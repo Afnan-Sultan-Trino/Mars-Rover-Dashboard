@@ -1,0 +1,163 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
+.page{background:#0d0d0d;color:#fff;min-height:100vh}
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.logo-wrap{display:flex;align-items:center;gap:12px}
+.arc-logo{width:42px;height:42px;border-radius:50%;background:conic-gradient(from 135deg,#b71c1c 0%,#e65100 40%,#1b5e20 70%,#b71c1c 100%);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;border:2px solid rgba(255,255,255,0.1)}
+.nav-brand{font-size:16px;font-weight:700;letter-spacing:.5px}
+.nav-brand span{color:#e53935}
+.nav-brand sub{display:block;font-size:10px;color:#555;font-weight:400;letter-spacing:2px;margin-top:1px}
+.nav-links{display:flex;gap:6px}
+.nav-links a{font-size:12px;color:#777;text-decoration:none;padding:7px 14px;border-radius:4px;cursor:pointer;transition:all .2s}
+.nav-links a.active{background:rgba(229,57,53,0.12);color:#e53935}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.05)}
+.sponsor{background:#e53935;color:#fff;border:none;padding:8px 18px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:0;min-height:380px}
+.hero-left{padding:52px 32px 40px;display:flex;flex-direction:column;justify-content:center}
+.award-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.25);border-radius:4px;padding:4px 12px;font-size:10px;color:#e53935;letter-spacing:1px;margin-bottom:20px;width:fit-content}
+.hero-left h1{font-size:38px;font-weight:900;line-height:1.15;margin-bottom:14px}
+.hero-left h1 em{color:#e53935;font-style:normal}
+.hero-left p{font-size:13px;color:#777;line-height:1.75;max-width:420px;margin-bottom:24px}
+.hero-bullets{list-style:none;margin-bottom:26px}
+.hero-bullets li{font-size:11px;color:#888;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.bullet-dot{width:5px;height:5px;border-radius:50%;background:#e53935;flex-shrink:0}
+.hero-btns{display:flex;gap:10px}
+.btn-r{background:#e53935;color:#fff;border:none;padding:11px 22px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer}
+.btn-w{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.15);padding:11px 22px;border-radius:4px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.hero-right{background:#111;border-left:1px solid rgba(255,255,255,0.05);padding:32px;display:flex;flex-direction:column;justify-content:space-between}
+.rover-display{background:#161616;border:1px solid rgba(255,255,255,0.07);border-radius:8px;height:160px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;overflow:hidden}
+.rover-text{font-size:11px;color:#333;letter-spacing:2px;text-align:center}
+.rover-glow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80%;height:30px;background:radial-gradient(ellipse,rgba(229,57,53,0.2) 0%,transparent 70%)}
+.mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mini-stat{background:#161616;border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:12px}
+.ms-num{font-size:22px;font-weight:800;color:#e53935}
+.ms-label{font-size:10px;color:#555;margin-top:2px;letter-spacing:.5px}
+.chips-bar{display:flex;gap:6px;padding:12px 32px;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);flex-wrap:wrap}
+.chip{font-size:10px;color:#888;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:4px 10px;letter-spacing:.5px}
+.chip.red{color:#e53935;background:rgba(229,57,53,0.08);border-color:rgba(229,57,53,0.2)}
+.content{display:grid;grid-template-columns:2fr 1fr;gap:1px;background:rgba(255,255,255,0.05)}
+.col-left{background:#0d0d0d;padding:28px 32px;display:flex;flex-direction:column;gap:24px}
+.col-right{background:#0d0d0d;padding:28px 24px;display:flex;flex-direction:column;gap:20px}
+.sec-label{font-size:10px;color:#e53935;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;font-weight:600}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:14px;padding-bottom:16px;position:relative}
+.tl-item:last-child{padding-bottom:0}
+.tl-line{display:flex;flex-direction:column;align-items:center}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:#e53935;flex-shrink:0;margin-top:4px}
+.tl-track{width:1px;background:rgba(229,57,53,0.15);flex:1;margin-top:4px}
+.tl-item:last-child .tl-track{display:none}
+.tl-year{font-size:10px;color:#e53935;font-weight:600;margin-bottom:2px;letter-spacing:.5px}
+.tl-title{font-size:12px;color:#ddd;margin-bottom:2px;font-weight:500}
+.tl-desc{font-size:11px;color:#555;line-height:1.5}
+.sub-div{background:#111;border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:14px}
+.sub-head{font-size:12px;font-weight:600;color:#fff;margin-bottom:4px}
+.sub-p{font-size:11px;color:#555;line-height:1.55}
+.progress-row{margin-top:8px}
+.pr-lbl{display:flex;justify-content:space-between;font-size:10px;color:#666;margin-bottom:4px}
+.pr-bar{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
+.pr-fill{height:100%;background:#e53935;border-radius:2px}
+footer{padding:16px 32px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center}
+.ft-left{font-size:11px;color:#333}
+.ft-links{display:flex;gap:16px}
+.ft-links a{font-size:10px;color:#444;text-decoration:none;cursor:pointer;letter-spacing:.5px}
+</style>
+<div class="page">
+<nav>
+  <div class="logo-wrap">
+    <div class="arc-logo">ARC</div>
+    <div class="nav-brand">AIUB <span>ROBOTIC</span> CREW<sub>AMERICAN INTERNATIONAL UNIVERSITY</sub></div>
+  </div>
+  <div class="nav-links">
+    <a class="active">Home</a>
+    <a>About</a>
+    <a>Rovers</a>
+    <a>Competitions</a>
+    <a>Achievements</a>
+    <a>Team</a>
+    <a>Research Paper</a>
+    <a>Sponsors</a>
+    <a>Contact</a>
+  </div>
+  <button class="sponsor">Become a Sponsor</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="award-chip">🏆 URC 2025 FINALIST</div>
+    <h1>Pioneering<br><em>Mars Exploration</em><br>from Bangladesh</h1>
+    <p>AIUB Robotic Crew is Bangladesh's competitive Mars rover team, pushing the boundaries of space exploration through innovative engineering and unwavering determination.</p>
+    <ul class="hero-bullets">
+      <li><span class="bullet-dot"></span>URC 2025 Finalists — Utah, USA</li>
+      <li><span class="bullet-dot"></span>ARC 2025 Best Autonomous System Award</li>
+      <li><span class="bullet-dot"></span>Highest Scoring AIUB Team in URC History</li>
+    </ul>
+    <div class="hero-btns">
+      <button class="btn-r">Explore Our Rovers →</button>
+      <button class="btn-w">👥 Join Our Team</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="rover-display">
+      <div>
+        <div class="rover-text">[ ARC ROVER MK-III ]</div>
+        <div style="font-size:10px;color:#222;text-align:center;margin-top:6px;letter-spacing:1px">PHOTO PLACEHOLDER</div>
+      </div>
+      <div class="rover-glow"></div>
+    </div>
+    <div class="mini-stats">
+      <div class="mini-stat"><div class="ms-num">10+</div><div class="ms-label">Years Active</div></div>
+      <div class="mini-stat"><div class="ms-num">50+</div><div class="ms-label">Members</div></div>
+      <div class="mini-stat"><div class="ms-num">8+</div><div class="ms-label">URC Appearances</div></div>
+      <div class="mini-stat"><div class="ms-num">3</div><div class="ms-label">Rover Gens</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="chips-bar">
+  <span class="chip red">URC 2025 Finalist</span>
+  <span class="chip red">Best Autonomous System</span>
+  <span class="chip">Autonomous Navigation</span>
+  <span class="chip">Science Mission</span>
+  <span class="chip">Arm Manipulation</span>
+  <span class="chip">Extreme Retrieval</span>
+  <span class="chip">Equipment Servicing</span>
+</div>
+
+<div class="content">
+  <div class="col-left">
+    <div>
+      <div class="sec-label">Competition History</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-line"><div class="tl-dot"></div><div class="tl-track"></div></div><div><div class="tl-year">2025</div><div class="tl-title">URC Finals — Utah, USA</div><div class="tl-desc">Qualified for the finals. Won Best Autonomous System & Science Award at ARC-25.</div></div></div>
+        <div class="tl-item"><div class="tl-line"><div class="tl-dot"></div><div class="tl-track"></div></div><div><div class="tl-year">2024</div><div class="tl-title">URC Semi-Finals</div><div class="tl-desc">Top 20 globally. Highest scoring Bangladeshi team in URC 2024.</div></div></div>
+        <div class="tl-item"><div class="tl-line"><div class="tl-dot"></div><div class="tl-track"></div></div><div><div class="tl-year">2023</div><div class="tl-title">URC International Qualifier</div><div class="tl-desc">Successfully qualified through System Acceptance Review with perfect scores.</div></div></div>
+        <div class="tl-item"><div class="tl-line"><div class="tl-dot"></div><div class="tl-track"></div></div><div><div class="tl-year">2015</div><div class="tl-title">ARC Founded at AIUB</div><div class="tl-desc">Team formed by passionate 3rd year undergraduates with a dream to compete at URC.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-right">
+    <div>
+      <div class="sec-label">Rover Status</div>
+      <div class="sub-div" style="margin-bottom:10px">
+        <div class="sub-head">MK-III Development</div>
+        <div class="progress-row"><div class="pr-lbl"><span>Autonomous Nav</span><span style="color:#e53935">82%</span></div><div class="pr-bar"><div class="pr-fill" style="width:82%"></div></div></div>
+        <div class="progress-row" style="margin-top:8px"><div class="pr-lbl"><span>Science Module</span><span style="color:#e53935">95%</span></div><div class="pr-bar"><div class="pr-fill" style="width:95%"></div></div></div>
+        <div class="progress-row" style="margin-top:8px"><div class="pr-lbl"><span>Robotic Arm</span><span style="color:#e53935">70%</span></div><div class="pr-bar"><div class="pr-fill" style="width:70%"></div></div></div>
+      </div>
+      <div class="sub-div">
+        <div class="sub-head">Sub-Teams</div>
+        <div class="sub-p" style="margin-top:6px">⚙️ Mechanical · 💻 Software · ⚡ Electrical · 🔬 Science · 📡 Communication</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-left">© 2025 AIUB ROBOTIC CREW — DHAKA, BANGLADESH</div>
+  <div class="ft-links">
+    <a>About</a><a>Research</a><a>Sponsors</a><a>Join Us</a><a>Contact</a>
+  </div>
+</footer>
+</div>
