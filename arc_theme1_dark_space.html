@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,147 +9,389 @@
 <body>
     <div class="page">
 
-        <!-- ===== NAVIGATION ===== -->
+        <!-- ===== NAVIGATION (fixed) ===== -->
         <nav>
             <div class="logo-area">
                 <div class="logo-shield">
-                <img src="Screenshot_2026-06-24_221754-removebg-preview.png" alt="ARC Logo" >
-                    </div>
+                    <img src="Screenshot_2026-06-24_221754-removebg-preview.png" alt="ARC Logo" />
+                </div>
                 <div>
                     <div class="brand">AIUB <span><br>ROBOTIC</span><br><span class="green-text">CREW</span></div>
                     <div class="brand-sub">UNIVERSITY ROVER CHALLENGE</div>
                 </div>
             </div>
             <div class="nav-links">
-                <a class="active">Home</a>
-                <a>About</a>
-                <a>Rovers</a>
-                <a>Achievements</a>
-                <a>Team</a>
-                <a>Research</a>
-                <a>Contact</a>
+                <a href="#home" class="active">Home</a>
+                <a href="#about">About</a>
+                <a href="#" id="marsRoverLink" target="_blank">Mars Rover</a>
+                <a href="#workshop">Workshop</a>
+                <a href="#research">Research</a>
+                <a href="#contact">Contact</a>
             </div>
             <button class="sponsor-btn">Become a Sponsor</button>
         </nav>
 
-        <!-- ===== HERO ===== -->
-        <div class="hero">
-            <div class="hero-bg"></div>
-            <div class="badge-row">
-                <span class="badge">URC 2025 Finalist</span>
-                <span class="badge">ARC-25 Best Autonomous System</span>
-                <span class="badge">AIUB</span>
-            </div>
-            <h1>PIONEERING MARS<br /><span>EXPLORATION</span><br />FROM BANGLADESH</h1>
-            <p>AIUB Robotic Crew is a team of passionate undergraduate engineers building Mars rovers and pushing the boundaries of innovation on the global stage.</p>
-            <div class="hero-btns">
-                <button class="btn-primary">Explore Our Rovers</button>
-                <button class="btn-outline">Join Our Team →</button>
-            </div>
-        </div>
-
-        <!-- ===== STATS ===== -->
-        <div class="stats-bar">
-            <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Years Active</div></div>
-            <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Team Members</div></div>
-            <div class="stat"><div class="stat-num">8+</div><div class="stat-label">URC Appearances</div></div>
-            <div class="stat"><div class="stat-num">3</div><div class="stat-label">Rover Generations</div></div>
-        </div>
-
-        <!-- ===== CONTENT GRID ===== -->
-        <div class="content">
-
-            <!-- ACHIEVEMENTS -->
-            <div class="card wide">
-                <div class="card-tag">Achievements</div>
-                <h3>Competition History</h3>
-                <ul class="achievement-list">
-                    <li><span class="dot-gold"></span>URC 2025 — International Finalist, Best Autonomous System Award</li>
-                    <li><span class="dot-gold"></span>URC 2024 — Top 20 Globally, Highest Scoring BD Team</li>
-                    <li><span class="dot-red"></span>URC 2023 — Semi-Finalist, Science Mission Excellence</li>
-                    <li><span class="dot-red"></span>ARC 2025 — Best Autonomous System &amp; Science Team Award</li>
-                    <li><span class="dot-gold"></span>URC 2022 — South Asian Regional Champions</li>
-                </ul>
-            </div>
-
-            <!-- PROGRESS -->
-            <div class="card">
-                <div class="card-tag">Current Project</div>
-                <h3>Rover Development Status</h3>
-                <div class="progress-wrap">
-                    <div class="progress-item">
-                        <div class="progress-label"><span>Autonomous Navigation</span><span class="progress-value">82%</span></div>
-                        <div class="progress-bar"><div class="progress-fill" style="width:82%"></div></div>
+        <!-- ===== HOME SECTION (HERO + STATS) ===== -->
+        <section id="home">
+            <!-- ===== HERO ===== -->
+            <div class="hero">
+                <div class="hero-image" id="heroSlideshow">
+                    <!-- Slide 1 -->
+                    <div class="slide" data-image="Gemini_Generated_Image_s8egqts8egqts8eg (1).png">
+                        <div class="slide-blur" style="background-image: url('Gemini_Generated_Image_s8egqts8egqts8eg\ \(1\).png');"></div>
+                        <div class="slide-main" style="background-image: url('Gemini_Generated_Image_s8egqts8egqts8eg\ \(1\).png');"></div>
                     </div>
-                    <div class="progress-item">
-                        <div class="progress-label"><span>Science Module</span><span class="progress-value">95%</span></div>
-                        <div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div>
+                    <!-- Slide 2 -->
+                    <div class="slide" data-image="IMG_9816 (1).JPG.jpeg">
+                        <div class="slide-blur" style="background-image: url('IMG_9816\ \(1\).JPG.jpeg');"></div>
+                        <div class="slide-main" style="background-image: url('IMG_9816\ \(1\).JPG.jpeg');"></div>
                     </div>
-                    <div class="progress-item">
-                        <div class="progress-label"><span>Arm Manipulation</span><span class="progress-value">70%</span></div>
-                        <div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div>
+                    <!-- Slide 3 -->
+                    <div class="slide" data-image="PXL_20250508_043159235 (1).jpg.jpeg">
+                        <div class="slide-blur" style="background-image: url('PXL_20250508_043159235\ \(1\).jpg.jpeg');"></div>
+                        <div class="slide-main" style="background-image: url('PXL_20250508_043159235\ \(1\).jpg.jpeg');"></div>
                     </div>
-                    <div class="progress-item">
-                        <div class="progress-label"><span>Communication</span><span class="progress-value">88%</span></div>
-                        <div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
+                    <!-- Slide 4 -->
+                    <div class="slide" data-image="473077580_1137605848069499_8323036023182530407_n.jpg.jpeg">
+                        <div class="slide-blur" style="background-image: url('473077580_1137605848069499_8323036023182530407_n.jpg.jpeg');"></div>
+                        <div class="slide-main" style="background-image: url('473077580_1137605848069499_8323036023182530407_n.jpg.jpeg');"></div>
+                    </div>
+                </div>
+                <div class="hero-bg"></div>
+
+                <div class="hero-content">
+                    <div class="badge-row">
+                        <span class="badge">URC 2025 Finalist</span>
+                        <span class="badge">ARC-25 Best Autonomous System</span>
+                        <span class="badge">AIUB</span>
+                    </div>
+
+                    <div class="text-slideshow" id="textSlideshow">
+                        <div class="text-block slide-left active" id="textBlock1">
+                            <h1>Pioneering<br /><span>Mars Exploration</span><br />from Bangladesh</h1>
+                            <p><b>Learn robotics from the ground up with our expert-led workshops. From basic circuits to advanced autonomous systems – we make robotics accessible to all.</b></p>
+                        </div>
+                        <div class="text-block slide-bottom" id="textBlock2">
+                            <h1>INNOVATIVE<br /><span>DESIGN</span><br />THINKING</h1>
+                            <p><b>Our design philosophy combines creativity with engineering precision. We build robots that are not only functional but also elegant in their execution.</b></p>
+                        </div>
+                        <div class="text-block slide-left" id="textBlock3">
+                            <h1>NEXT-GEN<br /><span>LEADERSHIP</span><br />IN ROBOTICS</h1>
+                            <p><b>Developing the next generation of robotics leaders through hands-on projects, mentorship, and real-world challenges that build character and skill.</b></p>
+                        </div>
+                        <div class="text-block slide-bottom" id="textBlock4">
+                            <h1>HANDS-ON ROBOTICS<br /><span>WORKSHOPS</span><br />FOR EVERYONE</h1>
+                            <p><b>Learn robotics from the ground up with our expert-led workshops. From basic circuits to advanced autonomous systems – we make robotics accessible to all.</b></p>
+                        </div>
+                    </div>
+
+                    <div class="hero-btns">
+                        <button class="btn-primary">Explore Our Rovers</button>
+                        <button class="btn-outline">Join Our Crew →</button>
                     </div>
                 </div>
             </div>
 
-            <!-- TEAM -->
-            <div class="card">
-                <div class="card-tag">The Team</div>
-                <h3>Meet Our Engineers</h3>
-                <div class="team-grid">
-                    <div class="member"><div class="avatar">TL</div><div class="member-name">Team Lead</div><div class="member-role">Systems</div></div>
-                    <div class="member"><div class="avatar">SW</div><div class="member-name">Software</div><div class="member-role">AI / Nav</div></div>
-                    <div class="member"><div class="avatar">ME</div><div class="member-name">Mechanical</div><div class="member-role">Design</div></div>
-                    <div class="member"><div class="avatar">EE</div><div class="member-name">Electrical</div><div class="member-role">Power</div></div>
-                    <div class="member"><div class="avatar">SC</div><div class="member-name">Science</div><div class="member-role">Research</div></div>
-                    <div class="member"><div class="avatar">+</div><div class="member-name">40+ More</div><div class="member-role">Members</div></div>
-                </div>
+            <!-- ===== STATS ===== -->
+            <div class="stats-bar">
+                <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Years Active</div></div>
+                <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Team Members</div></div>
+                <div class="stat"><div class="stat-num">8+</div><div class="stat-label">URC Appearances</div></div>
+                <div class="stat"><div class="stat-num">3</div><div class="stat-label">Rover Generations</div></div>
             </div>
+        </section>
 
-            <!-- MISSION -->
-            <div class="card">
-                <div class="card-tag">Mission</div>
-                <h3>Why We Build</h3>
-                <p>Founded at American International University-Bangladesh (AIUB), ARC competes in the University Rover Challenge — the world's premier robotics competition held in Utah, USA. We represent Bangladesh on the global stage with passion, precision, and purpose.</p>
-                <div class="mission-tags">
-                    <span>Robotics</span>
-                    <span>AI</span>
-                    <span>Mechanical</span>
-                    <span>Bangladesh</span>
+        <!-- ===== ABOUT SECTION (CONDENSED) ===== -->
+        <section id="about" class="section-about">
+            <div class="section-inner">
+
+                <!-- Hero -->
+                <div class="card wide about-hero">
+                    <div class="card-tag">About ARC</div>
+                    <h1 class="about-title">AIUB Robotic Crew</h1>
+                    <p class="about-subtitle">Engineering the Future of Planetary Exploration — From Bangladesh to the World</p>
+                    <div class="about-divider"></div>
+                    <p class="about-intro">
+                        The <strong>AIUB Robotic Crew (ARC)</strong> is the premier robotics team of the
+                        <strong>American International University-Bangladesh (AIUB)</strong>. We compete in the
+                        <strong>University Rover Challenge (URC)</strong> — the world's premier Mars rover competition —
+                        and have earned international recognition, including <strong>URC 2025 Finalist</strong> and the
+                        <strong>Best Autonomous System Award</strong>.
+                    </p>
                 </div>
-            </div>
 
-            <!-- NEWS -->
-            <div class="card wide">
-                <div class="card-tag">Latest News</div>
-                <h3>Updates from ARC</h3>
-                <div class="news-grid">
-                    <div class="news-item">
-                        <div class="news-date">JUNE 2025</div>
-                        <div class="news-text">ARC qualifies for URC 2025 Finals in Utah, USA</div>
+                <!-- Mission & Vision (two columns) -->
+                <div class="card wide mission-vision">
+                    <div class="mission-block">
+                        <span class="mv-icon">🚀</span>
+                        <h4>Our Mission</h4>
+                        <p>Build world‑class robots, inspire the next generation, and put Bangladesh on the global robotics map.</p>
                     </div>
-                    <div class="news-item">
-                        <div class="news-date">MAR 2025</div>
-                        <div class="news-text">New rover generation unveiled at AIUB Tech Fest</div>
-                    </div>
-                    <div class="news-item">
-                        <div class="news-date">JAN 2025</div>
-                        <div class="news-text">Research paper accepted at international robotics journal</div>
+                    <div class="vision-block">
+                        <span class="mv-icon">🌍</span>
+                        <h4>Our Vision</h4>
+                        <p>Become a globally recognised hub for robotics research and innovation, fostering excellence and collaboration.</p>
                     </div>
                 </div>
-            </div>
 
-        </div>
+                <!-- Key Milestones (compact timeline) -->
+                <div class="card wide">
+                    <div class="card-tag">Our Journey</div>
+                    <h3>Key Milestones</h3>
+                    <div class="compact-timeline">
+                        <div class="milestone"><span class="year">2018</span> Founded at AIUB</div>
+                        <div class="milestone"><span class="year">2020</span> First URC qualification</div>
+                        <div class="milestone"><span class="year">2022</span> South Asian Champions</div>
+                        <div class="milestone"><span class="year">2025</span> International Finalist &amp; Best Autonomous System</div>
+                    </div>
+                </div>
+
+                <!-- Core Values & Culture combined -->
+                <div class="card wide">
+                    <div class="card-tag">What Drives Us</div>
+                    <div class="values-compact">
+                        <div class="value-chip"><span>🔬</span> Innovation</div>
+                        <div class="value-chip"><span>🤝</span> Collaboration</div>
+                        <div class="value-chip"><span>🎯</span> Excellence</div>
+                        <div class="value-chip"><span>🌱</span> Impact</div>
+                    </div>
+                    <div class="culture-blurb">
+                        <p><strong>40+ active members</strong> from diverse engineering disciplines, united by a shared passion to explore, create, and inspire. Our lab is a second home where failures become lessons and every success is a collective victory.</p>
+                        <div class="stats-mini">
+                            <span>🏅 5 Engineering Disciplines</span>
+                            <span>🌍 Global Competitors</span>
+                            <span>🏆 7 Years of Excellence</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== WORKSHOP SECTION ===== -->
+        <section id="workshop" class="section-workshop">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="section-tag">Learn & Build</span>
+                    <h2>Robotics Workshops</h2>
+                    <p class="section-sub">Hands-on training programs designed to turn curiosity into expertise.</p>
+                </div>
+
+                <div class="workshop-grid">
+                    <div class="workshop-card">
+                        <div class="workshop-icon">⚙️</div>
+                        <h4>Fundamentals of Robotics</h4>
+                        <p>Introduction to robotics basics — sensors, actuators, microcontrollers, and programming. Perfect for beginners.</p>
+                        <div class="workshop-meta"><span>🕒 8 Weeks</span><span>📘 Beginner</span></div>
+                    </div>
+                    <div class="workshop-card">
+                        <div class="workshop-icon">🧠</div>
+                        <h4>AI & Autonomous Systems</h4>
+                        <p>Dive deep into computer vision, path planning, and machine learning for autonomous robots. Build your own self-driving rover.</p>
+                        <div class="workshop-meta"><span>🕒 12 Weeks</span><span>📘 Intermediate</span></div>
+                    </div>
+                    <div class="workshop-card">
+                        <div class="workshop-icon">🦾</div>
+                        <h4>Robotic Arm Manipulation</h4>
+                        <p>Learn kinematics, inverse dynamics, and control systems to design and program robotic arms for precision tasks.</p>
+                        <div class="workshop-meta"><span>🕒 10 Weeks</span><span>📘 Advanced</span></div>
+                    </div>
+                    <div class="workshop-card">
+                        <div class="workshop-icon">📡</div>
+                        <h4>Rover Communication Systems</h4>
+                        <p>Master wireless communication, telemetry, and data transmission for remote robotic operations in extreme environments.</p>
+                        <div class="workshop-meta"><span>🕒 6 Weeks</span><span>📘 Intermediate</span></div>
+                    </div>
+                </div>
+
+                <div class="workshop-highlight">
+                    <div class="highlight-text">
+                        <h4>🚀 Upcoming Workshop: Mars Rover Bootcamp</h4>
+                        <p>Join our intensive 4-day bootcamp where you'll build a miniature mars rover from scratch. Learn from ARC's experienced engineers and compete in a mini-challenge.</p>
+                        <p><strong>📅 Date:</strong> August 15–18, 2026 &nbsp;|&nbsp; <strong>📍 Location:</strong> AIUB Campus, Dhaka</p>
+                        <button class="btn-primary" style="margin-top:12px;">Register Now →</button>
+                    </div>
+                    <div class="highlight-badge">🔥 Limited Seats</div>
+                </div>
+
+                <div class="past-workshops">
+                    <h4>Past Workshops</h4>
+                    <div class="past-grid">
+                        <div class="past-item"><span>📌</span> Introduction to ROS (2025) — 120+ participants</div>
+                        <div class="past-item"><span>📌</span> Embedded Systems for Robotics (2024) — 85+ participants</div>
+                        <div class="past-item"><span>📌</span> AI for Autonomous Navigation (2024) — 60+ participants</div>
+                        <div class="past-item"><span>📌</span> 3D Printing & Rapid Prototyping (2023) — 100+ participants</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== RESEARCH SECTION ===== -->
+        <section id="research" class="section-research">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="section-tag">Innovation Lab</span>
+                    <h2>Research & Development</h2>
+                    <p class="section-sub">Pushing the boundaries of robotics through cutting-edge research and collaboration.</p>
+                </div>
+
+                <div class="research-areas">
+                    <div class="research-area">
+                        <div class="area-icon">🤖</div>
+                        <h4>Autonomous Navigation</h4>
+                        <p>Developing robust SLAM algorithms, obstacle detection, and path planning for unstructured terrain. Our systems enable rovers to navigate autonomously in Mars-like environments.</p>
+                        <span class="research-tag">Active</span>
+                    </div>
+                    <div class="research-area">
+                        <div class="area-icon">🧬</div>
+                        <h4>AI-Driven Science</h4>
+                        <p>Using machine learning to analyze geological samples, detect biosignatures, and classify terrain features — accelerating scientific discovery on planetary missions.</p>
+                        <span class="research-tag">Active</span>
+                    </div>
+                    <div class="research-area">
+                        <div class="area-icon">🛠️</div>
+                        <h4>Robotic Manipulation</h4>
+                        <p>Researching dexterous manipulation, force control, and adaptive gripping for robotic arms to perform complex tasks like sample collection and instrument deployment.</p>
+                        <span class="research-tag">Ongoing</span>
+                    </div>
+                    <div class="research-area">
+                        <div class="area-icon">📶</div>
+                        <h4>Communication Systems</h4>
+                        <p>Exploring reliable, low-latency communication protocols for remote rover operations, including mesh networking and delay-tolerant networking.</p>
+                        <span class="research-tag">Ongoing</span>
+                    </div>
+                </div>
+
+                <div class="publications">
+                    <h4>Selected Publications</h4>
+                    <div class="pub-list">
+                        <div class="pub-item">
+                            <span class="pub-year">2025</span>
+                            <div>
+                                <strong>Adaptive Path Planning for Mars Rovers Using Deep Reinforcement Learning</strong>
+                                <p>ARC Robotics Journal, Vol. 12, pp. 45–62</p>
+                            </div>
+                        </div>
+                        <div class="pub-item">
+                            <span class="pub-year">2024</span>
+                            <div>
+                                <strong>Vision-Based Terrain Classification for Autonomous Rover Navigation</strong>
+                                <p>International Conference on Robotics and Automation (ICRA)</p>
+                            </div>
+                        </div>
+                        <div class="pub-item">
+                            <span class="pub-year">2024</span>
+                            <div>
+                                <strong>Design and Control of a Lightweight Robotic Arm for Planetary Sample Collection</strong>
+                                <p>Journal of Field Robotics, Vol. 41, Issue 3</p>
+                            </div>
+                        </div>
+                        <div class="pub-item">
+                            <span class="pub-year">2023</span>
+                            <div>
+                                <strong>Low-Power Communication Protocols for Long-Distance Rover Missions</strong>
+                                <p>IEEE Transactions on Aerospace and Electronic Systems</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="research-partners">
+                    <h4>Research Collaborations</h4>
+                    <div class="partner-grid">
+                        <span class="partner">🇧🇩 AIUB</span>
+                        <span class="partner">🇺🇸 NASA Mars Rover Team</span>
+                        <span class="partner">🇩🇪 DLR Robotics</span>
+                        <span class="partner">🇯🇵 JAXA</span>
+                        <span class="partner">🇨🇦 CSA</span>
+                        <span class="partner">🇬🇧 UK Space Agency</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CONTACT SECTION ===== -->
+        <section id="contact" class="section-contact">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="section-tag">Get in Touch</span>
+                    <h2>Contact Us</h2>
+                    <p class="section-sub">Have questions, collaboration ideas, or want to join the crew? Reach out to us.</p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>Address</h4>
+                                <p>AIUB Robotic Crew Lab<br />American International University-Bangladesh<br />408/1, Kuratoli, Khilkhet, Dhaka 1229, Bangladesh</p>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:arc@aiub.edu">arc@aiub.edu</a></p>
+                                <p><a href="mailto:robotics@aiub.edu">robotics@aiub.edu</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+880 2 989 7632</p>
+                                <p>+880 17 1234 5678 (WhatsApp)</p>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">🌐</div>
+                            <div>
+                                <h4>Social Media</h4>
+                                <div class="social-links">
+                                    <a href="#" class="social-link">Facebook</a>
+                                    <a href="#" class="social-link">Instagram</a>
+                                    <a href="#" class="social-link">YouTube</a>
+                                    <a href="#" class="social-link">LinkedIn</a>
+                                    <a href="#" class="social-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <h4>Send Us a Message</h4>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" placeholder="John Doe" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="john@example.com" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" placeholder="I'd like to join ARC..." required />
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" rows="5" placeholder="Tell us about yourself, your interests, or your collaboration idea..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary" style="width:100%;">Send Message →</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- ===== FOOTER ===== -->
         <footer>
-            © 2025 AIUB ROBOTIC CREW — AIUB, DHAKA, BANGLADESH &nbsp;|&nbsp; marsrover.aiub.edu.bd
+            © 2026 AIUB ROBOTIC CREW — AIUB, DHAKA, BANGLADESH &nbsp;|&nbsp; marsrover.aiub.edu.bd
         </footer>
 
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
