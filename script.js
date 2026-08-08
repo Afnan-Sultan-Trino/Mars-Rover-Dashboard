@@ -71,11 +71,11 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ===== MARS ROVER LINK (opens new page/blank) =====
-document.getElementById('marsRoverLink').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.open('https://marsrover.aiub.edu.bd', '_blank');
-});
+// // ===== MARS ROVER LINK (opens new page/blank) =====
+// document.getElementById('marsRoverLink').addEventListener('click', function(e) {
+//     e.preventDefault();
+//     window.open('https://marsrover.aiub.edu.bd', '_blank');
+// });
 
 // ===== CONTACT FORM SUBMISSION (demo) =====
 document.getElementById('contactForm').addEventListener('submit', function(e) {
