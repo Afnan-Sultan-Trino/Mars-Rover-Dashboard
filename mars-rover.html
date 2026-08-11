@@ -3,359 +3,288 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URC Dashboard — AIUB Robotic Crew</title>
+    <title>ARC Rover Team — AIUB Robotic Crew</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="mars-rover.css" />
 </head>
 <body>
-    <div class="rover-page">
 
-        <!-- ===== HEADER WITH BACK BUTTON ===== -->
-        <header class="rover-header">
-            <div class="header-left">
-                <a href="index.html" class="back-btn">← Back to Home</a>
+    <!-- ===== NAVIGATION ===== -->
+    <header class="site-nav" id="siteNav">
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo">
+                <span class="logo-mark"></span>
+                <span>ARC ROVER TEAM</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#overview" class="nav-link">Overview</a>
+                <a href="#history" class="nav-link">History</a>
+                <a href="#faculty" class="nav-link">Faculty</a>
+                <a href="#join" class="nav-link">Join Us</a>
+                <a href="index.html" class="nav-link nav-dashboard">Dashboard →</a>
+            </nav>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="hero-scene" aria-hidden="true"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <span class="hero-credit">Photo: NASA/JPL-Caltech/MSSS — Perseverance rover selfie, Mars</span>
+
+        <div class="hero-content">
+            
+            <h1>ARC ROVER<br><span class="accent">TEAM</span></h1>
+            <p class="hero-sub">
+                We design, build, and pilot Mars rovers from Dhaka to the Utah desert —
+                competing at the University Rover Challenge on the global stage.
+            </p>
+            <div class="hero-actions">
+                <a href="#overview" class="btn btn-primary">Explore The Mission</a>
+                <a href="mars-rover.html" class="btn btn-ghost">Live Dashboard</a>
             </div>
-            <div class="header-center">
-                <h1>🚀 URC Dashboard</h1>
-                <p>University Rover Challenge — AIUB Robotic Crew</p>
+        </div>
+
+        <a href="#overview" class="scroll-cue" aria-label="Scroll to overview">
+            <span></span>
+        </a>
+    </section>
+
+    <!-- ===== OVERVIEW ===== -->
+    <section class="section" id="overview">
+        <div class="section-inner">
+            
+            <h2 class="section-title">Brief Overview</h2>
+            <p class="section-lead">
+                ARC Rover Team is the flagship rover division of AIUB Robotic Crew — a
+                student-run engineering group building autonomous, science-capable rovers
+                to compete internationally and push Bangladeshi robotics forward.
+            </p>
+
+            <div class="pillar-grid">
+                <div class="pillar-card hud-panel">
+                    <span class="pillar-icon">🧭</span>
+                    <h3>Autonomous Navigation</h3>
+                    <p>GPS-denied terrain traversal using computer vision, LiDAR mapping, and obstacle-aware path planning.</p>
+                </div>
+                <div class="pillar-card hud-panel">
+                    <span class="pillar-icon">🔬</span>
+                    <h3>Science Mission</h3>
+                    <p>On-site soil analysis and life-detection instrumentation built and calibrated entirely by our science team.</p>
+                </div>
+                <div class="pillar-card hud-panel">
+                    <span class="pillar-icon">📦</span>
+                    <h3>Delivery Mission</h3>
+                    <p>Precision payload transport and equipment servicing tasks that simulate real astronaut-support scenarios.</p>
+                </div>
+                <div class="pillar-card hud-panel">
+                    <span class="pillar-icon">🦾</span>
+                    <h3>Arm Manipulation</h3>
+                    <p>A dexterous robotic arm engineered for fine sample collection and tool operation under mission constraints.</p>
+                </div>
             </div>
-            <div class="header-right">
-                <span class="status-badge status-live">● LIVE</span>
+
+            <div class="unit-grid">
+                <div class="unit-card">
+                    <span class="unit-tag">Unit_01</span>
+                    <h4>Software Team</h4>
+                    <ul>
+                        <li>Mission Control Software</li>
+                        <li>Autonomy Algorithms</li>
+                        <li>ROS Node Integration</li>
+                        <li>Real-time Telemetry Dev</li>
+                    </ul>
+                </div>
+                <div class="unit-card">
+                    <span class="unit-tag">Unit_02</span>
+                    <h4>Electrical Team</h4>
+                    <ul>
+                        <li>Power Systems &amp; BMS</li>
+                        <li>PCB Designing</li>
+                        <li>Sensor Integration</li>
+                        <li>Embedded Architectures</li>
+                    </ul>
+                </div>
+                <div class="unit-card">
+                    <span class="unit-tag">Unit_03</span>
+                    <h4>Mechanical Team</h4>
+                    <ul>
+                        <li>Chassis Geometry</li>
+                        <li>Suspension Dynamics</li>
+                        <li>Robotic Arm Kinematics</li>
+                        <li>Actuator Geartrains</li>
+                    </ul>
+                </div>
+                <div class="unit-card">
+                    <span class="unit-tag">Unit_04</span>
+                    <h4>Science Team</h4>
+                    <ul>
+                        <li>Payload Instrumentation</li>
+                        <li>Spectrometric Research</li>
+                        <li>Bio-Signature Detection</li>
+                        <li>Soil Sample Geology</li>
+                    </ul>
+                </div>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <!-- ===== MAIN CONTENT ===== -->
-        <main class="rover-container">
+    <!-- ===== HISTORY / ACHIEVEMENTS ===== -->
+    <section class="section section-alt" id="history">
+        <div class="section-inner">
+           
+            <h2 class="section-title">History &amp; Achievements</h2>
+            <p class="section-lead">
+                From a small group of curious students in 2014 to Bangladesh's first
+                internationally-competing rover team — here's the trail we've left behind.
+            </p>
 
-            <!-- ===== TOP STATS ROW ===== -->
-            <section class="stats-row">
-                <div class="stat-card">
-                    <div class="stat-number">URC 2026</div>
-                    <div class="stat-label">Competition Year</div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2014</span>
+                        <p>ARC founded by a small group of AIUB engineering students.</p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">8th</div>
-                    <div class="stat-label">Global Ranking</div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2016</span>
+                        <p>First promotional rover demo and prototype chassis built in-house.</p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">92%</div>
-                    <div class="stat-label">Mission Success Rate</div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2019</span>
+                        <p>Selected among the world's top teams for the International Rover Challenge — first Bangladeshi entry.</p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">45</div>
-                    <div class="stat-label">Team Members</div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2022</span>
+                        <p>South Asian Champions — regional title secured ahead of the finals.</p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Rover Generations</div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2025</span>
+                        <p>Best Autonomous System Award — first Bangladeshi team to win a URC category.</p>
+                    </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- ===== ROVER OVERVIEW ===== -->
-            <section class="rover-overview">
-                <div class="rover-image-placeholder">
-                    <div class="rover-icon"></div>
-                    <p>ARC-26 Rover</p>
-                    <span class="rover-status">● Operational</span>
+            <!-- Press carousel -->
+            <div class="press-block">
+                <h3 class="press-heading">In The Press</h3>
+                <div class="carousel" id="pressCarousel">
+                    <div class="carousel-track" id="carouselTrack">
+                        <article class="clipping">
+                            <span class="clipping-masthead">The Daily Star</span>
+                            <h4>Taking It To The International Arena</h4>
+                            <p>AIUB Robotic Crew becomes the first Bangladeshi team selected for the International Rover Challenge, competing against 32 nations.</p>
+                        </article>
+                        <article class="clipping">
+                            <span class="clipping-masthead">The Independent</span>
+                            <h4>AIUB Team To Join Int'l Rover Contest</h4>
+                            <p>A team of undergraduate engineering students from AIUB will attend the Mars Society's rover competition held in Utah, USA.</p>
+                        </article>
+                        <article class="clipping">
+                            <span class="clipping-masthead">Daily Sun</span>
+                            <h4>Campus Corner: ARC's Road To Utah</h4>
+                            <p>Months of prototyping and testing led the AIUB Robotic Crew to the final round of the University Rover Challenge.</p>
+                        </article>
+                        <article class="clipping">
+                            <span class="clipping-masthead">Daily Observer</span>
+                            <h4>AIUB Robotic Crew In The Final Round of URC</h4>
+                            <p>Seventeen undergraduate engineering students represented Bangladesh among 63 shortlisted teams worldwide.</p>
+                        </article>
+                    </div>
                 </div>
-                <div class="rover-info">
-                    <h2>ARC-26 — "Perseverance"</h2>
-                    <p class="rover-desc">
-                        Our third-generation Mars rover, designed and built entirely by AIUB students.
-                        Equipped with autonomous navigation, AI-driven science instruments, and a
-                        dexterous robotic arm for sample collection.
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="prevBtn" aria-label="Previous">←</button>
+                    <div class="carousel-dots" id="carouselDots"></div>
+                    <button class="carousel-btn" id="nextBtn" aria-label="Next">→</button>
+                </div>
+            </div>
+
+            <div class="achievement-strip">
+                <div class="achievement-pill"><strong>🥇</strong> Best Autonomous System — URC 2025</div>
+                <div class="achievement-pill"><strong>🏅</strong> International Finalist — Top 10 Globally</div>
+                <div class="achievement-pill"><strong>🏆</strong> South Asian Champions — URC 2022</div>
+                <div class="achievement-pill"><strong>🔬</strong> Science Mission Excellence — URC 2023</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FACULTY ===== -->
+    <section class="section" id="faculty">
+        <div class="section-inner">
+           
+            <h2 class="section-title">Faculty Advisor</h2>
+
+            <div class="faculty-card hud-panel">
+                <div class="faculty-photo">
+                    <span><img src="Screenshot 2026-08-11 010829.png"></span>
+                </div>
+                <div class="faculty-info">
+                    <span class="faculty-badge">Faculty Advisor</span>
+                    <h3>Dr. Ebad Zahir</h3>
+                    <p class="faculty-role">Associate Professor, Department of Electrical &amp; Electronic Engineering, AIUB</p>
+                    <p class="faculty-bio">
+                        Dr. Zahir has guided ARC since its early years, mentoring students across
+                        mechatronics, photonics, and embedded systems. His research spans assistive
+                        robotics, sensor systems, and optical communications — several of which have
+                        directly shaped ARC's rover instrumentation and navigation design.
                     </p>
-                    <div class="rover-tags">
-                        <span>⚡ 48V System</span>
-                        <span>🧠 NVIDIA Jetson</span>
-                        <span>📡 5.8 GHz Telemetry</span>
-                        <span>🔋 6h Endurance</span>
+                    <div class="faculty-links">
+                        <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=ebad.zahir" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Faculty Profile</a>
+                        <a href="https://scholar.google.com/citations?hl=en&user=20Uq-QoAAAAJ" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">Google Scholar</a>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- ===== MISSION PERFORMANCE ===== -->
-            <section class="mission-section">
-                <h3>📊 Mission Performance</h3>
-                <p class="section-sub">URC 2026 scores across all mission categories</p>
-                <div class="mission-grid">
-                    <div class="mission-card">
-                        <div class="mission-header">
-                            <span class="mission-icon">🤖</span>
-                            <span class="mission-name">Autonomous Navigation</span>
-                        </div>
-                        <div class="mission-score">88%</div>
-                        <div class="progress-bar"><div class="progress-fill" style="width:88%;"></div></div>
-                        <div class="mission-detail">Ranked 6th globally</div>
-                    </div>
-                    <div class="mission-card">
-                        <div class="mission-header">
-                            <span class="mission-icon">🔬</span>
-                            <span class="mission-name">Science Mission</span>
-                        </div>
-                        <div class="mission-score">95%</div>
-                        <div class="progress-bar"><div class="progress-fill" style="width:95%;"></div></div>
-                        <div class="mission-detail">Ranked 3rd globally</div>
-                    </div>
-                    <div class="mission-card">
-                        <div class="mission-header">
-                            <span class="mission-icon">🦾</span>
-                            <span class="mission-name">Arm Manipulation</span>
-                        </div>
-                        <div class="mission-score">78%</div>
-                        <div class="progress-bar"><div class="progress-fill" style="width:78%;"></div></div>
-                        <div class="mission-detail">Ranked 12th globally</div>
-                    </div>
-                    <div class="mission-card">
-                        <div class="mission-header">
-                            <span class="mission-icon">📡</span>
-                            <span class="mission-name">Communication</span>
-                        </div>
-                        <div class="mission-score">92%</div>
-                        <div class="progress-bar"><div class="progress-fill" style="width:92%;"></div></div>
-                        <div class="mission-detail">Ranked 5th globally</div>
-                    </div>
-                </div>
-            </section>
+    <!-- ===== JOIN US ===== -->
+    <section class="section section-join" id="join">
+        <div class="section-inner join-inner">
+            
+            <h2 class="section-title">Join The Mission</h2>
+            <p class="section-lead">
+                We're looking for curious builders across software, electrical, mechanical,
+                and science — no prior rover experience required, just the will to learn fast
+                and build things that work under pressure.
+            </p>
 
-            <!-- ===== TIMELINE & ACHIEVEMENTS ===== -->
-            <div class="two-col">
-                <!-- Timeline -->
-                <section class="timeline-section">
-                    <h3>📅 Competition Timeline</h3>
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">Mar 2026</span>
-                                <p>Design &amp; Planning Phase</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">Apr 2026</span>
-                                <p>Prototype Assembly &amp; Testing</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">May 2026</span>
-                                <p>System Integration &amp; Field Trials</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">Jun 2026</span>
-                                <p>URC Finals — Utah, USA</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">Jul 2026</span>
-                                <p>Post-Competition Review &amp; Upgrades</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Achievements -->
-                <section class="achievements-section">
-                    <h3>🏆 Achievements</h3>
-                    <div class="achievement-list">
-                        <div class="achievement-item">
-                            <span class="achievement-icon">🥇</span>
-                            <div>
-                                <strong>Best Autonomous System Award</strong>
-                                <p>URC 2025 — First Bangladeshi team to win</p>
-                            </div>
-                        </div>
-                        <div class="achievement-item">
-                            <span class="achievement-icon">🏅</span>
-                            <div>
-                                <strong>International Finalist</strong>
-                                <p>URC 2025 — Top 10 globally</p>
-                            </div>
-                        </div>
-                        <div class="achievement-item">
-                            <span class="achievement-icon">🏆</span>
-                            <div>
-                                <strong>South Asian Champions</strong>
-                                <p>URC 2022 — Regional title</p>
-                            </div>
-                        </div>
-                        <div class="achievement-item">
-                            <span class="achievement-icon">📜</span>
-                            <div>
-                                <strong>Highest Scoring BD Team</strong>
-                                <p>URC 2024 — Record-breaking performance</p>
-                            </div>
-                        </div>
-                        <div class="achievement-item">
-                            <span class="achievement-icon">🔬</span>
-                            <div>
-                                <strong>Science Mission Excellence</strong>
-                                <p>URC 2023 — Top 5 in Science category</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            <div class="join-roles">
+                <span class="role-chip">Software</span>
+                <span class="role-chip">Electrical</span>
+                <span class="role-chip">Mechanical</span>
+                <span class="role-chip">Science</span>
+                <span class="role-chip">Media &amp; Outreach</span>
             </div>
 
-            <!-- ===== TEAM & ROVER SPECS ===== -->
-            <div class="two-col">
-                <!-- Team -->
-                <section class="team-section">
-                    <h3>👥 Core Team</h3>
-                    <div class="team-grid">
-                        <div class="team-member">
-                            <div class="member-avatar">TL</div>
-                            <div class="member-info">
-                                <strong>Team Lead</strong>
-                                <span>Systems Engineering</span>
-                            </div>
-                        </div>
-                        <div class="team-member">
-                            <div class="member-avatar">SW</div>
-                            <div class="member-info">
-                                <strong>Software Lead</strong>
-                                <span>AI &amp; Navigation</span>
-                            </div>
-                        </div>
-                        <div class="team-member">
-                            <div class="member-avatar">ME</div>
-                            <div class="member-info">
-                                <strong>Mechanical Lead</strong>
-                                <span>Design &amp; Fabrication</span>
-                            </div>
-                        </div>
-                        <div class="team-member">
-                            <div class="member-avatar">EE</div>
-                            <div class="member-info">
-                                <strong>Electrical Lead</strong>
-                                <span>Power &amp; Sensors</span>
-                            </div>
-                        </div>
-                        <div class="team-member">
-                            <div class="member-avatar">SC</div>
-                            <div class="member-info">
-                                <strong>Science Lead</strong>
-                                <span>Research &amp; Analysis</span>
-                            </div>
-                        </div>
-                        <div class="team-member">
-                            <div class="member-avatar">+</div>
-                            <div class="member-info">
-                                <strong>40+ Members</strong>
-                                <span>Engineering &amp; Support</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Rover Specs -->
-                <section class="specs-section">
-                    <h3>⚙️ Rover Specifications</h3>
-                    <div class="spec-grid">
-                        <div class="spec-item">
-                            <span class="spec-label">Mass</span>
-                            <span class="spec-value">45 kg</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Dimensions</span>
-                            <span class="spec-value">120 × 80 × 60 cm</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Power</span>
-                            <span class="spec-value">48V Li-Ion</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Endurance</span>
-                            <span class="spec-value">6 hours</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Processor</span>
-                            <span class="spec-value">NVIDIA Jetson Orin</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Sensors</span>
-                            <span class="spec-value">LiDAR, Stereo Cam, IMU</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Arm Reach</span>
-                            <span class="spec-value">1.2 m</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Top Speed</span>
-                            <span class="spec-value">2.5 m/s</span>
-                        </div>
-                    </div>
-                </section>
+            <div class="hero-actions join-actions">
+                <a href="mailto:arc.roverteam@aiub.edu?subject=Joining%20ARC%20Rover%20Team" class="btn btn-primary">Apply By Email</a>
+                <a href="#home" class="btn btn-ghost">Back To Top</a>
             </div>
+        </div>
+    </section>
 
-            <!-- ===== GALLERY ===== -->
-            <section class="gallery-section">
-                <h3>📸 Rover Gallery</h3>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder"></div>
-                        <p>Assembly Phase</p>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder"></div>
-                        <p>Field Testing</p>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder"></div>
-                        <p>Arm Calibration</p>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder"></div>
-                        <p>URC Competition</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ===== LIVE STATUS ===== -->
-            <section class="status-section">
-                <h3>📡 Live Development Status</h3>
-                <div class="status-grid">
-                    <div class="status-item">
-                        <span class="status-label">Autonomous Navigation</span>
-                        <div class="progress-bar"><div class="progress-fill" style="width:82%;"></div></div>
-                        <span class="status-percent">82%</span>
-                    </div>
-                    <div class="status-item">
-                        <span class="status-label">Science Module</span>
-                        <div class="progress-bar"><div class="progress-fill" style="width:95%;"></div></div>
-                        <span class="status-percent">95%</span>
-                    </div>
-                    <div class="status-item">
-                        <span class="status-label">Arm Manipulation</span>
-                        <div class="progress-bar"><div class="progress-fill" style="width:70%;"></div></div>
-                        <span class="status-percent">70%</span>
-                    </div>
-                    <div class="status-item">
-                        <span class="status-label">Communication System</span>
-                        <div class="progress-bar"><div class="progress-fill" style="width:88%;"></div></div>
-                        <span class="status-percent">88%</span>
-                    </div>
-                </div>
-                <div class="status-update">
-                    <span class="update-dot">●</span>
-                    Last updated: 30 July 2026 — All systems nominal
-                </div>
-            </section>
-
-        </main>
-
-        <!-- ===== FOOTER ===== -->
-        <footer class="rover-footer">
-            © 2026 AIUB Robotic Crew — URC Dashboard &nbsp;|&nbsp; marsrover.aiub.edu.bd
-        </footer>
-    </div>
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+        © 2026 AIUB Robotic Crew — ARC Rover Team &nbsp;|&nbsp; marsrover.aiub.edu.bd
+    </footer>
 
     <script src="mars-rover.js"></script>
 </body>
