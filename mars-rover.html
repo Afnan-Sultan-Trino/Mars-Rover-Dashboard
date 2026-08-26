@@ -10,27 +10,29 @@
 </head>
 <body>
 
-    <!-- ===== NAVIGATION ===== -->
-    <header class="site-nav" id="siteNav">
-        <div class="nav-inner">
-            <a href="#home" class="nav-logo">
-                <span class="logo-mark"></span>
-                <span>ARC ROVER TEAM</span>
-            </a>
+<!-- ===== NAVIGATION ===== -->
+<header class="site-nav" id="siteNav">
+    <div class="nav-inner">
+        <a href="#home" class="nav-logo">
+            <!-- Logo image -->
+            <img src="Screenshot_2026-06-24_221754-removebg-preview.png" alt="AIUB Robotic Crew Logo" class="logo-icon" />
+            <span>ARC <span style="color:orange ;">ROVER</span>    <span style="color:rgb(12, 136, 8) ;">TEAM</span>  </span>
+        </a>
 
-            <nav class="nav-links" id="navLinks">
-                <a href="#overview" class="nav-link">Overview</a>
-                <a href="#history" class="nav-link">History</a>
-                <a href="#faculty" class="nav-link">Faculty</a>
-                <a href="#join" class="nav-link">Join Us</a>
-                <a href="index.html" class="nav-link nav-dashboard">Dashboard →</a>
-            </nav>
+        <nav class="nav-links" id="navLinks">
+            <a href="#overview" class="nav-link">Overview</a>
+            <a href="#history" class="nav-link">History</a>
+            <a href="#faculty" class="nav-link">Faculty</a>
+            <a href="#teams" class="nav-link">Teams</a>
+            <a href="#join" class="nav-link">Join Us</a>
+            <a href="index.html" class="nav-link nav-dashboard">Dashboard →</a>
+        </nav>
 
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </header>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
 
     <!-- ===== HERO ===== -->
     <section class="hero" id="home">
@@ -39,7 +41,7 @@
         <span class="hero-credit">Photo: NASA/JPL-Caltech/MSSS — Perseverance rover selfie, Mars</span>
 
         <div class="hero-content">
-            
+
             <h1>ARC ROVER<br><span class="accent">TEAM</span></h1>
             <p class="hero-sub">
                 We design, build, and pilot Mars rovers from Dhaka to the Utah desert —
@@ -59,7 +61,7 @@
     <!-- ===== OVERVIEW ===== -->
     <section class="section" id="overview">
         <div class="section-inner">
-            
+
             <h2 class="section-title">Brief Overview</h2>
             <p class="section-lead">
                 ARC Rover Team is the flagship rover division of AIUB Robotic Crew — a
@@ -89,56 +91,20 @@
                     <p>A dexterous robotic arm engineered for fine sample collection and tool operation under mission constraints.</p>
                 </div>
             </div>
-
-            <div class="unit-grid">
-                <div class="unit-card">
-                    <span class="unit-tag">Unit_01</span>
-                    <h4>Software Team</h4>
-                    <ul>
-                        <li>Mission Control Software</li>
-                        <li>Autonomy Algorithms</li>
-                        <li>ROS Node Integration</li>
-                        <li>Real-time Telemetry Dev</li>
-                    </ul>
-                </div>
-                <div class="unit-card">
-                    <span class="unit-tag">Unit_02</span>
-                    <h4>Electrical Team</h4>
-                    <ul>
-                        <li>Power Systems &amp; BMS</li>
-                        <li>PCB Designing</li>
-                        <li>Sensor Integration</li>
-                        <li>Embedded Architectures</li>
-                    </ul>
-                </div>
-                <div class="unit-card">
-                    <span class="unit-tag">Unit_03</span>
-                    <h4>Mechanical Team</h4>
-                    <ul>
-                        <li>Chassis Geometry</li>
-                        <li>Suspension Dynamics</li>
-                        <li>Robotic Arm Kinematics</li>
-                        <li>Actuator Geartrains</li>
-                    </ul>
-                </div>
-                <div class="unit-card">
-                    <span class="unit-tag">Unit_04</span>
-                    <h4>Science Team</h4>
-                    <ul>
-                        <li>Payload Instrumentation</li>
-                        <li>Spectrometric Research</li>
-                        <li>Bio-Signature Detection</li>
-                        <li>Soil Sample Geology</li>
-                    </ul>
-                </div>
-            </div>
         </div>
+    </section>
+
+
+    <!-- ===== TEAM PHOTO (FULL SCREEN) ===== -->
+    <section class="team-photo-section">
+        <!-- Replace "team-photo.jpg" with the actual file name or path of the image you uploaded -->
+        <img src="team-photo.png" alt="ARC Rover Team posing with their rover">
     </section>
 
     <!-- ===== HISTORY / ACHIEVEMENTS ===== -->
     <section class="section section-alt" id="history">
         <div class="section-inner">
-           
+
             <h2 class="section-title">History &amp; Achievements</h2>
             <p class="section-lead">
                 From a small group of curious students in 2014 to Bangladesh's first
@@ -183,39 +149,40 @@
                 </div>
             </div>
 
-            <!-- Press carousel -->
-            <div class="press-block">
-                <h3 class="press-heading">In The Press</h3>
-                <div class="carousel" id="pressCarousel">
-                    <div class="carousel-track" id="carouselTrack">
-                        <article class="clipping">
-                            <span class="clipping-masthead">The Daily Star</span>
-                            <h4>Taking It To The International Arena</h4>
-                            <p>AIUB Robotic Crew becomes the first Bangladeshi team selected for the International Rover Challenge, competing against 32 nations.</p>
-                        </article>
-                        <article class="clipping">
-                            <span class="clipping-masthead">The Independent</span>
-                            <h4>AIUB Team To Join Int'l Rover Contest</h4>
-                            <p>A team of undergraduate engineering students from AIUB will attend the Mars Society's rover competition held in Utah, USA.</p>
-                        </article>
-                        <article class="clipping">
-                            <span class="clipping-masthead">Daily Sun</span>
-                            <h4>Campus Corner: ARC's Road To Utah</h4>
-                            <p>Months of prototyping and testing led the AIUB Robotic Crew to the final round of the University Rover Challenge.</p>
-                        </article>
-                        <article class="clipping">
-                            <span class="clipping-masthead">Daily Observer</span>
-                            <h4>AIUB Robotic Crew In The Final Round of URC</h4>
-                            <p>Seventeen undergraduate engineering students represented Bangladesh among 63 shortlisted teams worldwide.</p>
-                        </article>
-                    </div>
-                </div>
-                <div class="carousel-controls">
-                    <button class="carousel-btn" id="prevBtn" aria-label="Previous">←</button>
-                    <div class="carousel-dots" id="carouselDots"></div>
-                    <button class="carousel-btn" id="nextBtn" aria-label="Next">→</button>
-                </div>
-            </div>
+    <!-- Press marquee — continuous scrolling -->
+<div class="press-block">
+    <h3 class="press-heading">In The Press</h3>
+    <div class="marquee-container">
+        <div class="marquee-track" id="marqueeTrack">
+            <!-- Duplicate the items to create seamless loop -->
+            <article class="clipping">
+                <img src="Screenshot 2026-08-27 001043.png" alt="Daily Sun - Taking It To The International Arena">
+            </article>
+            <article class="clipping">
+                <img src="Screenshot 2026-08-27 001015.png" alt="The Independent - AIUB team to join int'l rover contest">
+            </article>
+            <article class="clipping">
+                <img src="Screenshot 2026-08-27 001027.png" alt="Team from AIUB participates at University Rover Challenge">
+            </article>
+            <article class="clipping">
+                <img src="Screenshot 2026-08-27 000948.png" alt="Press coverage">
+            </article>
+            <!-- Duplicate for seamless loop -->
+            <article class="clipping">
+                <img src="Screenshot 2026-08-27 001043.png" alt="Daily Sun - Taking It To The International Arena">
+            </article>
+            <article class="clipping">
+                <img src="Screenshot 2026-08-27 001015.png" alt="The Independent - AIUB team to join int'l rover contest">
+            </article>
+            <article class="clipping">
+                <img src="Screenshot 2026-08-27 001027.png" alt="Team from AIUB participates at University Rover Challenge">
+            </article>
+            <article class="clipping">
+                <img src="Screenshot 2026-08-27 000948.png" alt="Press coverage">
+            </article>
+        </div>
+    </div>
+</div>
 
             <div class="achievement-strip">
                 <div class="achievement-pill"><strong>🥇</strong> Best Autonomous System — URC 2025</div>
@@ -229,12 +196,12 @@
     <!-- ===== FACULTY ===== -->
     <section class="section" id="faculty">
         <div class="section-inner">
-           
+
             <h2 class="section-title">Faculty Advisor</h2>
 
             <div class="faculty-card hud-panel">
                 <div class="faculty-photo">
-                    <span><img src="Screenshot 2026-08-11 010829.png"></span>
+                    <span><img src="Screenshot 2026-08-11 010829.png" alt="Dr. Ebad Zahir"></span>
                 </div>
                 <div class="faculty-info">
                     <span class="faculty-badge">Faculty Advisor</span>
@@ -255,10 +222,201 @@
         </div>
     </section>
 
+    <!-- ===== TEAMS ===== -->
+    <section class="section section-alt" id="teams">
+        <div class="section-inner">
+
+            <h2 class="section-title">Our Teams</h2>
+            <p class="section-lead">
+                Four interdisciplinary units working in sync — from embedded systems and
+                mechanical design to autonomous software and science payloads. Click the arrow
+                to expand each team's focus areas and meet the members.
+            </p>
+
+            <div class="unit-grid">
+
+                <!-- ====== SOFTWARE TEAM ====== -->
+                <div class="unit-card">
+                    <h4>
+                        <span class="title-text">Software Team</span>
+                        <button class="toggle-btn" aria-expanded="false" aria-label="Toggle team details">
+                            <span class="arrow">▼</span>
+                        </button>
+                    </h4>
+                    <div class="unit-content">
+                        <!-- Leader -->
+                        <div class="team-leader">
+                            <div class="leader-avatar" style="background-image: url('https://i.pravatar.cc/150?img=1');"></div>
+                            <span class="leader-label">Team Leader</span>
+                            <span class="leader-name">Muksitul Ziad</span>
+                        </div>
+                        <!-- Members -->
+                        <div class="member-grid">
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=2');"></div>
+                                <span class="member-name">Abdullah Al Nahian</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=3');"></div>
+                                <span class="member-name">Farhan Sadik </span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=4');"></div>
+                                <span class="member-name">Stephen</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=5');"></div>
+                                <span class="member-name">Shahriar Hossain</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=6');"></div>
+                                <span class="member-name">Tasnim Ferdous</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=7');"></div>
+                                <span class="member-name">Kamal Hossain</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== ELECTRICAL TEAM ====== -->
+                <div class="unit-card">
+                    <h4>
+                        <span class="title-text">Electrical Team</span>
+                        <button class="toggle-btn" aria-expanded="false" aria-label="Toggle team details">
+                            <span class="arrow">▼</span>
+                        </button>
+                    </h4>
+                    <div class="unit-content">
+                        <div class="team-leader">
+                            <div class="leader-avatar" style="background-image: url('https://i.pravatar.cc/150?img=8');"></div>
+                            <span class="leader-label">Team Leader</span>
+                            <span class="leader-name">Sabbir Hasan</span>
+                        </div>
+                        <div class="member-grid">
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=9');"></div>
+                                <span class="member-name">Rukhsar Akhter</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=10');"></div>
+                                <span class="member-name">Sabbir Ahmed</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=11');"></div>
+                                <span class="member-name">Nadia Sultana</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=12');"></div>
+                                <span class="member-name">Imran Hossain</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=13');"></div>
+                                <span class="member-name">Sharmin Akhtar</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=14');"></div>
+                                <span class="member-name">Rafiqul Islam</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== MECHANICAL TEAM ====== -->
+                <div class="unit-card">
+                    <h4>
+                        <span class="title-text">Mechanical Team</span>
+                        <button class="toggle-btn" aria-expanded="false" aria-label="Toggle team details">
+                            <span class="arrow">▼</span>
+                        </button>
+                    </h4>
+                    <div class="unit-content">
+                        <div class="team-leader">
+                            <div class="leader-avatar" style="background-image: url('https://i.pravatar.cc/150?img=15');"></div>
+                            <span class="leader-label">Team Leader</span>
+                            <span class="leader-name">Farhan Zaman</span>
+                        </div>
+                        <div class="member-grid">
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=16');"></div>
+                                <span class="member-name">Tahsin Ahmed</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=17');"></div>
+                                <span class="member-name">Shahinur Rahman</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=18');"></div>
+                                <span class="member-name">Moumita Sarker</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=19');"></div>
+                                <span class="member-name">Ishrak Hossain</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=20');"></div>
+                                <span class="member-name">Nusrat Jahan</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=21');"></div>
+                                <span class="member-name">Ariful Islam</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== SCIENCE TEAM ====== -->
+                <div class="unit-card">
+                    <h4>
+                        <span class="title-text">Science Team</span>
+                        <button class="toggle-btn" aria-expanded="false" aria-label="Toggle team details">
+                            <span class="arrow">▼</span>
+                        </button>
+                    </h4>
+                    <div class="unit-content">
+                        <div class="team-leader">
+                            <div class="leader-avatar" style="background-image: url('https://i.pravatar.cc/150?img=22');"></div>
+                            <span class="leader-label">Team Leader</span>
+                            <span class="leader-name">Tasnuva Sultana</span>
+                        </div>
+                        <div class="member-grid">
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=23');"></div>
+                                <span class="member-name">Imtiaz Ahmed</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=24');"></div>
+                                <span class="member-name">Anika Noor</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=25');"></div>
+                                <span class="member-name">Shafiqur Rahman</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=26');"></div>
+                                <span class="member-name">Nazia Tasnim</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=27');"></div>
+                                <span class="member-name">Mahmudul Hasan</span>
+                            </div>
+                            <div class="member">
+                                <div class="member-avatar" style="background-image: url('https://i.pravatar.cc/100?img=28');"></div>
+                                <span class="member-name">Sadia Afrin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- end .unit-grid -->
+        </div> <!-- end .section-inner -->
+    </section>
+
     <!-- ===== JOIN US ===== -->
     <section class="section section-join" id="join">
         <div class="section-inner join-inner">
-            
+
             <h2 class="section-title">Join The Mission</h2>
             <p class="section-lead">
                 We're looking for curious builders across software, electrical, mechanical,
