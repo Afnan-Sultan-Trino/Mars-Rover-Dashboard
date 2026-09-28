@@ -42,7 +42,7 @@ function advanceSlide() {
     }, 50);
 }
 
-setInterval(advanceSlide, 5000);
+setInterval(advanceSlide, 12000);
 showSlide(0);
 
 function setTextContainerHeight() {
