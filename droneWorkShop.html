@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Workshop — AIUB Robotic Crew</title>
+    <link rel="stylesheet" href="dark_space_theme1.css">
+    <style>
+        /* Sub-page specific styles */
+        .subpage-hero { 
+            height: 60vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            position: relative; 
+            background: url('DroneWork2.jpeg') center/cover no-repeat; /* Replace with your image */
+        }
+        .subpage-hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.7); }
+        .subpage-hero h1 { position: relative; z-index: 1; font-size: 3.5rem; color: #fff; letter-spacing: 2px; }
+        .subpage-content { padding: 60px 32px; max-width: 1000px; margin: 0 auto; }
+        .subpage-content h2 { color: #e67e22; margin-bottom: 20px; font-size: 1.8rem; }
+        .subpage-content p { color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: 20px; font-size: 1.1rem; }
+        .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+        .gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; transition: transform 0.3s; }
+        .gallery img:hover { transform: scale(1.05); }
+        @media (max-width: 768px) { 
+            .subpage-hero h1 { font-size: 2.5rem; }
+            .gallery { grid-template-columns: 1fr; } 
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Reuse Nav -->
+        <nav>
+            <div class="logo-area">
+                <div class="logo-shield"><img src="Screenshot_2026-06-24_221754-removebg-preview.png" alt="ARC Logo"></div>
+                <div><div class="brand">AIUB <span><br>ROBOTICS</span><br><span class="green-text">CREW</span></div></div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="mars-rover.html">Mars Rover</a>
+                <a href="index.html#workshop" class="active">Workshop</a>
+                <a href="index.html#research">Research</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <a href="sponsor.html" class="sponsor-btn" style="text-decoration: none;">Become a Sponsor</a>
+        </nav>
+
+        <section class="subpage-hero">
+            <h1>DRONE WORKSHOP</h1>
+        </section>
+
+        <section class="subpage-content">
+            <h2>About the Workshop</h2>
+            <p>Dive into the world of aerial robotics! Learn the fundamentals of drone mechanics, flight controllers, aerodynamics, and programming. This hands-on workshop will take you from assembling your own quadcopter to mastering manual flight and autonomous navigation.</p>
+            <p>Whether you are a beginner curious about drones or an enthusiast looking to refine your skills, our experienced mentors will guide you every step of the way. You'll learn to troubleshoot, repair, and eventually program your drone for automated flight paths.</p>
+            
+            <h2 style="margin-top: 40px;">Gallery</h2>
+            <div class="gallery">
+                <img src="DroneWorkshop1.jpeg" alt="Drone 1">
+                <img src="DroneWork3.jpeg" alt="Drone 2">
+                <img src="DroneWorkshop3.jpeg" alt="Drone 3">
+            </div>
+        </section>
+        
+        <footer>
+            © 2026 AIUB ROBOTIC CREW — AIUB, DHAKA, BANGLADESH | marsrover.aiub.edu.bd
+        </footer>
+    </div>
+</body>
+</html>

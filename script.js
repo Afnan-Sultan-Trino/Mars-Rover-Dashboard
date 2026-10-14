@@ -27,8 +27,9 @@ setTimeout(() => {
     setActiveText(0);
 }, 100);
 
-function advanceSlide() {
-    bgIndex = (bgIndex + 1) % totalSlides;
+// Updated advanceSlide function to handle both forward (1) and backward (-1)
+function advanceSlide(step = 1) {
+    bgIndex = (bgIndex + step + totalSlides) % totalSlides;
     showSlide(bgIndex);
     setActiveText(bgIndex);
 
@@ -42,9 +43,34 @@ function advanceSlide() {
     }, 50);
 }
 
-setInterval(advanceSlide, 12000);
-showSlide(0);
+// Auto-play logic with timer reset
+let slideInterval;
+const SLIDE_DURATION = 12000; // 12 seconds
 
+function startAutoPlay() {
+    if (slideInterval) clearInterval(slideInterval);
+    slideInterval = setInterval(() => {
+        advanceSlide(1); // Always move forward automatically
+    }, SLIDE_DURATION);
+}
+
+// Initialize
+showSlide(0);
+startAutoPlay();
+
+// ===== MANUAL CONTROLS (ARROW BUTTONS) =====
+document.getElementById('prevSlide').addEventListener('click', () => {
+    advanceSlide(-1); // Move backward
+    startAutoPlay();  // Reset the timer so it doesn't jump immediately after
+});
+
+document.getElementById('nextSlide').addEventListener('click', () => {
+    advanceSlide(1);  // Move forward
+    startAutoPlay();  // Reset the timer
+});
+
+
+// ===== DYNAMIC TEXT CONTAINER HEIGHT =====
 function setTextContainerHeight() {
     const container = document.getElementById('textSlideshow');
     let maxHeight = 250;
@@ -71,16 +97,9 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     });
 });
 
-// // ===== MARS ROVER LINK (opens new page/blank) =====
-// document.getElementById('marsRoverLink').addEventListener('click', function(e) {
-//     e.preventDefault();
-//     window.open('https://marsrover.aiub.edu.bd', '_blank');
-// });
-
 // ===== CONTACT FORM SUBMISSION (demo) =====
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
     alert('Thank you for your message! We will get back to you soon. 🚀');
     this.reset();
 });
-
