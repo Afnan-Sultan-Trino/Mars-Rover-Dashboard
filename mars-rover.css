@@ -1,8 +1,5 @@
 /* ============================================================
    ARC ROVER TEAM — LANDING PAGE
-   Same "Mission Console" identity as the URC dashboard:
-   rust/amber on near-black, monospace data, HUD corner brackets.
-   Hero is an illustrated CSS/SVG Mars horizon — no stock imagery.
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
@@ -18,6 +15,7 @@
     --border:    rgba(232, 163, 61, 0.16);
     --border-2:  rgba(232, 163, 61, 0.32);
     --green:     #5fb87a;
+    --blue:      #4a90e2;
     --mono: 'IBM Plex Mono', 'Courier New', monospace;
     --sans: 'Manrope', 'Segoe UI', sans-serif;
 }
@@ -44,17 +42,6 @@ img, svg { display: block; max-width: 100%; }
 
 ::selection { background: rgba(232, 163, 61, 0.3); color: #fff; }
 :focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
-
-.eyebrow {
-    display: block;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    color: var(--rust);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
 
 /* ===== BUTTONS ===== */
 .btn {
@@ -89,7 +76,7 @@ img, svg { display: block; max-width: 100%; }
 
 .btn-ghost:hover { border-color: var(--amber); color: var(--amber); background: rgba(232, 163, 61, 0.06); }
 
-/* ===== HUD PANEL (shared with dashboard) ===== */
+/* ===== HUD PANEL ===== */
 .hud-panel {
     position: relative;
     background: rgba(255, 255, 255, 0.025);
@@ -151,29 +138,21 @@ img, svg { display: block; max-width: 100%; }
     letter-spacing: 0.04em;
     color: var(--text);
 }
-/* ===== NAV LOGO ICON ===== */
+
 .nav-logo .logo-icon {
-    height: 75px;          /* Adjust size to fit nav */
-    width: auto;           /* Maintain aspect ratio */
+    height: 75px;
+    width: auto;
     display: inline-block;
     vertical-align: middle;
 }
 
-/* If the logo appears too large on smaller screens */
 @media (max-width: 600px) {
-    .nav-logo .logo-icon {
-        height: 24px;
-    }
+    .nav-logo .logo-icon { height: 24px; }
 }
 
 .logo-mark { color: var(--rust); font-size: 16px; }
 
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    
-}
+.nav-links { display: flex; align-items: center; gap: 30px; }
 
 .nav-link {
     font-family: var(--mono);
@@ -236,7 +215,6 @@ img, svg { display: block; max-width: 100%; }
     overflow: hidden;
 }
 
-/* ===== FULL SCREEN TEAM PHOTO ===== */
 .team-photo-section {
     width: 100%;
     height: 100vh;
@@ -253,7 +231,6 @@ img, svg { display: block; max-width: 100%; }
     display: block;
 }
 
-/* Hero background — NASA/JPL Perseverance rover selfie on Mars */
 .hero-scene {
     position: absolute;
     inset: 0;
@@ -302,12 +279,7 @@ img, svg { display: block; max-width: 100%; }
     margin: 0 auto 30px;
 }
 
-.hero-actions {
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
+.hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
 .scroll-cue {
     position: absolute;
@@ -374,7 +346,7 @@ img, svg { display: block; max-width: 100%; }
     margin-bottom: 44px;
 }
 
-/* ===== OVERVIEW: PILLARS + UNITS ===== */
+/* ===== OVERVIEW: PILLARS ===== */
 .pillar-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -383,186 +355,9 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .pillar-card { padding: 24px 20px; }
-
 .pillar-icon { font-size: 26px; display: block; margin-bottom: 12px; }
-
-.pillar-card h3 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.pillar-card p {
-    font-size: 13.5px;
-    line-height: 1.6;
-    color: var(--muted);
-}
-
-.unit-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-top: 40px;
-}
-
-/* ===== UNIT CARDS (collapsible) with larger expanded content ===== */
-.unit-card {
-    border: 1px solid var(--border);
-    border-top: 2px solid var(--rust);
-    border-radius: 4px;
-    padding: 20px 18px;
-    background: rgba(255, 255, 255, 0.015);
-    transition: all 0.2s ease;
-}
-
-.unit-card h4 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #fff;
-}
-
-.unit-card h4 .title-text {
-    flex: 1;
-}
-
-/* Toggle button */
-.unit-card .toggle-btn {
-    background: none;
-    border: none;
-    font-size: 1.6rem;
-    cursor: pointer;
-    color: #e67e22;
-    padding: 0.2rem 0.5rem;
-    transition: transform 0.25s ease, opacity 0.2s;
-    line-height: 1;
-}
-
-.unit-card .toggle-btn:hover {
-    opacity: 0.8;
-}
-
-.unit-card .toggle-btn .arrow {
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-/* Collapsible content - increased max-height and spacing */
-.unit-card .unit-content {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.4s ease,
-                margin 0.3s ease;
-    margin-top: 0;
-}
-
-.unit-card.open .unit-content {
-    max-height: 800px;
-    opacity: 1;
-    margin-top: 1rem;
-}
-
-.unit-card.open .toggle-btn .arrow {
-    transform: rotate(180deg);
-}
-
-/* ===== TEAM MEMBERS (inside expanded cards) — larger sizes ===== */
-.team-leader {
-    text-align: center;
-    padding: 0.75rem 0 0.5rem;
-    border-bottom: 1px solid rgba(232, 163, 61, 0.2);
-    margin-bottom: 1rem;
-}
-
-.leader-avatar {
-    width: 96px;
-    height: 96px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    background-color: rgba(255,255,255,0.1);
-    border: 3px solid var(--amber);
-    margin: 0 auto 8px;
-    box-shadow: 0 0 0 3px rgba(232,163,61,0.1);
-}
-
-.leader-label {
-    display: block;
-    font-family: var(--mono);
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--rust);
-    margin-bottom: 4px;
-}
-
-.leader-name {
-    display: block;
-    font-weight: 700;
-    font-size: 1.4rem;
-    color: #fff;
-}
-
-.member-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem 0.75rem;
-    padding: 0.75rem 0 0.25rem;
-}
-
-.member {
-    text-align: center;
-}
-
-.member-avatar {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    background-color: rgba(255,255,255,0.06);
-    border: 2px solid var(--border-2);
-    margin: 0 auto 6px;
-    transition: border-color 0.2s;
-}
-
-.member-avatar:hover {
-    border-color: var(--amber);
-}
-
-.member-name {
-    display: block;
-    font-size: 14px;
-    color: rgba(255,255,255,0.85);
-    line-height: 1.3;
-    font-weight: 500;
-}
-
-/* Responsive member grid */
-@media (max-width: 600px) {
-    .member-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .leader-avatar {
-        width: 76px;
-        height: 76px;
-    }
-    .leader-name {
-        font-size: 1.2rem;
-    }
-    .member-avatar {
-        width: 52px;
-        height: 52px;
-    }
-    .member-name {
-        font-size: 12px;
-    }
-}
+.pillar-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.pillar-card p { font-size: 13.5px; line-height: 1.6; color: var(--muted); }
 
 /* ===== HISTORY: TIMELINE ===== */
 .timeline {
@@ -602,19 +397,9 @@ img, svg { display: block; max-width: 100%; }
     max-width: 60ch;
 }
 
-/* ===== PRESS MARQUEE (continuous scroll — medium size) ===== */
-.press-block {
-    margin: 2rem 0;
-}
-
-.press-heading {
-    font-family: var(--mono);
-    font-size: 15px;
-    letter-spacing: 0.05em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 18px;
-}
+/* ===== PRESS MARQUEE ===== */
+.press-block { margin: 2rem 0; }
+.press-heading { font-family: var(--mono); font-size: 15px; letter-spacing: 0.05em; color: var(--muted); text-transform: uppercase; margin-bottom: 18px; }
 
 .marquee-container {
     overflow: hidden;
@@ -633,8 +418,8 @@ img, svg { display: block; max-width: 100%; }
 
 .clipping {
     flex: 0 0 auto;
-    width: 200px;          /* Medium size — good for readability */
-    height: 250px;         /* Fixed height keeps cards uniform */
+    width: 200px;
+    height: 250px;
     background: #f4f1ea;
     border-radius: 4px;
     padding: 6px;
@@ -645,40 +430,19 @@ img, svg { display: block; max-width: 100%; }
     overflow: hidden;
 }
 
-.clipping img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;   /* Shows the entire image, scaled down */
-    display: block;
-    border-radius: 2px;
-}
+.clipping img { width: 100%; height: 100%; object-fit: contain; display: block; border-radius: 2px; }
 
 @keyframes marqueeScroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
 
-/* Hide old carousel controls */
-.carousel-controls {
-    display: none;
-}
-
-/* Responsive: smaller cards on phones */
 @media (max-width: 600px) {
-    .clipping {
-        width: 160px;
-        height: 200px;
-    }
+    .clipping { width: 160px; height: 200px; }
 }
 
 /* ===== ACHIEVEMENT STRIP ===== */
-.achievement-strip {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 44px;
-}
-
+.achievement-strip { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 44px; }
 .achievement-pill {
     font-family: var(--mono);
     font-size: 12.5px;
@@ -727,28 +491,296 @@ img, svg { display: block; max-width: 100%; }
     margin-bottom: 12px;
 }
 
-.faculty-info h3 {
+.faculty-info h3 { font-family: var(--mono); font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+.faculty-role { font-size: 13.5px; color: var(--muted); margin-bottom: 16px; }
+.faculty-bio { font-size: 14.5px; line-height: 1.75; color: rgba(242, 237, 228, 0.75); max-width: 64ch; margin-bottom: 22px; }
+.faculty-links { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ============================================================
+   TEAMS ROTATING ORBITAL LAYOUT
+   ============================================================ */
+.team-orbit-container {
+    position: relative;
+    width: 100%;
+    height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    overflow: hidden;
+}
+
+.orbit-hub {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--amber);
+    background: rgba(200, 90, 46, 0.1);
+    border: 2px dashed var(--rust);
+    z-index: 10;
+    box-shadow: 0 0 30px rgba(200, 90, 46, 0.2);
+    animation: pulseHub 4s ease-in-out infinite;
+}
+
+@keyframes pulseHub {
+    0% { box-shadow: 0 0 20px rgba(200, 90, 46, 0.1); }
+    50% { box-shadow: 0 0 40px rgba(200, 90, 46, 0.4); }
+    100% { box-shadow: 0 0 20px rgba(200, 90, 46, 0.1); }
+}
+
+/* The Rotating Ring */
+.orbit-ring {
+    position: absolute;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    animation: spin 40s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}
+
+/* Node Positioning (Using Margins for perfect centering without transform conflicts) */
+.team-node {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    z-index: 5;
+}
+
+.team-node.software { top: 0%; left: 50%; margin-top: -55px; margin-left: -55px; }
+.team-node.electrical { top: 50%; right: 0%; margin-top: -55px; margin-right: -55px; }
+.team-node.mechanical { bottom: 0%; left: 50%; margin-bottom: -55px; margin-left: -55px; }
+.team-node.science { top: 50%; left: 0%; margin-top: -55px; margin-left: -55px; }
+
+.leader-node {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    z-index: 6;
+}
+
+.leader-node[data-team="software"] { top: 15%; left: 15%; margin-top: -45px; margin-left: -45px; }
+.leader-node[data-team="electrical"] { top: 15%; right: 15%; margin-top: -45px; margin-right: -45px; }
+.leader-node[data-team="mechanical"] { bottom: 15%; right: 15%; margin-bottom: -45px; margin-right: -45px; }
+.leader-node[data-team="science"] { bottom: 15%; left: 15%; margin-bottom: -45px; margin-left: -45px; }
+
+/* Node Inner Content (Counter-rotates to stay upright) */
+.node-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    cursor: pointer;
+    animation: spin-reverse 40s linear infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    line-height: 1.3;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Team Node Colors */
+.team-node.software .node-inner { background: linear-gradient(135deg, var(--rust), #e06a3a); border: 2px solid #ff8c5a; }
+.team-node.electrical .node-inner { background: linear-gradient(135deg, var(--amber), #f0b55a); border: 2px solid #ffc776; color: #171008; }
+.team-node.mechanical .node-inner { background: linear-gradient(135deg, var(--green), #7acc92); border: 2px solid #8aff9e; color: #0b1a0f; }
+.team-node.science .node-inner { background: linear-gradient(135deg, var(--blue), #6ba8f0); border: 2px solid #8bbfff; color: #fff; }
+
+/* Leader Node Styles */
+.leader-node .node-inner {
+    border: 3px solid var(--amber);
+    filter: grayscale(40%);
+}
+
+/* Hover Effects (Pause rotation and scale up) */
+.team-node:hover .node-inner,
+.leader-node:hover .node-inner {
+    animation-play-state: paused;
+    transform: scale(1.15);
+    box-shadow: 0 0 25px var(--amber);
+    z-index: 20;
+}
+
+.leader-node:hover .node-inner {
+    border-color: #fff;
+    filter: grayscale(0%);
+}
+
+/* ============================================================
+   TEAM MODAL
+   ============================================================ */
+.team-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.team-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 40px;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    background: rgba(14, 12, 9, 0.95);
+    border: 1px solid var(--border-2);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+}
+
+.team-modal.active .modal-content {
+    transform: translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-modal:hover {
+    color: var(--amber);
+}
+
+.modal-title {
     font-family: var(--mono);
     font-size: 24px;
     font-weight: 700;
-    margin-bottom: 6px;
+    color: var(--amber);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
 }
 
-.faculty-role {
-    font-size: 13.5px;
-    color: var(--muted);
-    margin-bottom: 16px;
+.modal-leader {
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(232, 163, 61, 0.2);
+    margin-bottom: 1.5rem;
 }
 
-.faculty-bio {
-    font-size: 14.5px;
-    line-height: 1.75;
-    color: rgba(242, 237, 228, 0.75);
-    max-width: 64ch;
-    margin-bottom: 22px;
+.modal-leader .leader-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255,255,255,0.1);
+    border: 3px solid var(--amber);
+    margin: 0 auto 12px;
+    box-shadow: 0 0 0 5px rgba(232,163,61,0.1);
 }
 
-.faculty-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.modal-leader .leader-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 4px;
+}
+
+.modal-leader .leader-name {
+    display: block;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.member-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem 1rem;
+    padding: 1rem 0;
+}
+
+.member {
+    text-align: center;
+}
+
+.member-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255,255,255,0.06);
+    border: 2px solid var(--border-2);
+    margin: 0 auto 8px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.member-avatar:hover {
+    border-color: var(--amber);
+    transform: scale(1.1);
+}
+
+.member-name {
+    display: block;
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+@media (max-width: 600px) {
+    .member-grid { grid-template-columns: repeat(2, 1fr); }
+    .modal-leader .leader-avatar { width: 90px; height: 90px; }
+    .modal-leader .leader-name { font-size: 1.4rem; }
+    .member-avatar { width: 60px; height: 60px; }
+    .member-name { font-size: 12px; }
+}
 
 /* ===== JOIN ===== */
 .section-join {
@@ -792,22 +824,9 @@ img, svg { display: block; max-width: 100%; }
     letter-spacing: 0.03em;
 }
 
-/* ===== SCROLL REVEAL ===== */
-.reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
     .pillar-grid { grid-template-columns: repeat(2, 1fr); }
-    .unit-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 820px) {
@@ -835,10 +854,41 @@ img, svg { display: block; max-width: 100%; }
     .faculty-photo { width: 120px; margin: 0 auto; }
     .faculty-links { justify-content: center; }
     .faculty-bio { margin-left: auto; margin-right: auto; }
+
+    /* Orbit Responsive — Disable rotation on mobile for better UX */
+    .team-orbit-container {
+        height: auto;
+        flex-direction: column;
+        gap: 20px;
+        padding-bottom: 40px;
+        overflow: visible;
+    }
+    .orbit-hub { position: relative; margin-bottom: 20px; }
+    .orbit-ring { 
+        position: relative; 
+        animation: none; 
+        width: 100%; 
+        max-width: 100%; 
+        aspect-ratio: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .team-node, .leader-node {
+        position: relative;
+        top: auto; left: auto; right: auto; bottom: auto;
+        margin: 0 !important;
+        width: 100px;
+        height: 100px;
+    }
+    .leader-node { width: 80px; height: 80px; }
+    .node-inner { animation: none !important; } /* Stop counter-rotation */
+    .team-node:hover .node-inner, .leader-node:hover .node-inner { transform: scale(1.05); }
 }
 
 @media (max-width: 600px) {
     .section { padding: 70px 0; }
-    .pillar-grid, .unit-grid { grid-template-columns: 1fr; }
+    .pillar-grid { grid-template-columns: 1fr; }
     .hero-content h1 { font-size: 42px; }
 }
