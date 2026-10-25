@@ -5,6 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AIUB Robotic Crew — Mars Rover Team</title>
     <link rel="stylesheet" href="dark_space_theme1.css" />
+
+    <!-- NEW: styles for the "Previous Workshops" link (you can move this into dark_space_theme1.css later) -->
+    <style>
+        .see-more-wrap {
+            display: flex;
+            justify-content: center;
+            margin-top: 36px;
+        }
+        .see-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 30px;
+            border: 1.5px solid #19e68c;
+            border-radius: 999px;
+            color: #19e68c;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            background: rgba(25, 230, 140, 0.06);
+            transition: background .3s, color .3s, box-shadow .3s;
+        }
+        .see-more-btn .arrow {
+            display: inline-block;
+            transition: transform .3s;
+        }
+        .see-more-btn:hover,
+        .see-more-btn:focus-visible {
+            background: #19e68c;
+            color: #04110b;
+            box-shadow: 0 10px 30px rgba(25, 230, 140, 0.25);
+        }
+        .see-more-btn:hover .arrow,
+        .see-more-btn:focus-visible .arrow {
+            transform: translateX(6px);
+        }
+    </style>
 </head>
 <body>
     <div class="page">
@@ -24,7 +61,7 @@
                 <a href="#about">About</a>
                 <a href="mars-rover.html" id="marsRoverLink">Mars Rover</a>
                 <a href="#workshop">Workshop</a>
-                <a href="#research">Research</a>
+                
                 <a href="#contact">Contact</a>
             </div>
             <a href="sponsor.html" class="sponsor-btn" style="text-decoration: none;">Become a Sponsor</a>
@@ -203,6 +240,13 @@
                             <span class="showcase-sub">Notre Dame College</span>
                             <h3 class="showcase-title">NDC</h3>
                         </div>
+                    </a>
+                </div>
+
+                <!-- NEW: See Previous Workshops (opens in the same tab) -->
+                <div class="see-more-wrap">
+                    <a href="previous_workshop.html" class="see-more-btn">
+                        See Previous Workshops <span class="arrow">&#10095;</span>
                     </a>
                 </div>
 

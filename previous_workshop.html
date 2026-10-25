@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Previous Workshops — AIUB Robotic Crew</title>
+    <link rel="stylesheet" href="dark_space_theme1.css" />
+
+    <style>
+        /* All page-specific classes start with "pw-" so they never clash with dark_space_theme1.css */
+        :root {
+            --pw-bg: #05070f;
+            --pw-panel: rgba(255, 255, 255, 0.04);
+            --pw-line: rgba(255, 255, 255, 0.10);
+            --pw-text: #e8edf5;
+            --pw-muted: #93a0b4;
+            --pw-green: #19e68c;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        .pw-main {
+            position: relative;
+            padding-top: 110px;           /* space for the fixed nav */
+            min-height: 100vh;
+            overflow: hidden;
+            color: var(--pw-text);
+        }
+
+        /* ---------- moving starfield background ---------- */
+        .pw-stars, .pw-stars::before, .pw-stars::after {
+            position: absolute;
+            inset: 0;
+            content: "";
+            pointer-events: none;
+            background-repeat: repeat;
+        }
+        .pw-stars {
+            z-index: 0;
+            background-image:
+                radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent),
+                radial-gradient(1px 1px at 90px 120px, #bfe9ff, transparent),
+                radial-gradient(1.5px 1.5px at 160px 60px, #fff, transparent),
+                radial-gradient(1px 1px at 230px 180px, #d6ffe9, transparent);
+            background-size: 260px 220px;
+            animation: pw-drift 90s linear infinite;
+            opacity: .55;
+        }
+        .pw-stars::before {
+            background-image:
+                radial-gradient(2px 2px at 60px 90px, #19e68c, transparent),
+                radial-gradient(1px 1px at 190px 150px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 300px 40px, #bfe9ff, transparent);
+            background-size: 340px 260px;
+            animation: pw-drift 150s linear infinite reverse;
+            opacity: .5;
+        }
+        .pw-stars::after {
+            background: radial-gradient(60% 40% at 80% 0%, rgba(25, 230, 140, .12), transparent 70%),
+                        radial-gradient(50% 40% at 0% 60%, rgba(70, 120, 255, .10), transparent 70%);
+        }
+        @keyframes pw-drift {
+            from { background-position: 0 0; }
+            to   { background-position: 0 1200px; }
+        }
+
+        .pw-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- back link + heading ---------- */
+        .pw-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 18px 0 28px;
+            padding: 10px 18px;
+            border: 1px solid var(--pw-line);
+            border-radius: 999px;
+            color: var(--pw-text);
+            text-decoration: none;
+            font-size: .95rem;
+            background: var(--pw-panel);
+            transition: border-color .25s, transform .25s;
+        }
+        .pw-back:hover { border-color: var(--pw-green); transform: translateX(-4px); }
+
+        .pw-head h1 {
+            font-size: clamp(2.2rem, 6vw, 4.2rem);
+            line-height: 1.05;
+            margin: 0 0 14px;
+            letter-spacing: -0.02em;
+        }
+        .pw-head h1 span { color: var(--pw-green); }
+        .pw-head p {
+            max-width: 620px;
+            color: var(--pw-muted);
+            font-size: 1.05rem;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* ---------- jump links (one per section) ---------- */
+        .pw-jump {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 32px 0 20px;
+        }
+        .pw-jump a {
+            padding: 10px 20px;
+            border-radius: 999px;
+            border: 1px solid var(--pw-line);
+            background: var(--pw-panel);
+            color: var(--pw-text);
+            text-decoration: none;
+            font-size: .95rem;
+            transition: border-color .25s, background .25s;
+        }
+        .pw-jump a:hover { border-color: var(--pw-green); background: rgba(25, 230, 140, .08); }
+        .pw-jump small { color: var(--pw-green); margin-left: 6px; }
+
+        /* ---------- sections ---------- */
+        .pw-section {
+            position: relative;
+            z-index: 1;
+            padding: 56px 0 24px;
+            scroll-margin-top: 110px;
+        }
+        .pw-section + .pw-section {
+            margin-top: 40px;
+            border-top: 1px solid var(--pw-line);
+        }
+        .pw-sec-head { margin-bottom: 28px; }
+        .pw-sec-head h2 {
+            font-size: clamp(1.6rem, 3.6vw, 2.3rem);
+            margin: 0 0 10px;
+            letter-spacing: -0.01em;
+        }
+        .pw-sec-head p {
+            margin: 0;
+            max-width: 640px;
+            color: var(--pw-muted);
+            line-height: 1.65;
+        }
+
+        /* ---------- moving rows ----------
+           Default direction: right to left.
+           Add .pw-reverse for left to right. */
+        .pw-marquee {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            margin: 0 0 18px;
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+                    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+        }
+        .pw-track {
+            display: flex;
+            gap: 16px;
+            width: max-content;
+            animation: pw-scroll 60s linear infinite;   /* real duration is set per row by the script */
+            padding: 8px 0;
+        }
+        .pw-marquee.pw-reverse .pw-track { animation-direction: reverse; }
+        .pw-marquee:hover .pw-track { animation-play-state: paused; }
+        @keyframes pw-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+        .pw-chip {
+            flex: 0 0 auto;
+            width: 360px;
+            height: 235px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--pw-line);
+            cursor: pointer;
+            position: relative;
+        }
+        .pw-chip img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+        .pw-chip:hover img { transform: scale(1.08); }
+        .pw-chip:hover { border-color: var(--pw-green); }
+        .pw-chip:focus-visible { outline: 2px solid var(--pw-green); outline-offset: 3px; }
+
+        .pw-end { height: 80px; }
+
+        /* ---------- lightbox ---------- */
+        .pw-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(2, 4, 10, .93);
+            padding: 24px;
+        }
+        .pw-lightbox.is-open { display: flex; animation: pw-fade .3s ease; }
+        @keyframes pw-fade { from { opacity: 0; } to { opacity: 1; } }
+        .pw-lb-body { max-width: 960px; width: 100%; text-align: center; }
+        .pw-lb-body img { max-width: 100%; max-height: 72vh; border-radius: 12px; }
+        .pw-lb-body h3 { margin: 16px 0 6px; color: var(--pw-text); }
+        .pw-lb-body p { margin: 0; color: var(--pw-muted); }
+        .pw-lb-btn {
+            position: absolute;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid var(--pw-line);
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: background .2s;
+        }
+        .pw-lb-btn:hover { background: var(--pw-green); color: #04110b; }
+        .pw-lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+        .pw-lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
+        .pw-lb-close { right: 20px; top: 20px; }
+
+        @media (max-width: 640px) {
+            .pw-main { padding-top: 96px; }
+            .pw-chip { width: 260px; height: 170px; }
+            .pw-lb-prev, .pw-lb-next { top: auto; bottom: 20px; transform: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .pw-stars, .pw-stars::before, .pw-track { animation: none; }
+            .pw-marquee { overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+
+        <!-- ===== NAVIGATION (same as index.html, links go back to the home page) ===== -->
+        <nav>
+            <div class="logo-area">
+                <div class="logo-shield">
+                    <img src="Screenshot_2026-06-24_221754-removebg-preview.png" alt="ARC Logo" />
+                </div>
+                <div>
+                    <div class="brand">AIUB <span><br>ROBOTICS</span><br><span class="green-text">CREW</span></div>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="mars-rover.html">Mars Rover</a>
+                <a href="index.html#workshop" class="active">Workshop</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <a href="sponsor.html" class="sponsor-btn" style="text-decoration: none;">Become a Sponsor</a>
+        </nav>
+
+        <main class="pw-main">
+            <div class="pw-stars" aria-hidden="true"></div>
+
+            <div class="pw-wrap">
+                <a href="index.html#workshop" class="pw-back">&#10094; Back to Workshops</a>
+
+                <header class="pw-head">
+                    <h1>Previous <span>Workshops</span></h1>
+                    <p>A look back at the workshops ARC has run over the years, from school community sessions to our earlier workshops. Hover to pause the photos, and click any photo to view it larger.</p>
+                </header>
+
+                <!-- Jump links are built automatically from the SECTIONS list in the script -->
+                <nav class="pw-jump" id="jumpLinks" aria-label="Workshop sections"></nav>
+            </div>
+
+            <!-- Sections (School Community, Past Workshops) are built here by the script -->
+            <div id="sections"></div>
+
+            <div class="pw-end"></div>
+        </main>
+
+        <!-- ===== LIGHTBOX ===== -->
+        <div class="pw-lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Workshop photo viewer">
+            <button class="pw-lb-btn pw-lb-close" id="lbClose" aria-label="Close">&#10005;</button>
+            <button class="pw-lb-btn pw-lb-prev" id="lbPrev" aria-label="Previous photo">&#10094;</button>
+            <div class="pw-lb-body">
+                <img id="lbImg" src="" alt="" />
+                <h3 id="lbTitle"></h3>
+                <p id="lbDesc"></p>
+            </div>
+            <button class="pw-lb-btn pw-lb-next" id="lbNext" aria-label="Next photo">&#10095;</button>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <footer>
+            © 2026 AIUB ROBOTIC CREW — AIUB, DHAKA, BANGLADESH &nbsp;|&nbsp; marsrover.aiub.edu.bd
+        </footer>
+
+    </div>
+
+    <script>
+        /* =====================================================================
+           EDIT HERE. Each section has its own photos, so the groups never mix.
+           - files      : image file names (same folder as this HTML file)
+           - rows       : how many moving rows to split the photos into
+           - startsFrom : direction of the FIRST row: "left" (moves left to right)
+                          or "right" (moves right to left). Next rows alternate.
+           - cardTitle  : title shown in the full-size viewer
+           - cardDesc   : short text in the full-size viewer ("" hides it)
+           To give ONE photo its own text, replace the file name string with an
+           object, e.g.  { src: "prev3.jpeg", title: "Rover Demo", desc: "Showing the rover to students." }
+           ===================================================================== */
+        const SECTIONS = [
+            {
+                id: "school",
+                label: "School Kids",
+                heading: "School Community Workshops",
+                intro: "Workshops we ran with school students, introducing young learners to robots, circuits and hands-on building.",
+                cardTitle: "School Kids Workshop",
+                cardDesc: "",
+                rows: 2,                 /* 6 photos -> 3 + 3 */
+                startsFrom: "left",      /* row 1: left to right, row 2: right to left */
+                files: ["Schl1.jpeg", "Schl2.jpeg", "Schl3.jpeg", "Schl4.jpeg", "Schl5.jpeg", "Schl6.jpeg"]
+            },
+            {
+                id: "past",
+                label: "Past Workshop",
+                heading: "Past Workshops",
+                intro: "Moments from our earlier workshops and events, including sessions where we showed our rover.",
+                cardTitle: "Past Workshop",
+                cardDesc: "",
+                rows: 3,                 /* 12 photos -> 4 + 4 + 4 */
+                startsFrom: "left",      /* row 1: left to right, row 2: right to left, row 3: left to right */
+                files: [
+                    "prev1.jpeg", "prev2.jpeg", "prev3.jpeg", "prev5.jpeg", "prev6.jpeg", "prev7.jpeg",
+                    "prev8.jpeg", "prev9.jpeg", "prev10.jpeg", "prev11.jpeg", "prev13.jpeg", "prev14.jpeg","prev15.jpeg","prev16.jpeg","prev17.jpeg"
+                ]
+            }
+        ];
+
+        const CHIP_WIDTH = 360 + 16;      /* photo width + gap, keep in sync with the CSS */
+        const SPEED = 45;                 /* pixels per second, raise for faster rows */
+
+        /* ---------- turn each section's file list into full photo objects ---------- */
+        SECTIONS.forEach(function (sec) {
+            sec.items = sec.files.map(function (f) {
+                const o = (typeof f === "string") ? { src: f } : f;
+                return {
+                    src: o.src,
+                    title: o.title || sec.cardTitle,
+                    desc: (o.desc !== undefined) ? o.desc : sec.cardDesc,
+                    label: sec.label
+                };
+            });
+        });
+
+        /* ---------- placeholder (only shown if an image file is missing) ---------- */
+        function placeholder(item, index) {
+            const hue = (index * 47 + 150) % 360;
+            const svg =
+                '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">' +
+                '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+                '<stop offset="0" stop-color="hsl(' + hue + ',55%,22%)"/>' +
+                '<stop offset="1" stop-color="hsl(' + ((hue + 60) % 360) + ',60%,10%)"/></linearGradient></defs>' +
+                '<rect width="800" height="600" fill="url(#g)"/>' +
+                '<circle cx="400" cy="250" r="64" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="5"/>' +
+                '<path d="M370 270 l22 -26 l16 18 l12 -14 l24 30 z" fill="rgba(255,255,255,.35)"/>' +
+                '<text x="400" y="400" fill="#fff" font-family="Arial,sans-serif" font-size="34" text-anchor="middle">Image not found</text>' +
+                '<text x="400" y="445" fill="rgba(255,255,255,.65)" font-family="Arial,sans-serif" font-size="26" text-anchor="middle">' + item.src + '</text>' +
+                '</svg>';
+            return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+        }
+
+        function makeImg(item, index) {
+            const img = document.createElement("img");
+            img.alt = item.title + " " + (index + 1);
+            img.src = item.src;
+            img.addEventListener("error", function () {
+                img.onerror = null;
+                img.src = placeholder(item, index);
+            });
+            return img;
+        }
+
+        /* ---------- build one moving row ---------- */
+        function buildRow(sec, entries, goesLeftToRight) {
+            const box = document.createElement("div");
+            box.className = "pw-marquee" + (goesLeftToRight ? " pw-reverse" : "");
+            const track = document.createElement("div");
+            track.className = "pw-track";
+            box.appendChild(track);
+
+            /* The row is repeated so the loop is seamless and never leaves a gap,
+               even on very wide screens. The number of repeats is always even. */
+            const halfWidth = entries.length * CHIP_WIDTH;
+            const reps = Math.max(1, Math.ceil(2600 / halfWidth));
+            for (let round = 0; round < reps * 2; round++) {
+                entries.forEach(function (entry) {
+                    const chip = document.createElement("div");
+                    chip.className = "pw-chip";
+                    chip.tabIndex = 0;
+                    chip.setAttribute("role", "button");
+                    chip.setAttribute("aria-label", "Open " + entry.item.title + " " + (entry.index + 1));
+                    chip.appendChild(makeImg(entry.item, entry.index));
+                    chip.addEventListener("click", function () { openLightbox(sec.items, entry.index); });
+                    chip.addEventListener("keydown", function (e) {
+                        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLightbox(sec.items, entry.index); }
+                    });
+                    track.appendChild(chip);
+                });
+            }
+            /* same pixel speed for every row, however many photos it has */
+            track.style.animationDuration = Math.round((reps * halfWidth) / SPEED) + "s";
+            return box;
+        }
+
+        /* ---------- build every section + jump links ---------- */
+        const sectionsBox = document.getElementById("sections");
+        const jumpBox = document.getElementById("jumpLinks");
+
+        SECTIONS.forEach(function (sec) {
+            const link = document.createElement("a");
+            link.href = "#" + sec.id;
+            link.innerHTML = sec.heading + '<small>' + sec.items.length + ' photos</small>';
+            jumpBox.appendChild(link);
+
+            const section = document.createElement("section");
+            section.className = "pw-section";
+            section.id = sec.id;
+
+            const head = document.createElement("div");
+            head.className = "pw-wrap pw-sec-head";
+            head.innerHTML = '<h2>' + sec.heading + '</h2><p>' + sec.intro + '</p>';
+            section.appendChild(head);
+
+            /* split the photos into equal groups, one group per row (each photo appears in exactly one row) */
+            const entries = sec.items.map(function (item, index) { return { item: item, index: index }; });
+            const perRow = Math.ceil(entries.length / sec.rows);
+            for (let r = 0; r < sec.rows; r++) {
+                const part = entries.slice(r * perRow, (r + 1) * perRow);
+                if (!part.length) continue;
+                const firstRowLeftToRight = (sec.startsFrom === "left");
+                const leftToRight = (r % 2 === 0) ? firstRowLeftToRight : !firstRowLeftToRight;
+                section.appendChild(buildRow(sec, part, leftToRight));
+            }
+
+            sectionsBox.appendChild(section);
+        });
+
+        /* ---------- lightbox (moves only within the section you opened it from) ---------- */
+        const lb = document.getElementById("lightbox");
+        const lbImg = document.getElementById("lbImg");
+        const lbTitle = document.getElementById("lbTitle");
+        const lbDesc = document.getElementById("lbDesc");
+        let currentList = [];
+        let current = 0;
+
+        function showItem(i) {
+            current = (i + currentList.length) % currentList.length;
+            const item = currentList[current];
+            lbImg.onerror = function () { lbImg.onerror = null; lbImg.src = placeholder(item, current); };
+            lbImg.src = item.src;
+            lbImg.alt = item.title + " " + (current + 1);
+            lbTitle.textContent = item.title + " (" + (current + 1) + " / " + currentList.length + ")";
+            lbDesc.textContent = item.desc || item.label;
+        }
+        function openLightbox(list, i) {
+            currentList = list;
+            showItem(i);
+            lb.classList.add("is-open");
+            document.body.style.overflow = "hidden";
+        }
+        function closeLightbox() {
+            lb.classList.remove("is-open");
+            document.body.style.overflow = "";
+        }
+        document.getElementById("lbClose").addEventListener("click", closeLightbox);
+        document.getElementById("lbPrev").addEventListener("click", function () { showItem(current - 1); });
+        document.getElementById("lbNext").addEventListener("click", function () { showItem(current + 1); });
+        lb.addEventListener("click", function (e) { if (e.target === lb) closeLightbox(); });
+        document.addEventListener("keydown", function (e) {
+            if (!lb.classList.contains("is-open")) return;
+            if (e.key === "Escape") closeLightbox();
+            if (e.key === "ArrowLeft") showItem(current - 1);
+            if (e.key === "ArrowRight") showItem(current + 1);
+        });
+    </script>
+</body>
+</html>

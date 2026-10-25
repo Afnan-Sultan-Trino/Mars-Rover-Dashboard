@@ -7,6 +7,98 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="mars-rover.css" />
+
+    <!-- Mission Gallery styles (self-contained, all classes start with "rg-") -->
+    <style>
+        .rg-rows { margin-top: 8px; }
+
+        /* One moving row. Default direction: right to left. Add .rg-ltr for left to right. */
+        .rg-row {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 16px;
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+                    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+        }
+        .rg-track {
+            display: flex;
+            gap: 18px;
+            width: max-content;
+            padding: 8px 0;
+            animation: rg-scroll 60s linear infinite;   /* real duration is set per row by the script */
+        }
+        .rg-row.rg-ltr .rg-track { animation-direction: reverse; }
+        .rg-row:hover .rg-track { animation-play-state: paused; }
+        @keyframes rg-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+        .rg-item {
+            position: relative;
+            flex: 0 0 auto;
+            width: 340px;
+            height: 235px;
+            margin: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #14110c;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            cursor: pointer;
+            transition: border-color .3s;
+        }
+        .rg-item:hover { border-color: #ff9a2e; }
+        .rg-item:focus-visible { outline: 2px solid #ff9a2e; outline-offset: 3px; }
+        .rg-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform .5s ease;
+        }
+        .rg-item:hover img { transform: scale(1.07); }
+
+        /* ---- close-up viewer ---- */
+        .rg-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(4, 4, 6, 0.94);
+            padding: 24px;
+        }
+        .rg-lightbox.is-open { display: flex; animation: rg-fade .3s ease; }
+        @keyframes rg-fade { from { opacity: 0; } to { opacity: 1; } }
+        .rg-lb-body { max-width: 1000px; width: 100%; text-align: center; }
+        .rg-lb-body img { max-width: 100%; max-height: 80vh; border-radius: 10px; }
+        .rg-lb-count { margin-top: 14px; color: #c9c2b4; font-size: .95rem; }
+        .rg-lb-btn {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: background .2s, color .2s;
+        }
+        .rg-lb-btn:hover { background: #ff9a2e; color: #111; }
+        .rg-lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+        .rg-lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
+        .rg-lb-close { right: 20px; top: 20px; }
+
+        @media (max-width: 640px) {
+            .rg-item { width: 250px; height: 175px; }
+            .rg-lb-prev, .rg-lb-next { top: auto; bottom: 20px; transform: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .rg-track { animation: none; }
+            .rg-row { overflow-x: auto; }
+        }
+    </style>
 </head>
 <body>
 
@@ -159,6 +251,13 @@
                 </div>
             </div>
 
+            <!-- Mission Gallery: the 3 moving rows are built by the script at the bottom of this page.
+                 To change photos, edit the GALLERY_FILES list in that script. -->
+            <div class="press-block">
+                <h3 class="press-heading">Mission Gallery</h3>
+                <div class="rg-rows" id="galleryRows"></div>
+            </div>
+
             <div class="achievement-strip">
                 <div class="achievement-pill"><strong>🥇</strong> Best Autonomous System — URC 2025</div>
                 <div class="achievement-pill"><strong>🏅</strong> International Finalist — Top 10 Globally</div>
@@ -171,25 +270,73 @@
     <!-- ===== FACULTY ===== -->
     <section class="section" id="faculty">
         <div class="section-inner">
-            <h2 class="section-title">Faculty Advisor</h2>
-            <div class="faculty-card hud-panel">
-                <div class="faculty-photo">
-                    <span><img src="Screenshot 2026-08-11 010829.png" alt="Dr. Ebad Zahir"></span>
-                </div>
-                <div class="faculty-info">
-                    <span class="faculty-badge">Faculty Advisor</span>
-                    <h3>Dr. Ebad Zahir</h3>
-                    <p class="faculty-role">Associate Professor, Department of Electrical &amp; Electronic Engineering, AIUB</p>
-                    <p class="faculty-bio">
-                        Dr. Zahir has guided ARC since its early years, mentoring students across
-                        mechatronics, photonics, and embedded systems. His research spans assistive
-                        robotics, sensor systems, and optical communications — several of which have
-                        directly shaped ARC's rover instrumentation and navigation design.
-                    </p>
-                    <div class="faculty-links">
-                        <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=ebad.zahir" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Faculty Profile</a>
+            <h2 class="section-title">Faculty Advisors</h2>
+
+            <!-- The wrapper stacks the three cards with even spacing -->
+            <div class="faculty-list" style="display:flex; flex-direction:column; gap:32px;">
+
+                <!-- Faculty 1: Dr. Ebad Zahir -->
+                <div class="faculty-card hud-panel">
+                    <div class="faculty-photo">
+                        <span><img src="Screenshot 2026-08-11 010829.png" alt="Dr. Ebad Zahir"></span>
+                    </div>
+                    <div class="faculty-info">
+                        <span class="faculty-badge">Faculty Advisor</span>
+                        <h3>Dr. Ebad Zahir</h3>
+                        <p class="faculty-role">Associate Professor, Department of Electrical &amp; Electronic Engineering, AIUB</p>
+                        <p class="faculty-bio">
+                            Dr. Zahir has guided ARC since its early years, mentoring students across
+                            mechatronics, photonics, and embedded systems. His research spans assistive
+                            robotics, sensor systems, and optical communications — several of which have
+                            directly shaped ARC's rover instrumentation and navigation design.
+                        </p>
+                        <div class="faculty-links">
+                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=ebad.zahir" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Faculty Profile</a>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Faculty 2: Dr. Chowdhury Akram Hossain -->
+                <div class="faculty-card hud-panel">
+                    <div class="faculty-photo">
+                        <span><img src="Akram_Sir.png" alt="Dr. Chowdhury Akram Hossain"></span>
+                    </div>
+                    <div class="faculty-info">
+                        <span class="faculty-badge">Faculty Advisor</span>
+                        <h3>Dr. Chowdhury Akram Hossain</h3>
+                        <p class="faculty-role">Associate Professor &amp; Head, Department of Computer Engineering, AIUB</p>
+                        <p class="faculty-bio">
+                            Dr. Hossain supports ARC with academic guidance and mentoring. His research
+                            interests include wireless communication, power electronics, renewable energy
+                            systems, smart grids, and telemedicine, and he also serves as an advisor to the
+                            IEEE AIUB Student Branch.
+                        </p>
+                        <div class="faculty-links">
+                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=chowdhury.akram" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Faculty Profile</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faculty 3: Sadman Shahriar Alam -->
+                <div class="faculty-card hud-panel">
+                    <div class="faculty-photo">
+                        <span><img src="Sadman_Sir.png" alt="Sadman Shahriar Alam"></span>
+                    </div>
+                    <div class="faculty-info">
+                        <span class="faculty-badge">Faculty Advisor</span>
+                        <h3>Sadman Shahriar Alam</h3>
+                        <p class="faculty-role">Faculty of Engineering, AIUB</p>
+                        <p class="faculty-bio">
+                            Sadman Shahriar Alam supports ARC Rover Team with academic guidance and
+                            mentoring. See his AIUB faculty profile for his full designation, research
+                            interests, and publications.
+                        </p>
+                        <div class="faculty-links">
+                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=sadman.alam" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Faculty Profile</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -271,6 +418,146 @@
         </div>
     </div>
 
+    <!-- ===== MISSION GALLERY CLOSE-UP VIEWER ===== -->
+    <div class="rg-lightbox" id="rgLightbox" role="dialog" aria-modal="true" aria-label="Mission Gallery photo viewer">
+        <button class="rg-lb-btn rg-lb-close" id="rgClose" aria-label="Close">&#10005;</button>
+        <button class="rg-lb-btn rg-lb-prev" id="rgPrev" aria-label="Previous photo">&#10094;</button>
+        <div class="rg-lb-body">
+            <img id="rgImg" src="" alt="" />
+            <div class="rg-lb-count" id="rgCount"></div>
+        </div>
+        <button class="rg-lb-btn rg-lb-next" id="rgNext" aria-label="Next photo">&#10095;</button>
+    </div>
+
     <script src="mars-rover.js"></script>
+
+    <!-- Mission Gallery script: 3 moving rows + click-to-enlarge viewer -->
+    <script>
+        (function () {
+            /* =====================================================================
+               EDIT HERE
+               - GALLERY_FILES : your photo file names (same folder as this page).
+                                 Each photo appears in exactly one row.
+               - GALLERY_ROWS  : how many moving rows to split the photos into.
+               - FIRST_ROW     : "left" = first row moves left to right,
+                                 "right" = first row moves right to left.
+                                 The next rows alternate (left, right, left...).
+               ===================================================================== */
+            var GALLERY_FILES = [
+                "mars1.jpeg", "mars2.jpeg", "mars3.jpeg", "mars4.jpeg", "mars5.jpeg", "mars6.jpeg",
+                "mars7.jpeg", "mars8.jpeg", "mars9.jpeg", "mars10.jpeg", "mars11.jpeg", "mars12.jpeg",
+                "mars13.jpeg", "mars14.jpeg", "mars15.jpeg", "mars16.jpeg", "mars17.jpeg", "mars18.jpeg",
+                "mars19.jpeg", "mars20.jpeg", "mars21.jpeg", "mars22.jpeg", "mars23.jpeg"
+            ];
+            var GALLERY_ROWS = 3;      /* 23 photos -> 8 + 8 + 7 */
+            var FIRST_ROW = "left";    /* row 1: left to right, row 2: right to left, row 3: left to right */
+
+            var CHIP_WIDTH = 340 + 18; /* photo width + gap, keep in sync with the CSS */
+            var SPEED = 45;            /* pixels per second, raise for faster rows */
+
+            var rowsBox = document.getElementById("galleryRows");
+            if (!rowsBox) return;
+
+            /* Placeholder shown if an image file is missing */
+            function placeholder(name) {
+                var svg =
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="680" height="470" viewBox="0 0 680 470">' +
+                    '<rect width="680" height="470" fill="#1d1a14"/>' +
+                    '<circle cx="340" cy="190" r="48" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="4"/>' +
+                    '<path d="M316 206 l18 -22 l14 15 l10 -12 l20 25 z" fill="rgba(255,255,255,.3)"/>' +
+                    '<text x="340" y="290" fill="#fff" font-family="Arial,sans-serif" font-size="26" text-anchor="middle">Image not found</text>' +
+                    '<text x="340" y="330" fill="rgba(255,255,255,.6)" font-family="Arial,sans-serif" font-size="22" text-anchor="middle">' + name + '</text>' +
+                    '</svg>';
+                return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+            }
+
+            function makeImg(src, index) {
+                var img = document.createElement("img");
+                img.alt = "ARC rover team photo " + (index + 1);
+                img.src = src;
+                img.addEventListener("error", function () {
+                    img.onerror = null;
+                    img.src = placeholder(src);
+                });
+                return img;
+            }
+
+            /* ---------- build one moving row ---------- */
+            function buildRow(entries, leftToRight) {
+                var row = document.createElement("div");
+                row.className = "rg-row" + (leftToRight ? " rg-ltr" : "");
+                var track = document.createElement("div");
+                track.className = "rg-track";
+                row.appendChild(track);
+
+                /* Repeat the row so the loop is seamless, even on very wide screens (always an even number of copies) */
+                var halfWidth = entries.length * CHIP_WIDTH;
+                var reps = Math.max(1, Math.ceil(2600 / halfWidth));
+                for (var round = 0; round < reps * 2; round++) {
+                    entries.forEach(function (entry) {
+                        var fig = document.createElement("figure");
+                        fig.className = "rg-item";
+                        fig.tabIndex = 0;
+                        fig.setAttribute("role", "button");
+                        fig.setAttribute("aria-label", "Open photo " + (entry.index + 1));
+                        fig.appendChild(makeImg(entry.src, entry.index));
+                        fig.addEventListener("click", function () { openViewer(entry.index); });
+                        fig.addEventListener("keydown", function (e) {
+                            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openViewer(entry.index); }
+                        });
+                        track.appendChild(fig);
+                    });
+                }
+                /* same pixel speed for every row */
+                track.style.animationDuration = Math.round((reps * halfWidth) / SPEED) + "s";
+                return row;
+            }
+
+            /* ---------- split the photos into rows (each photo goes in exactly one row) ---------- */
+            var entries = GALLERY_FILES.map(function (src, index) { return { src: src, index: index }; });
+            var perRow = Math.ceil(entries.length / GALLERY_ROWS);
+            for (var r = 0; r < GALLERY_ROWS; r++) {
+                var part = entries.slice(r * perRow, (r + 1) * perRow);
+                if (!part.length) continue;
+                var firstLtr = (FIRST_ROW === "left");
+                var ltr = (r % 2 === 0) ? firstLtr : !firstLtr;
+                rowsBox.appendChild(buildRow(part, ltr));
+            }
+
+            /* ---------- close-up viewer ---------- */
+            var box = document.getElementById("rgLightbox");
+            var bigImg = document.getElementById("rgImg");
+            var count = document.getElementById("rgCount");
+            var current = 0;
+
+            function showPhoto(i) {
+                current = (i + GALLERY_FILES.length) % GALLERY_FILES.length;
+                var src = GALLERY_FILES[current];
+                bigImg.onerror = function () { bigImg.onerror = null; bigImg.src = placeholder(src); };
+                bigImg.src = src;
+                bigImg.alt = "ARC rover team photo " + (current + 1);
+                count.textContent = "Mission Gallery  (" + (current + 1) + " / " + GALLERY_FILES.length + ")";
+            }
+            function openViewer(i) {
+                showPhoto(i);
+                box.classList.add("is-open");
+                document.body.style.overflow = "hidden";
+            }
+            function closeViewer() {
+                box.classList.remove("is-open");
+                document.body.style.overflow = "";
+            }
+            document.getElementById("rgClose").addEventListener("click", closeViewer);
+            document.getElementById("rgPrev").addEventListener("click", function () { showPhoto(current - 1); });
+            document.getElementById("rgNext").addEventListener("click", function () { showPhoto(current + 1); });
+            box.addEventListener("click", function (e) { if (e.target === box) closeViewer(); });
+            document.addEventListener("keydown", function (e) {
+                if (!box.classList.contains("is-open")) return;
+                if (e.key === "Escape") closeViewer();
+                if (e.key === "ArrowLeft") showPhoto(current - 1);
+                if (e.key === "ArrowRight") showPhoto(current + 1);
+            });
+        })();
+    </script>
 </body>
 </html>
