@@ -57,62 +57,43 @@ const revealObserver = new IntersectionObserver((entries) => {
 revealTargets.forEach(el => revealObserver.observe(el));
 
 // ============================================================
-// TEAM MODAL LOGIC
+// TEAM MODAL LOGIC 
 // ============================================================
 
-// 1. Data for all 4 teams
 const teamData = {
     software: {
         title: 'Software Team',
-        leader: { name: 'Muksitul Ziad', img: 'https://i.pravatar.cc/150?img=1' },
+        leader: { name: 'Muksitul Ziad', img: 'Muksit.jpeg' },
         members: [
-            { name: 'Abdullah Al Nahian', img: 'https://i.pravatar.cc/100?img=2' },
-            { name: 'Farhan Sadik', img: 'https://i.pravatar.cc/100?img=3' },
-            { name: 'Stephen', img: 'https://i.pravatar.cc/100?img=4' },
-            { name: 'Shahriar Hossain', img: 'https://i.pravatar.cc/100?img=5' },
-            { name: 'Tasnim Ferdous', img: 'https://i.pravatar.cc/100?img=6' },
-            { name: 'Kamal Hossain', img: 'https://i.pravatar.cc/100?img=7' }
+            { name: 'Abdullah Nahian', img: 'NAHIYAN.jpeg' },
+            { name: 'Farhan Sadik', img: 'Fahim.jpeg' },
+            { name: 'Afnan Sultan Trino', img: 'Trino.jpeg' }
         ]
     },
     electrical: {
         title: 'Electrical Team',
-        leader: { name: 'Sabbir Hasan', img: 'https://i.pravatar.cc/150?img=8' },
+        leader: { name: 'Abul Bashar Sad', img: 'SAD.jpeg' },
         members: [
-            { name: 'Rukhsar Akhter', img: 'https://i.pravatar.cc/100?img=9' },
-            { name: 'Sabbir Ahmed', img: 'https://i.pravatar.cc/100?img=10' },
-            { name: 'Nadia Sultana', img: 'https://i.pravatar.cc/100?img=11' },
-            { name: 'Imran Hossain', img: 'https://i.pravatar.cc/100?img=12' },
-            { name: 'Sharmin Akhtar', img: 'https://i.pravatar.cc/100?img=13' },
-            { name: 'Rafiqul Islam', img: 'https://i.pravatar.cc/100?img=14' }
+            { name: 'Simran Hossain', img: 'Simran.jpeg' },
+            { name: 'Khandakar Omit', img: 'AMIT.webp' }
         ]
     },
     mechanical: {
         title: 'Mechanical Team',
-        leader: { name: 'Farhan Zaman', img: 'https://i.pravatar.cc/150?img=15' },
-        members: [
-            { name: 'Tahsin Ahmed', img: 'https://i.pravatar.cc/100?img=16' },
-            { name: 'Shahinur Rahman', img: 'https://i.pravatar.cc/100?img=17' },
-            { name: 'Moumita Sarker', img: 'https://i.pravatar.cc/100?img=18' },
-            { name: 'Ishrak Hossain', img: 'https://i.pravatar.cc/100?img=19' },
-            { name: 'Nusrat Jahan', img: 'https://i.pravatar.cc/100?img=20' },
-            { name: 'Ariful Islam', img: 'https://i.pravatar.cc/100?img=21' }
-        ]
+        leader: { name: 'Sabbir Hasan', img: 'Sabbir.jpg' },
+        members: [] // Empty array -> No "Coming Soon" text will show
     },
     science: {
         title: 'Science Team',
-        leader: { name: 'Tasnuva Sultana', img: 'https://i.pravatar.cc/150?img=22' },
+        leader: { name: 'Md. Arifullah', img: 'ARIF.jpg' }, // Fixed .HEIC to .jpg
         members: [
-            { name: 'Imtiaz Ahmed', img: 'https://i.pravatar.cc/100?img=23' },
-            { name: 'Anika Noor', img: 'https://i.pravatar.cc/100?img=24' },
-            { name: 'Shafiqur Rahman', img: 'https://i.pravatar.cc/100?img=25' },
-            { name: 'Nazia Tasnim', img: 'https://i.pravatar.cc/100?img=26' },
-            { name: 'Mahmudul Hasan', img: 'https://i.pravatar.cc/100?img=27' },
-            { name: 'Sadia Afrin', img: 'https://i.pravatar.cc/100?img=28' }
+            { name: 'Aurthy Sarker', img: 'AURTHY.jpeg' },
+            { name: 'Aha-raf-e Islam Ridita', img: 'Ridita.jpeg' },
+            { name: 'Mudabbiur Rahman Suhad', img: 'Suhad.png' }
         ]
     }
 };
 
-// 2. DOM Elements
 const modal = document.getElementById('teamModal');
 const closeModalBtn = document.getElementById('closeModal');
 const modalTeamName = document.getElementById('modalTeamName');
@@ -121,17 +102,16 @@ const modalLeaderAvatar = document.getElementById('modalLeaderAvatar');
 const modalMemberGrid = document.getElementById('modalMemberGrid');
 const orbitRing = document.querySelector('.orbit-ring');
 
-// 3. Open Modal Function
 function openTeamModal(teamKey) {
     const data = teamData[teamKey];
     if (!data) return;
 
-    // Populate Data
+    // Populate Leader Data
     modalTeamName.textContent = data.title;
     modalLeaderName.textContent = data.leader.name;
     modalLeaderAvatar.style.backgroundImage = `url('${data.leader.img}')`;
 
-    // Generate Member Grid HTML
+    // Generate Member Grid HTML (If members exist)
     modalMemberGrid.innerHTML = data.members.map(m => `
         <div class="member">
             <div class="member-avatar" style="background-image: url('${m.img}');"></div>
@@ -139,24 +119,18 @@ function openTeamModal(teamKey) {
         </div>
     `).join('');
 
-    // Show Modal
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
     
-    // Pause the orbit rotation while modal is open
     if (orbitRing) orbitRing.style.animationPlayState = 'paused';
 }
 
-// 4. Close Modal Function
 function closeTeamModal() {
     modal.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scrolling
-    
-    // Resume the orbit rotation
+    document.body.style.overflow = '';
     if (orbitRing) orbitRing.style.animationPlayState = 'running';
 }
 
-// 5. Event Listeners
 document.querySelectorAll('.leader-node').forEach(node => {
     node.addEventListener('click', () => {
         openTeamModal(node.dataset.team);
@@ -166,7 +140,6 @@ document.querySelectorAll('.leader-node').forEach(node => {
 closeModalBtn.addEventListener('click', closeTeamModal);
 modal.querySelector('.modal-overlay').addEventListener('click', closeTeamModal);
 
-// Close on Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
         closeTeamModal();

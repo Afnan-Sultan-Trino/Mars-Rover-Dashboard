@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="mars-rover.css" />
 
-    <!-- Faculty Advisors: 3 cards side by side in one row (photo on top, details below) -->
+    <!-- Faculty Advisors: 3 cards side by side in one row -->
     <style>
         .faculty-list {
             display: grid !important;
@@ -16,7 +16,6 @@
             gap: 28px;
             align-items: stretch;
         }
-        /* each card becomes a vertical card, overriding the old wide "photo left, text right" layout */
         .faculty-list .faculty-card {
             display: flex !important;
             flex-direction: column !important;
@@ -59,17 +58,14 @@
         .faculty-list .faculty-info h3 { margin: 10px 0 6px; }
         .faculty-list .faculty-links { margin-top: auto; padding-top: 16px; }
 
-        /* tablets and phones: stack the cards one under another */
         @media (max-width: 900px) {
             .faculty-list { grid-template-columns: minmax(0, 1fr); max-width: 460px; margin: 0 auto; }
         }
     </style>
 
-    <!-- Mission Gallery styles (self-contained, all classes start with "rg-") -->
+    <!-- Mission Gallery styles -->
     <style>
         .rg-rows { margin-top: 8px; }
-
-        /* One moving row. Default direction: right to left. Add .rg-ltr for left to right. */
         .rg-row {
             position: relative;
             overflow: hidden;
@@ -82,7 +78,7 @@
             gap: 18px;
             width: max-content;
             padding: 8px 0;
-            animation: rg-scroll 60s linear infinite;   /* real duration is set per row by the script */
+            animation: rg-scroll 60s linear infinite;
         }
         .rg-row.rg-ltr .rg-track { animation-direction: reverse; }
         .rg-row:hover .rg-track { animation-play-state: paused; }
@@ -113,8 +109,6 @@
             transition: transform .5s ease;
         }
         .rg-item:hover img { transform: scale(1.07); }
-
-        /* ---- close-up viewer ---- */
         .rg-lightbox {
             position: fixed;
             inset: 0;
@@ -146,7 +140,6 @@
         .rg-lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
         .rg-lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
         .rg-lb-close { right: 20px; top: 20px; }
-
         @media (max-width: 640px) {
             .rg-item { width: 250px; height: 175px; }
             .rg-lb-prev, .rg-lb-next { top: auto; bottom: 20px; transform: none; }
@@ -163,7 +156,7 @@
 <header class="site-nav" id="siteNav">
     <div class="nav-inner">
         <a href="#home" class="nav-logo">
-            <img src="Screenshot_2026-06-24_221754-removebg-preview.png" alt="AIUB Robotic Crew Logo" class="logo-icon" />
+            <img src="ARC_Logo.png" alt="AIUB Robotic Crew Logo" class="logo-icon" />
             <span>ARC <span style="color:orange ;">ROVER</span>    <span style="color:rgb(12, 136, 8) ;">TEAM</span>  </span>
         </a>
 
@@ -239,7 +232,7 @@
         </div>
     </section>
 
-    <!-- ===== TEAM PHOTO (FULL SCREEN) ===== -->
+    <!-- ===== TEAM PHOTO ===== -->
     <section class="team-photo-section">
         <img src="team-photo.png" alt="ARC Rover Team posing with their rover">
     </section>
@@ -308,8 +301,7 @@
                 </div>
             </div>
 
-            <!-- Mission Gallery: the 3 moving rows are built by the script at the bottom of this page.
-                 To change photos, edit the GALLERY_FILES list in that script. -->
+            <!-- Mission Gallery -->
             <div class="press-block">
                 <h3 class="press-heading">Mission Gallery</h3>
                 <div class="rg-rows" id="galleryRows"></div>
@@ -329,10 +321,8 @@
         <div class="section-inner">
             <h2 class="section-title">Faculty Advisors</h2>
 
-            <!-- The three cards sit side by side in one row (styles are in the <head>) -->
             <div class="faculty-list">
-
-                <!-- Faculty 1: Dr. Ebad Zahir -->
+                <!-- Faculty 1 -->
                 <div class="faculty-card hud-panel">
                     <div class="faculty-photo">
                         <span><img src="Screenshot 2026-08-11 010829.png" alt="Dr. Ebad Zahir"></span>
@@ -340,7 +330,7 @@
                     <div class="faculty-info">
                         <span class="faculty-badge">Faculty Advisor</span>
                         <h3>Dr. Ebad Zahir</h3>
-                        <p class="faculty-role">Associate Professor, Department of Electrical &amp; Electronic Engineering, AIUB</p>
+                        <p class="faculty-role">Associate Professor, Dept. of EEE, AIUB</p>
                         <p class="faculty-bio">
                             Dr. Zahir has guided ARC since its early years, mentoring students across
                             mechatronics, photonics, and embedded systems. His research spans assistive
@@ -348,12 +338,12 @@
                             directly shaped ARC's rover instrumentation and navigation design.
                         </p>
                         <div class="faculty-links">
-                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=ebad.zahir" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Faculty Profile</a>
+                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=ebad.zahir" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Profile</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Faculty 2: Dr. Chowdhury Akram Hossain -->
+                <!-- Faculty 2 -->
                 <div class="faculty-card hud-panel">
                     <div class="faculty-photo">
                         <span><img src="Akram_Sir.png" alt="Dr. Chowdhury Akram Hossain"></span>
@@ -361,7 +351,7 @@
                     <div class="faculty-info">
                         <span class="faculty-badge">Faculty Advisor</span>
                         <h3>Dr. Chowdhury Akram Hossain</h3>
-                        <p class="faculty-role">Associate Professor &amp; Head, Department of Computer Engineering, AIUB</p>
+                        <p class="faculty-role">Associate Professor &amp; Head, Dept. of CoE, AIUB</p>
                         <p class="faculty-bio">
                             Dr. Hossain supports ARC with academic guidance and mentoring. His research
                             interests include wireless communication, power electronics, renewable energy
@@ -369,12 +359,12 @@
                             IEEE AIUB Student Branch.
                         </p>
                         <div class="faculty-links">
-                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=chowdhury.akram" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Faculty Profile</a>
+                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=chowdhury.akram" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Profile</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Faculty 3: Sadman Shahriar Alam -->
+                <!-- Faculty 3 -->
                 <div class="faculty-card hud-panel">
                     <div class="faculty-photo">
                         <span><img src="Sadman_Sir.png" alt="Sadman Shahriar Alam"></span>
@@ -389,11 +379,10 @@
                             interests, and publications.
                         </p>
                         <div class="faculty-links">
-                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=sadman.alam" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Faculty Profile</a>
+                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=sadman.alam" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Profile</a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -409,7 +398,7 @@
             </p>
 
             <div class="team-orbit-container">
-                <!-- Central Hub (Static) -->
+                <!-- Central Hub -->
                 <div class="orbit-hub hud-panel">
                     <span>ARC<br>TEAMS</span>
                 </div>
@@ -423,10 +412,10 @@
                     <div class="team-node science" data-team="science"><div class="node-inner">Science<br>Team</div></div>
 
                     <!-- Leader Nodes -->
-                    <div class="leader-node" data-team="software" title="Muksitul Ziad"><div class="node-inner" style="background-image: url('https://i.pravatar.cc/150?img=1');"></div></div>
-                    <div class="leader-node" data-team="electrical" title="Saad"><div class="node-inner" style="background-image: url('https://i.pravatar.cc/150?img=8');"></div></div>
-                    <div class="leader-node" data-team="mechanical" title="Sabbir Hasan"><div class="node-inner" style="background-image: url('https://i.pravatar.cc/150?img=15');"></div></div>
-                    <div class="leader-node" data-team="science" title="Md Arif"><div class="node-inner" style="background-image: url('https://i.pravatar.cc/150?img=22');"></div></div>
+                    <div class="leader-node" data-team="software" title="Muksitul Ziad"><div class="node-inner" style="background-image: url('Muksit.jpeg');"></div></div>
+                    <div class="leader-node" data-team="electrical" title="Abul Bashar Sad"><div class="node-inner" style="background-image: url('SAD.jpeg');"></div></div>
+                    <div class="leader-node" data-team="mechanical" title="Sabbir Hasan"><div class="node-inner" style="background-image: url('Sabbir.jpg');"></div></div>
+                    <div class="leader-node" data-team="science" title="Md. Arifullah"><div class="node-inner" style="background-image: url('ARIF.jpg');"></div></div>
                 </div>
             </div>
         </div>
@@ -488,34 +477,22 @@
 
     <script src="mars-rover.js"></script>
 
-    <!-- Mission Gallery script: 3 moving rows + click-to-enlarge viewer -->
+    <!-- Mission Gallery script -->
     <script>
         (function () {
-            /* =====================================================================
-               EDIT HERE
-               - GALLERY_FILES : your photo file names (same folder as this page).
-                                 Each photo appears in exactly one row.
-               - GALLERY_ROWS  : how many moving rows to split the photos into.
-               - FIRST_ROW     : "left" = first row moves left to right,
-                                 "right" = first row moves right to left.
-                                 The next rows alternate (left, right, left...).
-               ===================================================================== */
             var GALLERY_FILES = [
                 "mars1.jpeg", "mars2.jpeg", "mars3.jpeg", "mars4.jpeg", "mars5.jpeg", "mars6.jpeg",
                 "mars7.jpeg", "mars8.jpeg", "mars9.jpeg", "mars10.jpeg", "mars11.jpeg", "mars12.jpeg",
                 "mars13.jpeg", "mars14.jpeg", "mars15.jpeg", "mars16.jpeg", "mars17.jpeg", "mars18.jpeg",
                 "mars19.jpeg", "mars20.jpeg", "mars21.jpeg", "mars22.jpeg", "mars23.jpeg"
             ];
-            var GALLERY_ROWS = 3;      /* 23 photos -> 8 + 8 + 7 */
-            var FIRST_ROW = "left";    /* row 1: left to right, row 2: right to left, row 3: left to right */
-
-            var CHIP_WIDTH = 340 + 18; /* photo width + gap, keep in sync with the CSS */
-            var SPEED = 45;            /* pixels per second, raise for faster rows */
-
+            var GALLERY_ROWS = 3;
+            var FIRST_ROW = "left";
+            var CHIP_WIDTH = 340 + 18;
+            var SPEED = 45;
             var rowsBox = document.getElementById("galleryRows");
             if (!rowsBox) return;
 
-            /* Placeholder shown if an image file is missing */
             function placeholder(name) {
                 var svg =
                     '<svg xmlns="http://www.w3.org/2000/svg" width="680" height="470" viewBox="0 0 680 470">' +
@@ -539,15 +516,12 @@
                 return img;
             }
 
-            /* ---------- build one moving row ---------- */
             function buildRow(entries, leftToRight) {
                 var row = document.createElement("div");
                 row.className = "rg-row" + (leftToRight ? " rg-ltr" : "");
                 var track = document.createElement("div");
                 track.className = "rg-track";
                 row.appendChild(track);
-
-                /* Repeat the row so the loop is seamless, even on very wide screens (always an even number of copies) */
                 var halfWidth = entries.length * CHIP_WIDTH;
                 var reps = Math.max(1, Math.ceil(2600 / halfWidth));
                 for (var round = 0; round < reps * 2; round++) {
@@ -565,12 +539,10 @@
                         track.appendChild(fig);
                     });
                 }
-                /* same pixel speed for every row */
                 track.style.animationDuration = Math.round((reps * halfWidth) / SPEED) + "s";
                 return row;
             }
 
-            /* ---------- split the photos into rows (each photo goes in exactly one row) ---------- */
             var entries = GALLERY_FILES.map(function (src, index) { return { src: src, index: index }; });
             var perRow = Math.ceil(entries.length / GALLERY_ROWS);
             for (var r = 0; r < GALLERY_ROWS; r++) {
@@ -581,7 +553,6 @@
                 rowsBox.appendChild(buildRow(part, ltr));
             }
 
-            /* ---------- close-up viewer ---------- */
             var box = document.getElementById("rgLightbox");
             var bigImg = document.getElementById("rgImg");
             var count = document.getElementById("rgCount");
