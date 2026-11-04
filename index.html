@@ -6,7 +6,7 @@
     <title>AIUB Robotic Crew — Mars Rover Team</title>
     <link rel="stylesheet" href="dark_space_theme1.css" />
 
-    <!-- NEW: styles for the "Previous Workshops" link (you can move this into dark_space_theme1.css later) -->
+    <!-- NEW: styles for the "Previous Workshops" link and 5-column grid -->
     <style>
         .see-more-wrap {
             display: flex;
@@ -40,6 +40,30 @@
         .see-more-btn:hover .arrow,
         .see-more-btn:focus-visible .arrow {
             transform: translateX(6px);
+        }
+
+        /* === NEW FIX: Force 5 cards in one row on desktop === */
+        .workshop-showcase {
+            display: grid !important;
+            grid-template-columns: repeat(5, 1fr) !important;
+            gap: 16px !important; /* Slightly smaller gap to fit everything */
+        }
+        
+        /* Responsive adjustments so it doesn't break on smaller screens */
+        @media (max-width: 1200px) {
+            .workshop-showcase {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .workshop-showcase {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .workshop-showcase {
+                grid-template-columns: 1fr !important;
+            }
         }
     </style>
 </head>
@@ -201,14 +225,11 @@
                     <p class="section-sub">Hands-on training programs designed to turn curiosity into expertise.</p>
                 </div>
 
-
-
-
-                <!-- NEW: Workshop Showcase Grid -->
+                <!-- Workshop Showcase Grid -->
                 <div class="workshop-showcase">
                     <!-- Card 1: Drone -->
                     <a href="droneWorkShop.html" class="showcase-card">
-                        <img src="DroneWorkshop2.jpeg" alt="Drone Workshop"> <!-- Replace with your image -->
+                        <img src="DroneWorkshop2.jpeg" alt="Drone Workshop"> 
                         <div class="showcase-overlay">
                             <span class="showcase-sub">Aerial Robotics</span>
                             <h3 class="showcase-title">DRONE</h3>
@@ -217,7 +238,7 @@
                     
                     <!-- Card 2: Robo-Soccer -->
                     <a href="roboSoccer.html" class="showcase-card">
-                        <img src="RoboSoccer1.jpeg" alt="Robo-Soccer Workshop"> <!-- Replace with your image -->
+                        <img src="RoboSoccer1.jpeg" alt="Robo-Soccer Workshop"> 
                         <div class="showcase-overlay">
                             <span class="showcase-sub">Competitive Robotics</span>
                             <h3 class="showcase-title">ROBO-SOCCER</h3>
@@ -226,7 +247,7 @@
                     
                     <!-- Card 3: Line Following -->
                     <a href="lineFollowing.html" class="showcase-card">
-                        <img src="LFR1.png" alt="Line Following Workshop"> <!-- Replace with your image -->
+                        <img src="LFR1.png" alt="Line Following Workshop"> 
                         <div class="showcase-overlay">
                             <span class="showcase-sub">Autonomous Navigation</span>
                             <h3 class="showcase-title">LINE FOLLOWING</h3>
@@ -235,15 +256,24 @@
                     
                     <!-- Card 4: NDC -->
                     <a href="ndc.html" class="showcase-card">
-                        <img src="NDC!.jpeg" alt="NDC Workshop"> <!-- Replace with your image -->
+                        <img src="NDC!.jpeg" alt="NDC Workshop"> 
                         <div class="showcase-overlay">
                             <span class="showcase-sub">Notre Dame College</span>
                             <h3 class="showcase-title">NDC</h3>
                         </div>
                     </a>
+
+                    <!-- Card 5: School Community (NEW) -->
+                    <a href="School_Community.html" class="showcase-card">
+                        <img src="Schl1.jpeg" alt="School Community Workshop"> 
+                        <div class="showcase-overlay">
+                            <span class="showcase-sub">Outreach Program</span>
+                            <h3 class="showcase-title">SCHOOL COMMUNITY</h3>
+                        </div>
+                    </a>
                 </div>
 
-                <!-- NEW: See Previous Workshops (opens in the same tab) -->
+                <!-- See Previous Workshops (opens in the same tab) -->
                 <div class="see-more-wrap">
                     <a href="previous_workshop.html" class="see-more-btn">
                         See Previous Workshops <span class="arrow">&#10095;</span>
@@ -261,74 +291,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- ===== RESEARCH SECTION =====
-        <section id="research" class="section-research">
-            <div class="section-inner">
-                <div class="section-header">
-                    <span class="section-tag">Innovation Lab</span>
-                    <h2>Research & Development</h2>
-                    <p class="section-sub">Pushing the boundaries of robotics through cutting-edge research and collaboration.</p>
-                </div>
-
-                <div class="research-areas">
-                    <div class="research-area">
-                        <div class="area-icon">🤖</div>
-                        <h4>Autonomous Navigation</h4>
-                        <p>Developing robust SLAM algorithms, obstacle detection, and path planning for unstructured terrain.</p>
-                        <span class="research-tag">Active</span>
-                    </div>
-                    <div class="research-area">
-                        <div class="area-icon">🧬</div>
-                        <h4>AI-Driven Science</h4>
-                        <p>Using machine learning to analyze geological samples, detect biosignatures, and classify terrain features.</p>
-                        <span class="research-tag">Active</span>
-                    </div>
-                    <div class="research-area">
-                        <div class="area-icon">🛠️</div>
-                        <h4>Robotic Manipulation</h4>
-                        <p>Researching dexterous manipulation, force control, and adaptive gripping for robotic arms.</p>
-                        <span class="research-tag">Ongoing</span>
-                    </div>
-                    <div class="research-area">
-                        <div class="area-icon">📶</div>
-                        <h4>Communication Systems</h4>
-                        <p>Exploring reliable, low-latency communication protocols for remote rover operations.</p>
-                        <span class="research-tag">Ongoing</span>
-                    </div>
-                </div>
-
-                <div class="publications">
-                    <h4>Selected Publications</h4>
-                    <div class="pub-list">
-                        <div class="pub-item">
-                            <span class="pub-year">2025</span>
-                            <div>
-                                <strong>Adaptive Path Planning for Mars Rovers Using Deep Reinforcement Learning</strong>
-                                <p>ARC Robotics Journal, Vol. 12, pp. 45–62</p>
-                            </div>
-                        </div>
-                        <div class="pub-item">
-                            <span class="pub-year">2024</span>
-                            <div>
-                                <strong>Vision-Based Terrain Classification for Autonomous Rover Navigation</strong>
-                                <p>International Conference on Robotics and Automation (ICRA)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="research-partners">
-                    <h4>Research Collaborations</h4>
-                    <div class="partner-grid">
-                        <span class="partner">🇧🇩 AIUB</span>
-                        <span class="partner">🇺🇸 NASA Mars Rover Team</span>
-                        <span class="partner">🇩🇪 DLR Robotics</span>
-                        <span class="partner">🇯🇵 JAXA</span>
-                    </div>
-                </div>
-            </div>
-        </section> -->
 
         <!-- ===== CONTACT SECTION ===== -->
         <section id="contact" class="section-contact">

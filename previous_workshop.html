@@ -140,12 +140,35 @@
             font-size: clamp(1.6rem, 3.6vw, 2.3rem);
             margin: 0 0 10px;
             letter-spacing: -0.01em;
+            line-height: 1.3;
         }
         .pw-sec-head p {
             margin: 0;
-            max-width: 640px;
+            max-width: 750px;
             color: var(--pw-muted);
             line-height: 1.65;
+        }
+
+        /* Custom Learn More Button */
+        .pw-learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 10px 24px;
+            border-radius: 999px;
+            border: 1.5px solid var(--pw-green);
+            background: rgba(25, 230, 140, 0.08);
+            color: var(--pw-green);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .pw-learn-more:hover {
+            background: var(--pw-green);
+            color: #04110b;
+            box-shadow: 0 10px 20px rgba(25, 230, 140, 0.2);
         }
 
         /* ---------- moving rows ----------
@@ -273,7 +296,7 @@
                 <nav class="pw-jump" id="jumpLinks" aria-label="Workshop sections"></nav>
             </div>
 
-            <!-- Sections (School Community, Past Workshops) are built here by the script -->
+            <!-- Sections (Nerd Community, Past Workshops) are built here by the script -->
             <div id="sections"></div>
 
             <div class="pw-end"></div>
@@ -301,26 +324,21 @@
     <script>
         /* =====================================================================
            EDIT HERE. Each section has its own photos, so the groups never mix.
-           - files      : image file names (same folder as this HTML file)
-           - rows       : how many moving rows to split the photos into
-           - startsFrom : direction of the FIRST row: "left" (moves left to right)
-                          or "right" (moves right to left). Next rows alternate.
-           - cardTitle  : title shown in the full-size viewer
-           - cardDesc   : short text in the full-size viewer ("" hides it)
-           To give ONE photo its own text, replace the file name string with an
-           object, e.g.  { src: "prev3.jpeg", title: "Rover Demo", desc: "Showing the rover to students." }
            ===================================================================== */
         const SECTIONS = [
             {
-                id: "school",
-                label: "School Kids",
-                heading: "School Community Workshops",
-                intro: "Workshops we ran with school students, introducing young learners to robots, circuits and hands-on building.",
-                cardTitle: "School Kids Workshop",
-                cardDesc: "",
-                rows: 2,                 /* 6 photos -> 3 + 3 */
-                startsFrom: "left",      /* row 1: left to right, row 2: right to left */
-                files: ["Schl1.jpeg", "Schl2.jpeg", "Schl3.jpeg", "Schl4.jpeg", "Schl5.jpeg", "Schl6.jpeg"]
+                id: "nerd",
+                label: "NERD Community",
+                heading: "NERD COMMUNITY ORGANIZED A WORKHSOP ON ROBOTICS 1.0 AT ACADEMIA",
+                intro: 'AIUB and NERD Community organized a hands-on workshop on Robotics 1.0 at Academia. Empowering the next generation of innovators with practical robotics skills. <br><br> <a href="https://www.aiub.edu/aiub-and-nerd-community-organized-a-workhsop-on-robotics-10-at-academia" target="_blank" rel="noopener noreferrer" class="pw-learn-more">Learn More on AIUB Website &rarr;</a>',
+                cardTitle: "NERD Community Workshop",
+                cardDesc: "Robotics 1.0 at Academia",
+                rows: 2,                 /* 11 photos -> 6 in row 1, 5 in row 2 */
+                startsFrom: "left",      
+                files: [
+                    "nerd1.png", "nerd2.png", "nerd3.png", "nerd4.png", "nerd5.png", "nerd6.png", 
+                    "nerd7.png", "nerd8.png", "nerd9.png", "nerd10.png", "nerd11.png"
+                ]
             },
             {
                 id: "past",
@@ -329,11 +347,12 @@
                 intro: "Moments from our earlier workshops and events, including sessions where we showed our rover.",
                 cardTitle: "Past Workshop",
                 cardDesc: "",
-                rows: 3,                 /* 12 photos -> 4 + 4 + 4 */
-                startsFrom: "left",      /* row 1: left to right, row 2: right to left, row 3: left to right */
+                rows: 3,                 /* 15 photos -> 5 + 5 + 5 */
+                startsFrom: "left",      
                 files: [
                     "prev1.jpeg", "prev2.jpeg", "prev3.jpeg", "prev5.jpeg", "prev6.jpeg", "prev7.jpeg",
-                    "prev8.jpeg", "prev9.jpeg", "prev10.jpeg", "prev11.jpeg", "prev13.jpeg", "prev14.jpeg","prev15.jpeg","prev16.jpeg","prev17.jpeg"
+                    "prev8.jpeg", "prev9.jpeg", "prev10.jpeg", "prev11.jpeg", "prev13.jpeg", "prev14.jpeg",
+                    "prev15.jpeg", "prev16.jpeg", "prev17.jpeg"
                 ]
             }
         ];
@@ -421,7 +440,7 @@
         SECTIONS.forEach(function (sec) {
             const link = document.createElement("a");
             link.href = "#" + sec.id;
-            link.innerHTML = sec.heading + '<small>' + sec.items.length + ' photos</small>';
+            link.innerHTML = sec.label + '<small>' + sec.items.length + ' photos</small>';
             jumpBox.appendChild(link);
 
             const section = document.createElement("section");
@@ -430,6 +449,7 @@
 
             const head = document.createElement("div");
             head.className = "pw-wrap pw-sec-head";
+            /* We use innerHTML here so the HTML link in the intro text renders correctly */
             head.innerHTML = '<h2>' + sec.heading + '</h2><p>' + sec.intro + '</p>';
             section.appendChild(head);
 

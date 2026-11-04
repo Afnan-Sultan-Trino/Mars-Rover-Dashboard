@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Community Workshop — AIUB Robotic Crew</title>
+    <link rel="stylesheet" href="dark_space_theme1.css">
+    <style>
+        /* Sub-page specific styles */
+        .subpage-hero { 
+            height: 80vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            position: relative; 
+            background: url('Schl1.jpeg') center/cover no-repeat; /* Uses Schl1 as the hero background */
+        }
+        .subpage-hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.7); }
+        .subpage-hero h1 { position: relative; z-index: 1; font-size: 3.5rem; color: #fff; letter-spacing: 2px; }
+        .subpage-content { padding: 60px 32px; max-width: 1000px; margin: 0 auto; }
+        .subpage-content h2 { color: #e67e22; margin-bottom: 20px; font-size: 1.8rem; }
+        .subpage-content p { color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: 20px; font-size: 1.1rem; }
+
+        /* ===== Moving gallery (right to left, infinite loop) ===== */
+        .gallery {
+            overflow: hidden;              
+            margin-top: 40px;
+            padding: 12px 0;               
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+        }
+        .gallery-track {
+            display: flex;
+            width: max-content;            
+            animation: gallery-scroll 30s linear infinite; /* Slowed down slightly for 6 images */
+        }
+        .gallery:hover .gallery-track {
+            animation-play-state: paused;  
+        }
+        .gallery-group {
+            display: flex;
+            gap: 16px;
+            padding-right: 16px;           
+        }
+        .gallery img {
+            width: 400px;
+            height: 300px;
+            flex-shrink: 0;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        .gallery img:hover { transform: scale(1.05); }
+
+        @keyframes gallery-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }   
+        }
+
+        /* Respect users who turn off animations */
+        @media (prefers-reduced-motion: reduce) {
+            .gallery-track { animation: none; }
+            .gallery { overflow-x: auto; }
+        }
+
+        @media (max-width: 768px) { 
+            .subpage-hero h1 { font-size: 2.5rem; }
+            .gallery img { width: 280px; height: 210px; }
+            .gallery-track { animation-duration: 20s; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Reuse Nav -->
+        <nav>
+            <div class="logo-area">
+                <div class="logo-shield"><img src="Screenshot_2026-06-24_221754-removebg-preview.png" alt="ARC Logo"></div>
+                <div><div class="brand">AIUB <span><br>ROBOTICS</span><br><span class="green-text">CREW</span></div></div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="mars-rover.html">Mars Rover</a>
+                <a href="index.html#workshop" class="active">Workshop</a>
+                <a href="index.html#research">Research</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <a href="sponsor.html" class="sponsor-btn" style="text-decoration: none;">Become a Sponsor</a>
+        </nav>
+
+        <section class="subpage-hero">
+            <h1>SCHOOL COMMUNITY WORKSHOP</h1>
+        </section>
+
+        <section class="subpage-content">
+            <h2>About the Workshop</h2>
+            <p>Inspiring the next generation of innovators! The AIUB Robotic Crew takes robotics beyond the university campus and into schools and local communities. We believe that hands-on STEM education should be accessible to everyone, regardless of age.</p>
+            <p>Our School Community program introduces young students to the exciting world of robotics. From basic electronics and circuits to assembling their very first line-following robots, we guide students step-by-step. It is incredibly rewarding to see their creativity spark as they build and program their own machines!</p>
+            
+            <h2 style="margin-top: 40px;">Gallery</h2>
+            <div class="gallery">
+                <div class="gallery-track">
+
+                    <!-- Image set 1: All 6 images -->
+                    <div class="gallery-group">
+                        <img src="Schl1.jpeg" alt="School Community 1">
+                        <img src="Schl2.jpeg" alt="School Community 2">
+                        <img src="Schl3.jpeg" alt="School Community 3">
+                        <img src="Schl4.jpeg" alt="School Community 4">
+                        <img src="Schl5.jpeg" alt="School Community 5">
+                        <img src="Schl6.jpeg" alt="School Community 6">
+                    </div>
+
+                    <!-- Image set 2: Exact copy for seamless loop -->
+                    <div class="gallery-group" aria-hidden="true">
+                        <img src="Schl1.jpeg" alt="">
+                        <img src="Schl2.jpeg" alt="">
+                        <img src="Schl3.jpeg" alt="">
+                        <img src="Schl4.jpeg" alt="">
+                        <img src="Schl5.jpeg" alt="">
+                        <img src="Schl6.jpeg" alt="">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            © 2026 AIUB ROBOTIC CREW — AIUB, DHAKA, BANGLADESH | marsrover.aiub.edu.bd
+        </footer>
+    </div>
+</body>
+</html>
