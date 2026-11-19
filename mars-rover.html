@@ -8,58 +8,194 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="mars-rover.css" />
 
-    <!-- Faculty Advisors: 3 cards side by side in one row -->
+    <!-- Faculty Advisors: rotating orbital layout (equal weight for every advisor) -->
     <style>
-        .faculty-list {
-            display: grid !important;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 28px;
-            align-items: stretch;
+        .fo-orbit {
+            --fo-size: min(560px, 94vw);
+            --fo-node: calc(var(--fo-size) * 0.27);
+            --fo-radius: calc(var(--fo-size) * 0.34);
+            --fo-speed: 50s;
+            position: relative;
+            width: var(--fo-size);
+            height: var(--fo-size);
+            margin: 24px auto 0;
         }
-        .faculty-list .faculty-card {
-            display: flex !important;
-            flex-direction: column !important;
-            grid-template-columns: none !important;
-            width: 100% !important;
-            max-width: none !important;
-            margin: 0 !important;
+        /* orbit track */
+        .fo-orbit::before {
+            content: "";
+            position: absolute;
+            top: 50%; left: 50%;
+            width: calc(var(--fo-radius) * 2);
+            height: calc(var(--fo-radius) * 2);
+            transform: translate(-50%, -50%);
+            border: 1px dashed rgba(255, 154, 46, 0.35);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .fo-hub {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: calc(var(--fo-size) * 0.26);
+            height: calc(var(--fo-size) * 0.26);
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: 700;
+            letter-spacing: .12em;
+            font-size: clamp(.7rem, 2.4vw, 1rem);
+            line-height: 1.3;
+            color: #ff9a2e;
+            background: rgba(20, 17, 12, 0.85);
+            border: 1px solid rgba(255, 154, 46, 0.5);
+            box-shadow: 0 0 30px rgba(255, 154, 46, 0.15);
+        }
+        .fo-ring {
+            position: absolute;
+            inset: 0;
+            animation: fo-spin var(--fo-speed) linear infinite;
+        }
+        .fo-node {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: var(--fo-node);
+            height: var(--fo-node);
+            margin: calc(var(--fo-node) / -2) 0 0 calc(var(--fo-node) / -2);
+            transform: rotate(var(--a)) translateX(var(--fo-radius)) rotate(calc(var(--a) * -1));
+        }
+        .fo-node-inner {
+            position: relative;
+            display: block;
+            width: 100%;
             height: 100%;
+            padding: 0;
+            border: 0;
+            background: none;
+            cursor: pointer;
+            font: inherit;
+            color: inherit;
+            animation: fo-spin-rev var(--fo-speed) linear infinite;
+        }
+        .fo-photo {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
             overflow: hidden;
+            border: 2px solid rgba(255, 154, 46, 0.6);
+            background: #14110c;
+            transition: border-color .3s, box-shadow .3s, transform .3s;
         }
-        .faculty-list .faculty-photo {
-            width: 100% !important;
-            max-width: none !important;
-            height: auto !important;
-            aspect-ratio: 3 / 3.6;
-            flex: 0 0 auto;
-            border-radius: 0 !important;
-            overflow: hidden;
-        }
-        .faculty-list .faculty-photo span {
-            display: block !important;
-            width: 100% !important;
-            height: 100% !important;
-        }
-        .faculty-list .faculty-photo img {
-            width: 100% !important;
-            height: 100% !important;
+        .fo-photo img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: center 15%;
             display: block;
         }
-        .faculty-list .faculty-info {
-            display: flex;
-            flex-direction: column;
-            flex: 1 1 auto;
-            width: 100%;
-            padding: 22px 22px 24px;
-            box-sizing: border-box;
+        .fo-node-inner:hover .fo-photo,
+        .fo-node-inner:focus-visible .fo-photo {
+            border-color: #ff9a2e;
+            box-shadow: 0 0 24px rgba(255, 154, 46, 0.55);
+            transform: scale(1.06);
         }
-        .faculty-list .faculty-info h3 { margin: 10px 0 6px; }
-        .faculty-list .faculty-links { margin-top: auto; padding-top: 16px; }
+        .fo-node-inner:focus-visible { outline: 2px solid #ff9a2e; outline-offset: 6px; border-radius: 50%; }
+        .fo-label {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            width: 190%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: clamp(.68rem, 2vw, .85rem);
+            font-weight: 600;
+            color: #e8e2d4;
+            pointer-events: none;
+        }
+        .fo-orbit:hover .fo-ring,
+        .fo-orbit:hover .fo-node-inner,
+        .fo-orbit:focus-within .fo-ring,
+        .fo-orbit:focus-within .fo-node-inner { animation-play-state: paused; }
+        @keyframes fo-spin     { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
+        @keyframes fo-spin-rev { from { transform: rotate(0deg); }   to { transform: rotate(-360deg); } }
+        @media (prefers-reduced-motion: reduce) {
+            .fo-ring, .fo-node-inner { animation: none; }
+        }
 
-        @media (max-width: 900px) {
-            .faculty-list { grid-template-columns: minmax(0, 1fr); max-width: 460px; margin: 0 auto; }
+        /* Faculty modal */
+        .fo-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 99998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .fo-modal.is-open { display: flex; animation: fo-fade .25s ease; }
+        @keyframes fo-fade { from { opacity: 0; } to { opacity: 1; } }
+        .fo-modal-overlay { position: absolute; inset: 0; background: rgba(4, 4, 6, 0.88); }
+        .fo-modal .fo-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 680px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+            padding: 32px 30px 30px;
+            border-radius: 12px;
+            background: #14110c;
+            border: 1px solid rgba(255, 154, 46, 0.45);
+            color: #e8e2d4;
+        }
+        .fo-close {
+            position: absolute;
+            top: 12px; right: 14px;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: background .2s, color .2s;
+        }
+        .fo-close:hover { background: #ff9a2e; color: #111; }
+        .fo-modal-head { display: flex; gap: 22px; align-items: center; margin-bottom: 18px; }
+        .fo-modal-photo {
+            flex: 0 0 auto;
+            width: 130px; height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #ff9a2e;
+        }
+        .fo-modal-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; }
+        .fo-modal-badge {
+            display: inline-block;
+            font-size: .72rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: #ff9a2e;
+            margin-bottom: 6px;
+        }
+        .fo-modal h3 { margin: 0 0 6px; font-size: 1.5rem; }
+        .fo-modal-role { margin: 0; color: #c9c2b4; }
+        .fo-modal-bio { margin: 0 0 18px; line-height: 1.7; }
+        .fo-areas-title { margin: 0 0 10px; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: #ff9a2e; }
+        .fo-areas { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+        .fo-areas span {
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: .82rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        @media (max-width: 560px) {
+            .fo-modal-head { flex-direction: column; text-align: center; }
+            .fo-modal .fo-modal-content { padding: 28px 20px 24px; }
         }
     </style>
 
@@ -179,7 +315,6 @@
     <section class="hero" id="home">
         <div class="hero-scene" aria-hidden="true"></div>
         <div class="hero-overlay" aria-hidden="true"></div>
-        <span class="hero-credit">Photo: NASA/JPL-Caltech/MSSS — Perseverance rover selfie, Mars</span>
 
         <div class="hero-content">
             <h1>ARC ROVER<br><span class="accent">TEAM</span></h1>
@@ -203,8 +338,20 @@
             <h2 class="section-title">Brief Overview</h2>
             <p class="section-lead">
                 ARC Rover Team is the flagship rover division of AIUB Robotic Crew — a
-                student-run engineering group building autonomous, science-capable rovers
-                to compete internationally and push Bangladeshi robotics forward.
+                student-run engineering group building science-capable rovers to compete
+                internationally and push Bangladeshi robotics forward. AIUB Robotic Crew is
+                the only team from Bangladesh to compete at the Mars Desert Research Station
+                (MDRS) for the fourth time in a row.
+            </p>
+            <p class="section-lead">
+                The University Rover Challenge (URC), organized by the Mars Society, challenges
+                university students from all over the world to design and build the next
+                generation of Mars rovers that will one day work alongside astronauts exploring
+                the Red Planet. It is held every summer at MDRS, outside Hanksville, Utah, USA —
+                a site chosen for its Mars-like barren desert terrain and soil chemistry similar
+                to that of Mars. Rovers perform teleoperated or autonomous tasks that would assist
+                astronauts in the field, with operators working from control stations that have
+                no direct view of the rover.
             </p>
 
             <div class="pillar-grid">
@@ -233,53 +380,48 @@
     </section>
 
     <!-- ===== TEAM PHOTO ===== -->
-    <section class="team-photo-section">
+    <!-- <section class="team-photo-section">
         <img src="team-photo.png" alt="ARC Rover Team posing with their rover">
-    </section>
+    </section> -->
 
     <!-- ===== HISTORY / ACHIEVEMENTS ===== -->
     <section class="section section-alt" id="history">
         <div class="section-inner">
             <h2 class="section-title">History &amp; Achievements</h2>
             <p class="section-lead">
-                From a small group of curious students in 2014 to Bangladesh's first
-                internationally-competing rover team — here's the trail we've left behind.
+                From the very first AIUB Robotic Crew team in 2016 to the 2019 finals — four
+                years of growth in knowledge and experience, with each generation inspiring the
+                next to build a rover capable of traversing an extraterrestrial planet and
+                conducting scientific studies on its surface.
             </p>
 
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <span class="timeline-date">2014</span>
-                        <p>ARC founded by a small group of AIUB engineering students.</p>
+                        <span class="timeline-date">2016</span>
+                        <p>The very first AIUB Robotic Crew team — a milestone for the university. They stood 8th among participants from all over the world in the Phobos final, and were invited to display their rover at the US Embassy.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <span class="timeline-date">2016</span>
-                        <p>First promotional rover demo and prototype chassis built in-house.</p>
+                        <span class="timeline-date">2017</span>
+                        <p>Returned to MDRS, Hanksville, Utah for the 2nd time. Scored the 2nd-highest mark in the Critical Design Review (CDR) and finished 32nd overall in the world.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2018</span>
+                        <p>A team of 14 Electrical students and 5 Computer Science students placed 26th among 93 teams worldwide, and set a mark by hosting outreach programs for school students interested in robotics.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <span class="timeline-date">2019</span>
-                        <p>Selected among the world's top teams for the International Rover Challenge — first Bangladeshi entry.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2022</span>
-                        <p>South Asian Champions — regional title secured ahead of the finals.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2025</span>
-                        <p>Best Autonomous System Award — first Bangladeshi team to win a URC category.</p>
+                        <p>12 students from EEE and Computer Science qualified for the final round as the top scorer among all Bangladeshi teams — one of 36 teams from 10 countries selected after the most competitive System Acceptance Review (SAR) in URC history.</p>
                     </div>
                 </div>
             </div>
@@ -307,80 +449,45 @@
                 <div class="rg-rows" id="galleryRows"></div>
             </div>
 
-            <div class="achievement-strip">
-                <div class="achievement-pill"><strong>🥇</strong> Best Autonomous System — URC 2025</div>
-                <div class="achievement-pill"><strong>🏅</strong> International Finalist — Top 10 Globally</div>
-                <div class="achievement-pill"><strong>🏆</strong> South Asian Champions — URC 2022</div>
-                <div class="achievement-pill"><strong>🔬</strong> Science Mission Excellence — URC 2023</div>
-            </div>
+            <!-- <div class="achievement-strip">
+                <div class="achievement-pill"><strong>🏅</strong> 8th Worldwide — Phobos Final, 2016</div>
+                <div class="achievement-pill"><strong>🥈</strong> 2nd-Highest CDR Mark — 2017</div>
+                <div class="achievement-pill"><strong>📊</strong> 26th of 93 Teams — URC 2018</div>
+                <div class="achievement-pill"><strong>🏆</strong> Top Bangladeshi Team &amp; Finalist (1 of 36) — URC 2019</div>
+            </div> -->
         </div>
     </section>
 
-    <!-- ===== FACULTY ===== -->
+    <!-- ===== FACULTY (ROTATING ORBITAL LAYOUT) ===== -->
     <section class="section" id="faculty">
         <div class="section-inner">
             <h2 class="section-title">Faculty Advisors</h2>
+            <p class="section-lead">
+                Three advisors guide ARC Rover Team — each with equal standing. Click on an
+                advisor's portrait to read more and open their AIUB profile.
+            </p>
 
-            <div class="faculty-list">
-                <!-- Faculty 1 -->
-                <div class="faculty-card hud-panel">
-                    <div class="faculty-photo">
-                        <span><img src="Screenshot 2026-08-11 010829.png" alt="Dr. Ebad Zahir"></span>
-                    </div>
-                    <div class="faculty-info">
-                        <span class="faculty-badge">Faculty Advisor</span>
-                        <h3>Dr. Ebad Zahir</h3>
-                        <p class="faculty-role">Associate Professor, Dept. of EEE, AIUB</p>
-                        <p class="faculty-bio">
-                            Dr. Zahir has guided ARC since its early years, mentoring students across
-                            mechatronics, photonics, and embedded systems. His research spans assistive
-                            robotics, sensor systems, and optical communications — several of which have
-                            directly shaped ARC's rover instrumentation and navigation design.
-                        </p>
-                        <div class="faculty-links">
-                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=ebad.zahir" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Profile</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="fo-orbit" id="facultyOrbit">
+                <div class="fo-hub"><span>ARC<br>ADVISORS</span></div>
 
-                <!-- Faculty 2 -->
-                <div class="faculty-card hud-panel">
-                    <div class="faculty-photo">
-                        <span><img src="Akram_Sir.png" alt="Dr. Chowdhury Akram Hossain"></span>
+                <div class="fo-ring">
+                    <div class="fo-node" style="--a: -90deg;">
+                        <button type="button" class="fo-node-inner" data-faculty="zahir" aria-label="Open profile of Dr. Ebad Zahir">
+                            <span class="fo-photo"><img src="Screenshot 2026-08-11 010829.png" alt="Dr. Ebad Zahir"></span>
+                            <span class="fo-label">Dr. Ebad Zahir</span>
+                        </button>
                     </div>
-                    <div class="faculty-info">
-                        <span class="faculty-badge">Faculty Advisor</span>
-                        <h3>Dr. Chowdhury Akram Hossain</h3>
-                        <p class="faculty-role">Associate Professor &amp; Head, Dept. of CoE, AIUB</p>
-                        <p class="faculty-bio">
-                            Dr. Hossain supports ARC with academic guidance and mentoring. His research
-                            interests include wireless communication, power electronics, renewable energy
-                            systems, smart grids, and telemedicine, and he also serves as an advisor to the
-                            IEEE AIUB Student Branch.
-                        </p>
-                        <div class="faculty-links">
-                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=chowdhury.akram" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Profile</a>
-                        </div>
+                    <div class="fo-node" style="--a: 30deg;">
+                        <button type="button" class="fo-node-inner" data-faculty="akram" aria-label="Open profile of Dr. Chowdhury Akram Hossain">
+                            <span class="fo-photo"><img src="Akram_Sir.png" alt="Dr. Chowdhury Akram Hossain"></span>
+                            <span class="fo-label">Dr. Chowdhury Akram Hossain</span>
+                        </button>
                     </div>
-                </div>
-
-                <!-- Faculty 3 -->
-                <div class="faculty-card hud-panel">
-                    <div class="faculty-photo">
-                        <span><img src="Sadman_Sir.png" alt="Sadman Shahriar Alam"></span>
-                    </div>
-                    <div class="faculty-info">
-                        <span class="faculty-badge">Faculty Advisor</span>
-                        <h3>Sadman Shahriar Alam</h3>
-                        <p class="faculty-role">Faculty of Engineering, AIUB</p>
-                        <p class="faculty-bio">
-                            Sadman Shahriar Alam supports ARC Rover Team with academic guidance and
-                            mentoring. See his AIUB faculty profile for his full designation, research
-                            interests, and publications.
-                        </p>
-                        <div class="faculty-links">
-                            <a href="https://www.aiub.edu/faculty-list/faculty-profile?q=sadman.alam" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">AIUB Profile</a>
-                        </div>
+                    <div class="fo-node" style="--a: 150deg;">
+                        <button type="button" class="fo-node-inner" data-faculty="sadman" aria-label="Open profile of Sadman Shahriar Alam">
+                            <span class="fo-photo"><img src="Sadman_Sir.png" alt="Sadman Shahriar Alam"></span>
+                            <span class="fo-label">Sadman Shahriar Alam</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -445,9 +552,9 @@
     </section>
 
     <!-- ===== FOOTER ===== -->
-    <footer class="site-footer">
+    <!-- <footer class="site-footer">
         © 2026 AIUB Robotic Crew — ARC Rover Team &nbsp;|&nbsp; marsrover.aiub.edu.bd
-    </footer>
+    </footer> -->
 
     <!-- ===== TEAM MODAL ===== -->
     <div class="team-modal" id="teamModal">
@@ -584,6 +691,106 @@
                 if (e.key === "Escape") closeViewer();
                 if (e.key === "ArrowLeft") showPhoto(current - 1);
                 if (e.key === "ArrowRight") showPhoto(current + 1);
+            });
+        })();
+    </script>
+<!-- ===== FACULTY MODAL ===== -->
+    <div class="fo-modal" id="facultyModal" role="dialog" aria-modal="true" aria-labelledby="foName">
+        <div class="fo-modal-overlay" id="foOverlay"></div>
+        <div class="fo-modal-content hud-panel">
+            <button type="button" class="fo-close" id="foClose" aria-label="Close">&times;</button>
+            <div class="fo-modal-head">
+                <div class="fo-modal-photo"><img id="foPhoto" src="" alt=""></div>
+                <div>
+                    <span class="fo-modal-badge">Faculty Advisor</span>
+                    <h3 id="foName"></h3>
+                    <p class="fo-modal-role" id="foRole"></p>
+                </div>
+            </div>
+            <p class="fo-modal-bio" id="foBio"></p>
+            <div id="foAreasWrap">
+                <h4 class="fo-areas-title">Research &amp; Interests</h4>
+                <div class="fo-areas" id="foAreas"></div>
+            </div>
+            <a id="foLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View AIUB Profile →</a>
+        </div>
+    </div>
+
+    <!-- Faculty orbit script -->
+    <script>
+        (function () {
+            var FACULTY = {
+                zahir: {
+                    name: "Dr. Ebad Zahir",
+                    role: "Associate Professor, Dept. of EEE, AIUB",
+                    photo: "Screenshot 2026-08-11 010829.png",
+                    bio: "Dr. Zahir has guided ARC since its early years, mentoring students across mechatronics, photonics, and embedded systems. His research spans assistive robotics, sensor systems, and optical communications — several of which have directly shaped ARC's rover instrumentation and navigation design.",
+                    areas: ["Mechatronics", "Photonics", "Embedded Systems", "Assistive Robotics", "Sensor Systems", "Optical Communications"],
+                    link: "https://www.aiub.edu/faculty-list/faculty-profile?q=ebad.zahir"
+                },
+                akram: {
+                    name: "Dr. Chowdhury Akram Hossain",
+                    role: "Associate Professor & Head, Dept. of CoE, AIUB",
+                    photo: "Akram_Sir.png",
+                    bio: "Dr. Hossain supports ARC with academic guidance and mentoring. His research interests include wireless communication, power electronics, renewable energy systems, smart grids, and telemedicine, and he also serves as an advisor to the IEEE AIUB Student Branch.",
+                    areas: ["Wireless Communication", "Power Electronics", "Renewable Energy Systems", "Smart Grids", "Telemedicine"],
+                    link: "https://www.aiub.edu/faculty-list/faculty-profile?q=chowdhury.akram"
+                },
+                sadman: {
+                    name: "Sadman Shahriar Alam",
+                    role: "Faculty of Engineering, AIUB",
+                    photo: "Sadman_Sir.png",
+                    bio: "Sadman Shahriar Alam supports ARC Rover Team with academic guidance and mentoring. See his AIUB faculty profile for his full designation, research interests, and publications.",
+                    areas: [],
+                    link: "https://www.aiub.edu/faculty-list/faculty-profile?q=sadman.alam"
+                }
+            };
+
+            var modal = document.getElementById("facultyModal");
+            if (!modal) return;
+            var elPhoto = document.getElementById("foPhoto");
+            var elName = document.getElementById("foName");
+            var elRole = document.getElementById("foRole");
+            var elBio = document.getElementById("foBio");
+            var elAreas = document.getElementById("foAreas");
+            var elAreasWrap = document.getElementById("foAreasWrap");
+            var elLink = document.getElementById("foLink");
+            var lastTrigger = null;
+
+            function openModal(key, trigger) {
+                var f = FACULTY[key];
+                if (!f) return;
+                lastTrigger = trigger || null;
+                elPhoto.src = f.photo;
+                elPhoto.alt = f.name;
+                elName.textContent = f.name;
+                elRole.textContent = f.role;
+                elBio.textContent = f.bio;
+                elAreas.innerHTML = "";
+                f.areas.forEach(function (a) {
+                    var chip = document.createElement("span");
+                    chip.textContent = a;
+                    elAreas.appendChild(chip);
+                });
+                elAreasWrap.style.display = f.areas.length ? "" : "none";
+                elLink.href = f.link;
+                modal.classList.add("is-open");
+                document.body.style.overflow = "hidden";
+                document.getElementById("foClose").focus();
+            }
+            function closeModal() {
+                modal.classList.remove("is-open");
+                document.body.style.overflow = "";
+                if (lastTrigger) lastTrigger.focus();
+            }
+
+            document.querySelectorAll("[data-faculty]").forEach(function (btn) {
+                btn.addEventListener("click", function () { openModal(btn.getAttribute("data-faculty"), btn); });
+            });
+            document.getElementById("foClose").addEventListener("click", closeModal);
+            document.getElementById("foOverlay").addEventListener("click", closeModal);
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
             });
         })();
     </script>
