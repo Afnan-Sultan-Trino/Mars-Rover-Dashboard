@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-L3sPo4NXmHdQlcaSh4tjh4uuYJ2FQAd8gG9Zj7a8Qkc=' 'sha256-9+Sde3obM3UTHzHTBrU/mg2oxo2V3CuADT3AJPuWrAw='; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'; form-action 'none'">
+    <meta name="referrer" content="no-referrer">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ARC Rover Team — AIUB Robotic Crew</title>
@@ -601,13 +603,14 @@
             if (!rowsBox) return;
 
             function placeholder(name) {
+                var label = String(name).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
                 var svg =
                     '<svg xmlns="http://www.w3.org/2000/svg" width="680" height="470" viewBox="0 0 680 470">' +
                     '<rect width="680" height="470" fill="#1d1a14"/>' +
                     '<circle cx="340" cy="190" r="48" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="4"/>' +
                     '<path d="M316 206 l18 -22 l14 15 l10 -12 l20 25 z" fill="rgba(255,255,255,.3)"/>' +
                     '<text x="340" y="290" fill="#fff" font-family="Arial,sans-serif" font-size="26" text-anchor="middle">Image not found</text>' +
-                    '<text x="340" y="330" fill="rgba(255,255,255,.6)" font-family="Arial,sans-serif" font-size="22" text-anchor="middle">' + name + '</text>' +
+                    '<text x="340" y="330" fill="rgba(255,255,255,.6)" font-family="Arial,sans-serif" font-size="22" text-anchor="middle">' + label + '</text>' +
                     '</svg>';
                 return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
             }
