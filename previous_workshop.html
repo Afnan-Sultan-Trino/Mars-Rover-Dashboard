@@ -289,14 +289,12 @@
 
                 <header class="pw-head">
                     <h1>Previous <span>Workshops</span></h1>
-                    <p>A look back at the workshops ARC has run over the years, from school community sessions to our earlier workshops. Hover to pause the photos, and click any photo to view it larger.</p>
+                    <p>A look back at ARC's previous workshops and events. Hover to pause the photos, and click any photo to view it larger.</p>
                 </header>
 
-                <!-- Jump links are built automatically from the SECTIONS list in the script -->
-                <nav class="pw-jump" id="jumpLinks" aria-label="Workshop sections"></nav>
             </div>
 
-            <!-- Sections (Nerd Community, Past Workshops) are built here by the script -->
+            <!-- All previous workshop photos are displayed together in one section -->
             <div id="sections"></div>
 
             <div class="pw-end"></div>
@@ -316,7 +314,7 @@
 
         <!-- ===== FOOTER ===== -->
         <footer>
-            © 2026 AIUB ROBOTIC CREW — AIUB, DHAKA, BANGLADESH &nbsp;|&nbsp; marsrover.aiub.edu.bd
+            <!-- © 2026 AIUB ROBOTIC CREW — AIUB, DHAKA, BANGLADESH &nbsp;|&nbsp; marsrover.aiub.edu.bd -->
         </footer>
 
     </div>
@@ -327,29 +325,17 @@
            ===================================================================== */
         const SECTIONS = [
             {
-                id: "nerd",
-                label: "NERD Community",
-                heading: "NERD COMMUNITY ORGANIZED A WORKHSOP ON ROBOTICS 1.0 AT ACADEMIA",
-                intro: 'AIUB and NERD Community organized a hands-on workshop on Robotics 1.0 at Academia. Empowering the next generation of innovators with practical robotics skills. <br><br> <a href="https://www.aiub.edu/aiub-and-nerd-community-organized-a-workhsop-on-robotics-10-at-academia" target="_blank" rel="noopener noreferrer" class="pw-learn-more">Learn More on AIUB Website &rarr;</a>',
-                cardTitle: "NERD Community Workshop",
-                cardDesc: "Robotics 1.0 at Academia",
-                rows: 2,                 /* 11 photos -> 6 in row 1, 5 in row 2 */
-                startsFrom: "left",      
-                files: [
-                    "nerd1.png", "nerd2.png", "nerd3.png", "nerd4.png", "nerd5.png", "nerd6.png", 
-                    "nerd7.png", "nerd8.png", "nerd9.png", "nerd10.png", "nerd11.png"
-                ]
-            },
-            {
                 id: "past",
                 label: "Past Workshop",
                 heading: "Past Workshops",
-                intro: "Moments from our earlier workshops and events, including sessions where we showed our rover.",
+                intro: "A look back at ARC's previous workshops and events, showcasing hands-on learning, robotics activities, and memorable moments from our earlier sessions.",
                 cardTitle: "Past Workshop",
-                cardDesc: "",
-                rows: 3,                 /* 15 photos -> 5 + 5 + 5 */
-                startsFrom: "left",      
+                cardDesc: "Moments from ARC's previous workshops and events",
+                rows: 4,                 /* 26 photos -> 7 + 7 + 7 + 5 */
+                startsFrom: "left",
                 files: [
+                    "nerd1.png", "nerd2.png", "nerd3.png", "nerd4.png", "nerd5.png", "nerd6.png",
+                    "nerd7.png", "nerd8.png", "nerd9.png", "nerd10.png", "nerd11.png",
                     "prev1.jpeg", "prev2.jpeg", "prev3.jpeg", "prev5.jpeg", "prev6.jpeg", "prev7.jpeg",
                     "prev8.jpeg", "prev9.jpeg", "prev10.jpeg", "prev11.jpeg", "prev13.jpeg", "prev14.jpeg",
                     "prev15.jpeg", "prev16.jpeg", "prev17.jpeg"
@@ -435,14 +421,8 @@
 
         /* ---------- build every section + jump links ---------- */
         const sectionsBox = document.getElementById("sections");
-        const jumpBox = document.getElementById("jumpLinks");
 
         SECTIONS.forEach(function (sec) {
-            const link = document.createElement("a");
-            link.href = "#" + sec.id;
-            link.innerHTML = sec.label + '<small>' + sec.items.length + ' photos</small>';
-            jumpBox.appendChild(link);
-
             const section = document.createElement("section");
             section.className = "pw-section";
             section.id = sec.id;
