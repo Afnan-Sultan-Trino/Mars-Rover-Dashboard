@@ -86,7 +86,7 @@ document.getElementById('submitSponsor').addEventListener('click', function() {
         agreed: agreeCheck.checked
     };
 
-    console.log('Sponsorship Request:', data);
+    // Do not write personal contact details to production console logs.
 
     // In a real scenario, you would send this to a server.
     alert('Thank you! Your sponsorship request has been submitted. We will contact you within 48 hours. 🚀');

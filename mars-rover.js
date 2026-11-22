@@ -111,13 +111,21 @@ function openTeamModal(teamKey) {
     modalLeaderName.textContent = data.leader.name;
     modalLeaderAvatar.style.backgroundImage = `url('${data.leader.img}')`;
 
-    // Generate Member Grid HTML (If members exist)
-    modalMemberGrid.innerHTML = data.members.map(m => `
-        <div class="member">
-            <div class="member-avatar" style="background-image: url('${m.img}');"></div>
-            <span class="member-name">${m.name}</span>
-        </div>
-    `).join('');
+    // Keep roster text as text, never parsed HTML.
+    modalMemberGrid.textContent = '';
+    data.members.forEach(m => {
+        const member = document.createElement('div');
+        member.className = 'member';
+        const avatar = document.createElement('div');
+        avatar.className = 'member-avatar';
+        avatar.style.backgroundImage = `url('${m.img}')`;
+        const name = document.createElement('span');
+        name.className = 'member-name';
+        name.textContent = m.name;
+        member.appendChild(avatar);
+        member.appendChild(name);
+        modalMemberGrid.appendChild(member);
+    });
 
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';

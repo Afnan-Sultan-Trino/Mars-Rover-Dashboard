@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-TxrdOdICQjvij+fYOxbcExj/2pOgx+StkIZ5+P0oU0Q='; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'; form-action 'none'">
+    <meta name="referrer" content="no-referrer">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Previous Workshops — AIUB Robotic Crew</title>
@@ -361,6 +363,7 @@
 
         /* ---------- placeholder (only shown if an image file is missing) ---------- */
         function placeholder(item, index) {
+            const label = String(item.src).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
             const hue = (index * 47 + 150) % 360;
             const svg =
                 '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">' +
@@ -371,7 +374,7 @@
                 '<circle cx="400" cy="250" r="64" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="5"/>' +
                 '<path d="M370 270 l22 -26 l16 18 l12 -14 l24 30 z" fill="rgba(255,255,255,.35)"/>' +
                 '<text x="400" y="400" fill="#fff" font-family="Arial,sans-serif" font-size="34" text-anchor="middle">Image not found</text>' +
-                '<text x="400" y="445" fill="rgba(255,255,255,.65)" font-family="Arial,sans-serif" font-size="26" text-anchor="middle">' + item.src + '</text>' +
+                '<text x="400" y="445" fill="rgba(255,255,255,.65)" font-family="Arial,sans-serif" font-size="26" text-anchor="middle">' + label + '</text>' +
                 '</svg>';
             return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
         }
@@ -429,8 +432,13 @@
 
             const head = document.createElement("div");
             head.className = "pw-wrap pw-sec-head";
-            /* We use innerHTML here so the HTML link in the intro text renders correctly */
-            head.innerHTML = '<h2>' + sec.heading + '</h2><p>' + sec.intro + '</p>';
+            // Section content is plain text, not executable markup.
+            const heading = document.createElement("h2");
+            heading.textContent = sec.heading;
+            const intro = document.createElement("p");
+            intro.textContent = sec.intro;
+            head.appendChild(heading);
+            head.appendChild(intro);
             section.appendChild(head);
 
             /* split the photos into equal groups, one group per row (each photo appears in exactly one row) */
