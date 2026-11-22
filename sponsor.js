@@ -1,3 +1,10 @@
+// The current page intentionally comments out its form controls.
+// Skip setup until the complete form is restored; never bind missing elements.
+(() => {
+const requiredIds = ['sponsorForm', 'orgName', 'contactPerson', 'email', 'phone',
+    'message', 'agreeCheck', 'agreementBox', 'submitSponsor'];
+if (requiredIds.some(id => !document.getElementById(id))) return;
+
 // ===== TIER SELECTION =====
 const tierCards = document.querySelectorAll('.tier-card');
 let selectedTier = null;
@@ -47,13 +54,16 @@ const agreeCheck = document.getElementById('agreeCheck');
 const agreementBox = document.getElementById('agreementBox');
 
 agreementBox.addEventListener('click', function(e) {
-    if (e.target.tagName !== 'INPUT') {
-        agreeCheck.checked = !agreeCheck.checked;
-    }
+    // Native input/label activation already toggles once, including label children.
+    if (e.target.closest('input, label')) return;
+    agreeCheck.checked = !agreeCheck.checked;
 });
 
-// ===== SUBMIT =====
-document.getElementById('submitSponsor').addEventListener('click', function() {
+// ===== SUBMIT (no delivery backend is configured) =====
+const sponsorForm = document.getElementById('sponsorForm');
+function handleSponsorSubmit(e) {
+    e.preventDefault();
+    if (!sponsorForm.reportValidity()) return;
     // Validate required fields
     const orgName = document.getElementById('orgName').value.trim();
     const contactPerson = document.getElementById('contactPerson').value.trim();
@@ -88,9 +98,9 @@ document.getElementById('submitSponsor').addEventListener('click', function() {
 
     // Do not write personal contact details to production console logs.
 
-    // In a real scenario, you would send this to a server.
-    alert('Thank you! Your sponsorship request has been submitted. We will contact you within 48 hours. 🚀');
-
-    // Optionally reset the form (or redirect)
-    // window.location.href = 'index.html';
-});
+    // No transport is configured: do not claim receipt or discard visitor input.
+    alert('Your sponsorship request has not been sent. Please use the contact email listed on this site.');
+}
+document.getElementById('submitSponsor').addEventListener('click', handleSponsorSubmit);
+sponsorForm.addEventListener('submit', handleSponsorSubmit);
+})();
