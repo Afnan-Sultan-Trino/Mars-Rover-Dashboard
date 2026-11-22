@@ -97,9 +97,12 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ===== CONTACT FORM SUBMISSION (demo) =====
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Thank you for your message! We will get back to you soon. 🚀');
-    this.reset();
-});
+// ===== OPTIONAL CONTACT FORM (no delivery backend is configured) =====
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Your message has not been sent. Please use the contact email listed on this site.');
+        // Keep the visitor's text so it can be copied into an email.
+    });
+}

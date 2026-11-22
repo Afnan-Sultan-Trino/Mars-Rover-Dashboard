@@ -50,15 +50,17 @@ Then run from the repository root:
 ```sh
 python tools/security_policy.py --check
 python -m unittest discover -s tests -v
-node --test tests/security-dom.test.cjs
+node --test tests/*.test.cjs
 ```
 
 No frontend build system, package dependency or application API upgrade is needed.
 Python is only used for maintenance checks; browsers execute the original HTML/JS.
 Test every route and gallery/faculty/team interaction over a local HTTP server and
-check for `securitypolicyviolation` events before deployment. Existing unrelated
-null-element errors on the currently disabled home/sponsor forms are outside this
-security-only change; do not mistake them for CSP regressions.
+check for `securitypolicyviolation` events before deployment. Disabled/partially
+restored forms now skip setup safely. Neither demo form claims delivery or clears
+visitor input: no backend exists. If sponsorship controls are restored, the script
+uses native form validity and native agreement-label activation, handles both click
+and form-submit paths, and still does not send requests.
 
 ## Repository-owner actions: required and NOT completed by this code
 
