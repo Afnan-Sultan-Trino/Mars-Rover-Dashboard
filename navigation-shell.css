@@ -1,0 +1,23 @@
+/* Only the host shell; all existing page styles remain unchanged. */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #080a0e;
+}
+#arcPage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+noscript {
+    position: fixed;
+    inset: 0;
+    padding: 24px;
+    color: #fff;
+    background: #080a0e;
+    font-family: sans-serif;
+}
+noscript a { color: #5ee9a1; }

@@ -20,8 +20,10 @@ invented here.
   not allowed. Existing inline **styles** remain allowed to preserve the design.
 - Images are same-origin or data images; Google Fonts CSS2 and fonts.gstatic.com
   remain allowed with the existing font families, weights and API unchanged.
-- Connections, embedded frames, objects, base-URL changes and form submission are
-  denied. There is currently no supported form backend. Revisit `connect-src` and
+- Connections, objects, base-URL changes and form submission are denied. View
+  pages deny embedded frames. Only the root navigation shell allows same-origin
+  frames (`frame-src 'self'`), selecting from a strict local route allowlist.
+  There is currently no supported form backend. Revisit `connect-src` and
   `form-action` deliberately before enabling a real approved delivery integration;
   do not loosen them to `*`.
 - Referrer metadata is `no-referrer` on every page.
@@ -64,14 +66,14 @@ and form-submit paths, and still does not send requests.
 
 ## Repository-owner actions: required and NOT completed by this code
 
-The contributor used for the security branch has push permission, not admin
-permission. The Pages API was readable and reported `https_enforced: false`.
+The contributor used for changes has push permission, not admin permission.
+HTTPS enforcement has been verified enabled; keep the account-managed setting on.
 
-1. **Enable HTTPS enforcement:** repository Settings -> Pages -> Enforce HTTPS.
-   Confirm certificate/domain readiness first. With a fresh non-upgrading client,
-   HTTP must redirect to the canonical HTTPS domain, not return the page with 200.
-   HTTPS availability alone is insufficient. The HTML CSP does not protect the
-   initial HTTP response from an on-path attacker.
+1. **Keep HTTPS enforcement enabled:** repository Settings -> Pages -> Enforce
+   HTTPS. With a fresh non-upgrading client, HTTP must redirect to the canonical
+   HTTPS domain, not return the page with 200. HTTPS availability alone is
+   insufficient. HTML CSP does not protect an initial HTTP response from an
+   on-path attacker if server-side enforcement is disabled.
 2. Verify the custom domain in the account's Pages settings and keep the DNS TXT
    verification record. Avoid wildcard DNS and remove stale Pages records when
    retiring the site. Domain verification status was not established by this work.
@@ -88,10 +90,14 @@ The source changes must not be described as fixing these response headers.
 
 If an approved configurable edge/serving layer is available, stage and test:
 
-- `Content-Security-Policy` header equivalent to the actual page policy, plus
-  `frame-ancestors 'none'`. Keep script hashes synchronized or deliberately move
-  inline scripts to same-origin files in a separate approved change.
-- `X-Frame-Options: DENY` for legacy framing protection.
+- Route-aware `Content-Security-Policy` response headers compatible with each
+  page's actual policy. Use `frame-ancestors 'none'` for the root shell and
+  `frame-ancestors 'self'` for the embedded view pages. Keep script hashes
+  synchronized or deliberately move inline scripts to same-origin files in a
+  separate approved change. A universal deny-framing policy would break this
+  same-origin navigation architecture.
+- Route-aware `X-Frame-Options`: `DENY` for the shell and `SAMEORIGIN` for views
+  if legacy framing protection is required.
 - `X-Content-Type-Options: nosniff`.
 - `Referrer-Policy: no-referrer` (the source meta already establishes this).
 - A suitable Permissions-Policy denying unused capabilities, for example camera,
