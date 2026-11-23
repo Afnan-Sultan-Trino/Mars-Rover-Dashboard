@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'; form-action 'none'">
+    <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ARC Rover Team — AIUB Robotic Crew</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -360,6 +362,8 @@
             .rg-row { overflow-x: auto; }
         }
     </style>
+    <script src="navigation-state.js"></script>
+    <script src="view-navigation.js"></script>
 </head>
 <body>
 
@@ -404,8 +408,8 @@
         <div class="hero-content">
             <h1>ARC ROVER<br><span class="accent">TEAM</span></h1>
             <p class="hero-sub">
-                <b>We design, build, and pilot Mars rovers from Dhaka to the Utah desert —
-                competing at the University Rover Challenge on the global stage.</b>
+                We design, build, and pilot Mars rovers from Dhaka to the Utah desert —
+                competing at the University Rover Challenge on the global stage.
             </p>
             <div class="hero-actions">
                 <a href="#overview" class="btn btn-primary">Explore The Mission</a>
@@ -421,13 +425,13 @@
     <section class="section" id="overview">
         <div class="section-inner">
             <h2 class="section-title">Brief Overview</h2>
-            <p class="section-lead">
+            <!-- <p class="section-lead">
                 ARC Rover Team is the flagship rover division of AIUB Robotic Crew — a
                 student-run engineering group building science-capable rovers to compete
                 internationally and push Bangladeshi robotics forward. AIUB Robotic Crew is
-                one of the team from Bangladesh to compete at the Mars Desert Research Station
+                the only team from Bangladesh to compete at the Mars Desert Research Station
                 (MDRS) for the fourth time in a row.
-            </p> 
+            </p>
             <p class="section-lead">
                 The University Rover Challenge (URC), organized by the Mars Society, challenges
                 university students from all over the world to design and build the next
@@ -437,7 +441,7 @@
                 to that of Mars. Rovers perform teleoperated or autonomous tasks that would assist
                 astronauts in the field, with operators working from control stations that have
                 no direct view of the rover.
-            </p> 
+            </p> -->
 
             <!-- <div class="pillar-grid">
                 <div class="pillar-card hud-panel">
@@ -762,163 +766,8 @@
     </div>
 
     <script src="mars-rover.js"></script>
+    <script src="mars-rover-extras.js"></script>
 
     <!-- Orbit nodes (leaders + members) open the team pop-up -->
-    <script>
-        (function () {
-            document.querySelectorAll(".team-orbit2-node-inner[data-team]").forEach(function (node) {
-                function openIt() {
-                    if (typeof openTeamModal === "function") openTeamModal(node.dataset.team);
-                }
-                node.addEventListener("click", openIt);
-                node.addEventListener("keydown", function (e) {
-                    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openIt(); }
-                });
-            });
-        })();
-    </script>
-
-    <!-- Hero background slideshow script -->
-    <script>
-        (function () {
-            var slides = document.querySelectorAll("#heroSlideshow .hero-slide");
-            if (!slides.length) return;
-            var current = 0;
-            var AUTOPLAY_MS = 6000;
-            var timer = null;
-
-            function show(index) {
-                current = (index + slides.length) % slides.length;
-                slides.forEach(function (slide, i) {
-                    slide.classList.toggle("active", i === current);
-                });
-            }
-            function next() { show(current + 1); }
-            function prev() { show(current - 1); }
-            function restartAutoplay() {
-                if (timer) clearInterval(timer);
-                timer = setInterval(next, AUTOPLAY_MS);
-            }
-
-            var prevBtn = document.getElementById("heroPrevSlide");
-            var nextBtn = document.getElementById("heroNextSlide");
-            if (nextBtn) nextBtn.addEventListener("click", function () { next(); restartAutoplay(); });
-            if (prevBtn) prevBtn.addEventListener("click", function () { prev(); restartAutoplay(); });
-
-            var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            if (!reduceMotion) restartAutoplay();
-        })();
-    </script>
-
-    <!-- Mission Gallery script -->
-    <script>
-        (function () {
-            var GALLERY_FILES = [
-                "mars1.jpeg", "mars2.jpeg", "mars3.jpeg", "mars4.jpeg", "mars5.jpeg", "mars6.jpeg",
-                "mars7.jpeg", "mars8.jpeg", "mars9.jpeg", "mars10.jpeg", "mars11.jpeg", "mars12.jpeg",
-                "mars13.jpeg", "mars14.jpeg", "mars15.jpeg", "mars16.jpeg", "mars17.jpeg", "mars18.jpeg",
-                "mars19.jpeg", "mars20.jpeg", "mars21.jpeg", "mars22.jpeg", "mars23.jpeg"
-            ];
-            var GALLERY_ROWS = 3;
-            var FIRST_ROW = "left";
-            var CHIP_WIDTH = 340 + 18;
-            var SPEED = 45;
-            var rowsBox = document.getElementById("galleryRows");
-            if (!rowsBox) return;
-
-            function placeholder(name) {
-                var svg =
-                    '<svg xmlns="http://www.w3.org/2000/svg" width="680" height="470" viewBox="0 0 680 470">' +
-                    '<rect width="680" height="470" fill="#1d1a14"/>' +
-                    '<circle cx="340" cy="190" r="48" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="4"/>' +
-                    '<path d="M316 206 l18 -22 l14 15 l10 -12 l20 25 z" fill="rgba(255,255,255,.3)"/>' +
-                    '<text x="340" y="290" fill="#fff" font-family="Arial,sans-serif" font-size="26" text-anchor="middle">Image not found</text>' +
-                    '<text x="340" y="330" fill="rgba(255,255,255,.6)" font-family="Arial,sans-serif" font-size="22" text-anchor="middle">' + name + '</text>' +
-                    '</svg>';
-                return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
-            }
-
-            function makeImg(src, index) {
-                var img = document.createElement("img");
-                img.alt = "ARC rover team photo " + (index + 1);
-                img.src = src;
-                img.addEventListener("error", function () {
-                    img.onerror = null;
-                    img.src = placeholder(src);
-                });
-                return img;
-            }
-
-            function buildRow(entries, leftToRight) {
-                var row = document.createElement("div");
-                row.className = "rg-row" + (leftToRight ? " rg-ltr" : "");
-                var track = document.createElement("div");
-                track.className = "rg-track";
-                row.appendChild(track);
-                var halfWidth = entries.length * CHIP_WIDTH;
-                var reps = Math.max(1, Math.ceil(2600 / halfWidth));
-                for (var round = 0; round < reps * 2; round++) {
-                    entries.forEach(function (entry) {
-                        var fig = document.createElement("figure");
-                        fig.className = "rg-item";
-                        fig.tabIndex = 0;
-                        fig.setAttribute("role", "button");
-                        fig.setAttribute("aria-label", "Open photo " + (entry.index + 1));
-                        fig.appendChild(makeImg(entry.src, entry.index));
-                        fig.addEventListener("click", function () { openViewer(entry.index); });
-                        fig.addEventListener("keydown", function (e) {
-                            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openViewer(entry.index); }
-                        });
-                        track.appendChild(fig);
-                    });
-                }
-                track.style.animationDuration = Math.round((reps * halfWidth) / SPEED) + "s";
-                return row;
-            }
-
-            var entries = GALLERY_FILES.map(function (src, index) { return { src: src, index: index }; });
-            var perRow = Math.ceil(entries.length / GALLERY_ROWS);
-            for (var r = 0; r < GALLERY_ROWS; r++) {
-                var part = entries.slice(r * perRow, (r + 1) * perRow);
-                if (!part.length) continue;
-                var firstLtr = (FIRST_ROW === "left");
-                var ltr = (r % 2 === 0) ? firstLtr : !firstLtr;
-                rowsBox.appendChild(buildRow(part, ltr));
-            }
-
-            var box = document.getElementById("rgLightbox");
-            var bigImg = document.getElementById("rgImg");
-            var count = document.getElementById("rgCount");
-            var current = 0;
-
-            function showPhoto(i) {
-                current = (i + GALLERY_FILES.length) % GALLERY_FILES.length;
-                var src = GALLERY_FILES[current];
-                bigImg.onerror = function () { bigImg.onerror = null; bigImg.src = placeholder(src); };
-                bigImg.src = src;
-                bigImg.alt = "ARC rover team photo " + (current + 1);
-                count.textContent = "Mission Gallery  (" + (current + 1) + " / " + GALLERY_FILES.length + ")";
-            }
-            function openViewer(i) {
-                showPhoto(i);
-                box.classList.add("is-open");
-                document.body.style.overflow = "hidden";
-            }
-            function closeViewer() {
-                box.classList.remove("is-open");
-                document.body.style.overflow = "";
-            }
-            document.getElementById("rgClose").addEventListener("click", closeViewer);
-            document.getElementById("rgPrev").addEventListener("click", function () { showPhoto(current - 1); });
-            document.getElementById("rgNext").addEventListener("click", function () { showPhoto(current + 1); });
-            box.addEventListener("click", function (e) { if (e.target === box) closeViewer(); });
-            document.addEventListener("keydown", function (e) {
-                if (!box.classList.contains("is-open")) return;
-                if (e.key === "Escape") closeViewer();
-                if (e.key === "ArrowLeft") showPhoto(current - 1);
-                if (e.key === "ArrowRight") showPhoto(current + 1);
-            });
-        })();
-    </script>
-</body>
+    </body>
 </html>
