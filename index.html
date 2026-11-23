@@ -48,7 +48,7 @@
             grid-template-columns: repeat(5, 1fr) !important;
             gap: 16px !important; /* Slightly smaller gap to fit everything */
         }
-        
+
         /* Responsive adjustments so it doesn't break on smaller screens */
         @media (max-width: 1200px) {
             .workshop-showcase {
@@ -65,6 +65,251 @@
                 grid-template-columns: 1fr !important;
             }
         }
+    </style>
+
+    <!-- Contact section: social media icons -->
+    <style>
+        .social-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            height: 100%;
+            min-height: 150px;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .social-title {
+            margin: 0;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .social-sub {
+            margin: -10px 0 0;
+            font-size: .9rem;
+            color: #9a9a9a;
+        }
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+        }
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            color: #bfe6ff;
+            text-decoration: none;
+            transition: color .25s, transform .25s, filter .25s;
+        }
+        .social-icon svg { width: 100%; height: 100%; display: block; }
+        .social-icon:hover,
+        .social-icon:focus-visible {
+            color: #ff9a2e;
+            transform: translateY(-4px) scale(1.08);
+            filter: drop-shadow(0 6px 14px rgba(255, 154, 46, 0.35));
+        }
+        .social-icon:focus-visible { outline: 2px solid #ff9a2e; outline-offset: 4px; border-radius: 10px; }
+    </style>
+
+    <!-- Faculty Advisors: rotating orbital layout (equal weight for every advisor) -->
+    <style>
+        .fo-orbit {
+            --fo-size: min(560px, 94vw);
+            --fo-node: calc(var(--fo-size) * 0.27);
+            --fo-radius: calc(var(--fo-size) * 0.34);
+            --fo-speed: 50s;
+            position: relative;
+            width: var(--fo-size);
+            height: var(--fo-size);
+            margin: 24px auto 0;
+        }
+        /* orbit track */
+        .fo-orbit::before {
+            content: "";
+            position: absolute;
+            top: 50%; left: 50%;
+            width: calc(var(--fo-radius) * 2);
+            height: calc(var(--fo-radius) * 2);
+            transform: translate(-50%, -50%);
+            border: 1px dashed rgba(255, 154, 46, 0.35);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .fo-hub {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: calc(var(--fo-size) * 0.26);
+            height: calc(var(--fo-size) * 0.26);
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: 700;
+            letter-spacing: .12em;
+            font-size: clamp(.7rem, 2.4vw, 1rem);
+            line-height: 1.3;
+            color: #ff9a2e;
+            background: rgba(20, 17, 12, 0.85);
+            border: 1px solid rgba(255, 154, 46, 0.5);
+            box-shadow: 0 0 30px rgba(255, 154, 46, 0.15);
+        }
+        .fo-ring {
+            position: absolute;
+            inset: 0;
+            animation: fo-spin var(--fo-speed) linear infinite;
+        }
+        .fo-node {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: var(--fo-node);
+            height: var(--fo-node);
+            margin: calc(var(--fo-node) / -2) 0 0 calc(var(--fo-node) / -2);
+            transform: rotate(var(--a)) translateX(var(--fo-radius)) rotate(calc(var(--a) * -1));
+        }
+        .fo-node-inner {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            border: 0;
+            background: none;
+            cursor: pointer;
+            font: inherit;
+            color: inherit;
+            animation: fo-spin-rev var(--fo-speed) linear infinite;
+        }
+        .fo-photo {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 154, 46, 0.6);
+            background: #14110c;
+            transition: border-color .3s, box-shadow .3s, transform .3s;
+        }
+        .fo-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            display: block;
+        }
+        .fo-node-inner:hover .fo-photo,
+        .fo-node-inner:focus-visible .fo-photo {
+            border-color: #ff9a2e;
+            box-shadow: 0 0 24px rgba(255, 154, 46, 0.55);
+            transform: scale(1.06);
+        }
+        .fo-node-inner:focus-visible { outline: 2px solid #ff9a2e; outline-offset: 6px; border-radius: 50%; }
+        .fo-label {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            width: 190%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: clamp(.68rem, 2vw, .85rem);
+            font-weight: 600;
+            color: #e8e2d4;
+            pointer-events: none;
+        }
+        .fo-orbit:hover .fo-ring,
+        .fo-orbit:hover .fo-node-inner,
+        .fo-orbit:focus-within .fo-ring,
+        .fo-orbit:focus-within .fo-node-inner { animation-play-state: paused; }
+        @keyframes fo-spin     { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
+        @keyframes fo-spin-rev { from { transform: rotate(0deg); }   to { transform: rotate(-360deg); } }
+        @media (prefers-reduced-motion: reduce) {
+            .fo-ring, .fo-node-inner { animation: none; }
+        }
+
+        /* Faculty modal */
+        .fo-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 99998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .fo-modal.is-open { display: flex; animation: fo-fade .25s ease; }
+        @keyframes fo-fade { from { opacity: 0; } to { opacity: 1; } }
+        .fo-modal-overlay { position: absolute; inset: 0; background: rgba(4, 4, 6, 0.88); }
+        .fo-modal .fo-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 680px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+            padding: 32px 30px 30px;
+            border-radius: 12px;
+            background: #14110c;
+            border: 1px solid rgba(255, 154, 46, 0.45);
+            color: #e8e2d4;
+        }
+        .fo-close {
+            position: absolute;
+            top: 12px; right: 14px;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: background .2s, color .2s;
+        }
+        .fo-close:hover { background: #ff9a2e; color: #111; }
+        .fo-modal-head { display: flex; gap: 22px; align-items: center; margin-bottom: 18px; }
+        .fo-modal-photo {
+            flex: 0 0 auto;
+            width: 130px; height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #ff9a2e;
+        }
+        .fo-modal-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; }
+        .fo-modal-badge {
+            display: inline-block;
+            font-size: .72rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: #ff9a2e;
+            margin-bottom: 6px;
+        }
+        .fo-modal h3 { margin: 0 0 6px; font-size: 1.5rem; }
+        .fo-modal-role { margin: 0; color: #c9c2b4; }
+        .fo-modal-bio { margin: 0 0 18px; line-height: 1.7; }
+        .fo-areas-title { margin: 0 0 10px; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: #ff9a2e; }
+        .fo-areas { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+        .fo-areas span {
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: .82rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        @media (max-width: 560px) {
+            .fo-modal-head { flex-direction: column; text-align: center; }
+            .fo-modal .fo-modal-content { padding: 28px 20px 24px; }
+        }
+
+        /* Faculty section heading spacing on the homepage's dark theme */
+        .section-faculty .section-header { text-align: center; margin-bottom: 8px; }
     </style>
 </head>
 <body>
@@ -83,9 +328,10 @@
             <div class="nav-links">
                 <a href="#home" class="active">Home</a>
                 <a href="#about">About</a>
+                <a href="#faculty">Faculty</a>
                 <a href="/mars-rover" id="marsRoverLink">Mars Rover</a>
                 <a href="#workshop">Workshop</a>
-                
+
                 <a href="#contact">Contact</a>
             </div>
             <a href="sponsor.html" class="sponsor-btn" style="text-decoration: none;">Become a Sponsor</a>
@@ -145,7 +391,7 @@
 
                     <div class="hero-btns">
                         <!-- <button class="btn-primary">Explore our ARC</button> -->
-                         <a href="#about"class="btn-primary"style="text-decoration: none;">Explore Our ARC</a> 
+                         <a href="#about"class="btn-primary"style="text-decoration: none;">Explore Our ARC</a>
                         <a href="#contact" class="btn-outline"style="text-decoration: none;">
                         Join Our Crew →
                         </a>                    </div>
@@ -219,6 +465,42 @@
             </div>
         </section>
 
+        <!-- ===== FACULTY SECTION (ROTATING ORBITAL LAYOUT) ===== -->
+        <section id="faculty" class="section-faculty">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="section-tag">Our Mentors</span>
+                    <h2>Faculty Advisors</h2>
+                    <!-- <p class="section-sub">Three advisors guide the Crew — each with equal standing. Click on an advisor's portrait to read more and open their AIUB profile.</p> -->
+                </div>
+
+                <div class="fo-orbit" id="facultyOrbit">
+                    <div class="fo-hub"><span>ARC<br>ADVISORS</span></div>
+
+                    <div class="fo-ring">
+                        <div class="fo-node" style="--a: -90deg;">
+                            <button type="button" class="fo-node-inner" data-faculty="zahir" aria-label="Open profile of Dr. Ebad Zahir">
+                                <span class="fo-photo"><img src="Screenshot 2026-08-11 010829.png" alt="Dr. Ebad Zahir"></span>
+                                <span class="fo-label">Dr. Ebad Zahir</span>
+                            </button>
+                        </div>
+                        <div class="fo-node" style="--a: 30deg;">
+                            <button type="button" class="fo-node-inner" data-faculty="akram" aria-label="Open profile of Dr. Chowdhury Akram Hossain">
+                                <span class="fo-photo"><img src="Akram_Sir.png" alt="Dr. Chowdhury Akram Hossain"></span>
+                                <span class="fo-label">Dr. Chowdhury Akram Hossain</span>
+                            </button>
+                        </div>
+                        <div class="fo-node" style="--a: 150deg;">
+                            <button type="button" class="fo-node-inner" data-faculty="sadman" aria-label="Open profile of Sadman Shahriar Alam">
+                                <span class="fo-photo"><img src="Sadman_Sir.png" alt="Sadman Shahriar Alam"></span>
+                                <span class="fo-label">Sadman Shahriar Alam</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ===== WORKSHOP SECTION ===== -->
         <section id="workshop" class="section-workshop">
             <div class="section-inner">
@@ -232,34 +514,34 @@
                 <div class="workshop-showcase">
                     <!-- Card 1: Drone -->
                     <a href="droneWorkShop.html" class="showcase-card">
-                        <img src="DroneWorkshop2.jpeg" alt="Drone Workshop"> 
+                        <img src="DroneWorkshop2.jpeg" alt="Drone Workshop">
                         <div class="showcase-overlay">
                             <span class="showcase-sub">Aerial Robotics</span>
                             <h3 class="showcase-title">DRONE</h3>
                         </div>
                     </a>
-                    
+
                     <!-- Card 2: Robo-Soccer -->
                     <a href="roboSoccer.html" class="showcase-card">
-                        <img src="RoboSoccer1.jpeg" alt="Robo-Soccer Workshop"> 
+                        <img src="RoboSoccer1.jpeg" alt="Robo-Soccer Workshop">
                         <div class="showcase-overlay">
                             <span class="showcase-sub">Competitive Robotics</span>
                             <h3 class="showcase-title">ROBO-SOCCER</h3>
                         </div>
                     </a>
-                    
+
                     <!-- Card 3: Line Following -->
                     <a href="lineFollowing.html" class="showcase-card">
-                        <img src="LFR1.png" alt="Line Following Workshop"> 
+                        <img src="LFR1.png" alt="Line Following Workshop">
                         <div class="showcase-overlay">
                             <span class="showcase-sub">Autonomous Navigation</span>
                             <h3 class="showcase-title">LINE FOLLOWING</h3>
                         </div>
                     </a>
-                    
+
                     <!-- Card 4: NDC -->
                     <a href="ndc.html" class="showcase-card">
-                        <img src="NDC!.jpeg" alt="NDC Workshop"> 
+                        <img src="NDC!.jpeg" alt="NDC Workshop">
                         <div class="showcase-overlay">
                             <span class="showcase-sub">Notre Dame College</span>
                             <h3 class="showcase-title">NDC</h3>
@@ -268,7 +550,7 @@
 
                     <!-- Card 5: School Community (NEW) -->
                     <a href="School_Community.html" class="showcase-card">
-                        <img src="Schl1.jpeg" alt="School Community Workshop"> 
+                        <img src="Schl1.jpeg" alt="School Community Workshop">
                         <div class="showcase-overlay">
                             <span class="showcase-sub">Outreach Program</span>
                             <h3 class="showcase-title">SCHOOL COMMUNITY</h3>
@@ -307,23 +589,62 @@
                 <div class="contact-grid">
                     <div class="contact-info">
                         <div class="contact-card">
-                            <!-- <div class="contact-icon">📍</div>
+                            <div class="contact-icon">📍</div>
                             <div>
                                 <h4>Address</h4>
-                                <p>AIUB Robotic Crew Lab<br />American International University-Bangladesh<br />408/1, Kuratoli, Khilkhet, Dhaka 1229, Bangladesh</p>
-                            </div> -->
+                                <p>American International University-Bangladesh<br />408/1, Kuratoli, Khilkhet, Dhaka 1229, Bangladesh</p>
+                            </div>
                         </div>
                         <div class="contact-card">
-                            <!-- <div class="contact-icon">📧</div> -->
-                            <!-- <div>
+                            <div class="contact-icon">📧</div> 
+                            <div>
                                 <h4>Email</h4>
-                                <p><a href="mailto:arc@aiub.edu">arc@aiub.edu</a></p>
-                                <p><a href="mailto:robotics@aiub.edu">robotics@aiub.edu</a></p>
-                            </div> -->
+                                
+                                <p><a href="mailto:roboticcrew.aiub@gmail.com">roboticcrew.aiub@gmail.com</a></p>
+                            </div> 
                         </div>
                     </div>
 
                     <div class="contact-form">
+                        <!-- Social media links (replaces the old contact form) -->
+                        <div class="social-wrap">
+                            <h4 class="social-title">Follow Us</h4>
+                            <p class="social-sub">Stay connected with the Crew</p>
+                            <div class="social-icons">
+                                <!-- Facebook -->
+                                <a class="social-icon" href="https://www.facebook.com/share/18oJ4s2JrV/" target="_blank" rel="noopener noreferrer" aria-label="AIUB Robotic Crew on Facebook" title="Facebook">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="12" fill="currentColor"/>
+                                        <path fill="#0b0b0f" d="M13.2 20.5v-7.3h2.4l.4-2.8h-2.8V8.7c0-.8.2-1.4 1.4-1.4H16V4.8c-.3 0-1.1-.1-2.1-.1-2.1 0-3.5 1.3-3.5 3.6v2.1H8v2.8h2.4v7.3z"/>
+                                    </svg>
+                                </a>
+                                <!-- YouTube -->
+                                <a class="social-icon" href="https://youtube.com/@aiubroboticcrew4068?si=k-dzkFPp_xI1SDnk" target="_blank" rel="noopener noreferrer" aria-label="AIUB Robotic Crew on YouTube" title="YouTube">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="1" y="4.5" width="22" height="15" rx="4.5" fill="currentColor"/>
+                                        <path fill="#0b0b0f" d="M10 9l5.5 3-5.5 3z"/>
+                                    </svg>
+                                </a>
+                                <!-- LinkedIn -->
+                                <a class="social-icon" href="https://www.linkedin.com/company/aiub-robotic-crew-arc/" target="_blank" rel="noopener noreferrer" aria-label="AIUB Robotic Crew on LinkedIn" title="LinkedIn">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="1" y="1" width="22" height="22" rx="4" fill="currentColor"/>
+                                        <circle cx="7" cy="7.4" r="1.5" fill="#0b0b0f"/>
+                                        <rect x="5.7" y="10" width="2.6" height="8.4" fill="#0b0b0f"/>
+                                        <path fill="#0b0b0f" d="M10.5 10h2.5v1.2c.4-.8 1.4-1.4 2.7-1.4 2.6 0 3.1 1.7 3.1 3.9v4.7h-2.6v-4.1c0-1 0-2.2-1.4-2.2s-1.6 1.1-1.6 2.1v4.2h-2.7z"/>
+                                    </svg>
+                                </a>
+                                <!-- Instagram -->
+                                <a class="social-icon" href="https://www.instagram.com/aiubroboticcrew?lqvp=aWhybGIxZWpyM29y" target="_blank" rel="noopener noreferrer" aria-label="AIUB Robotic Crew on Instagram" title="Instagram">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.2"/>
+                                        <circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.2"/>
+                                        <circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
                         <!-- <h4>Send Us a Message</h4>
                         <form id="contactForm">
                             <div class="form-group">
@@ -352,6 +673,107 @@
 
     </div>
 
+    <!-- ===== FACULTY MODAL ===== -->
+    <div class="fo-modal" id="facultyModal" role="dialog" aria-modal="true" aria-labelledby="foName">
+        <div class="fo-modal-overlay" id="foOverlay"></div>
+        <div class="fo-modal-content hud-panel">
+            <button type="button" class="fo-close" id="foClose" aria-label="Close">&times;</button>
+            <div class="fo-modal-head">
+                <div class="fo-modal-photo"><img id="foPhoto" src="" alt=""></div>
+                <div>
+                    <span class="fo-modal-badge">Faculty Advisor</span>
+                    <h3 id="foName"></h3>
+                    <p class="fo-modal-role" id="foRole"></p>
+                </div>
+            </div>
+            <p class="fo-modal-bio" id="foBio"></p>
+            <div id="foAreasWrap">
+                <h4 class="fo-areas-title">Research &amp; Interests</h4>
+                <div class="fo-areas" id="foAreas"></div>
+            </div>
+            <a id="foLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View AIUB Profile →</a>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+
+    <!-- Faculty orbit script -->
+    <script>
+        (function () {
+            var FACULTY = {
+                zahir: {
+                    name: "Dr. Ebad Zahir",
+                    role: "Associate Professor, Dept. of EEE, AIUB",
+                    photo: "Screenshot 2026-08-11 010829.png",
+                    bio: "Dr. Zahir has guided ARC since its early years, mentoring students across mechatronics, photonics, and embedded systems. His research spans assistive robotics, sensor systems, and optical communications — several of which have directly shaped ARC's rover instrumentation and navigation design.",
+                    areas: ["Mechatronics", "Photonics", "Embedded Systems", "Assistive Robotics", "Sensor Systems", "Optical Communications"],
+                    link: "https://www.aiub.edu/faculty-list/faculty-profile?q=ebad.zahir"
+                },
+                akram: {
+                    name: "Dr. Chowdhury Akram Hossain",
+                    role: "Associate Professor & Head, Dept. of CoE, AIUB",
+                    photo: "Akram_Sir.png",
+                    bio: "Dr. Hossain supports ARC with academic guidance and mentoring. His research interests include wireless communication, power electronics, renewable energy systems, smart grids, and telemedicine, and he also serves as an advisor to the IEEE AIUB Student Branch.",
+                    areas: ["Wireless Communication", "Power Electronics", "Renewable Energy Systems", "Smart Grids", "Telemedicine"],
+                    link: "https://www.aiub.edu/faculty-list/faculty-profile?q=chowdhury.akram"
+                },
+                sadman: {
+                    name: "Sadman Shahriar Alam",
+                    role: "Faculty of Engineering, AIUB",
+                    photo: "Sadman_Sir.png",
+                    bio: "Sadman Shahriar Alam supports ARC Rover Team with academic guidance and mentoring. See his AIUB faculty profile for his full designation, research interests, and publications.",
+                    areas: [],
+                    link: "https://www.aiub.edu/faculty-list/faculty-profile?q=sadman.alam"
+                }
+            };
+
+            var modal = document.getElementById("facultyModal");
+            if (!modal) return;
+            var elPhoto = document.getElementById("foPhoto");
+            var elName = document.getElementById("foName");
+            var elRole = document.getElementById("foRole");
+            var elBio = document.getElementById("foBio");
+            var elAreas = document.getElementById("foAreas");
+            var elAreasWrap = document.getElementById("foAreasWrap");
+            var elLink = document.getElementById("foLink");
+            var lastTrigger = null;
+
+            function openModal(key, trigger) {
+                var f = FACULTY[key];
+                if (!f) return;
+                lastTrigger = trigger || null;
+                elPhoto.src = f.photo;
+                elPhoto.alt = f.name;
+                elName.textContent = f.name;
+                elRole.textContent = f.role;
+                elBio.textContent = f.bio;
+                elAreas.innerHTML = "";
+                f.areas.forEach(function (a) {
+                    var chip = document.createElement("span");
+                    chip.textContent = a;
+                    elAreas.appendChild(chip);
+                });
+                elAreasWrap.style.display = f.areas.length ? "" : "none";
+                elLink.href = f.link;
+                modal.classList.add("is-open");
+                document.body.style.overflow = "hidden";
+                document.getElementById("foClose").focus();
+            }
+            function closeModal() {
+                modal.classList.remove("is-open");
+                document.body.style.overflow = "";
+                if (lastTrigger) lastTrigger.focus();
+            }
+
+            document.querySelectorAll("[data-faculty]").forEach(function (btn) {
+                btn.addEventListener("click", function () { openModal(btn.getAttribute("data-faculty"), btn); });
+            });
+            document.getElementById("foClose").addEventListener("click", closeModal);
+            document.getElementById("foOverlay").addEventListener("click", closeModal);
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+            });
+        })();
+    </script>
 </body>
 </html>
