@@ -50,8 +50,10 @@ class SecurityTests(unittest.TestCase):
                 expected = {"'sha256-" + base64.b64encode(hashlib.sha256(s.encode()).digest()).decode() + "'" for s in doc.scripts}
                 actual = {s for s in scripts if s.startswith("'sha256-")}
                 self.assertEqual(actual, expected, 'Inline script edit requires refreshed CSP hash')
-                for key in ['object-src', 'base-uri', 'connect-src', 'frame-src', 'form-action']:
+                for key in ['object-src', 'base-uri', 'connect-src', 'form-action']:
                     self.assertEqual(directives.get(key), ["'none'"], key)
+                # Only the domain shell may embed allowlisted same-origin views.
+                self.assertEqual(directives.get('frame-src'), ["'self'" if page.name == 'index.html' else "'none'"])
                 self.assertEqual(directives.get('img-src'), ["'self'", 'data:'])
                 self.assertIn("'unsafe-inline'", directives.get('style-src', []), 'Existing inline styles must still render')
                 self.assertIn('https://fonts.googleapis.com', directives.get('style-src', []))

@@ -28,7 +28,7 @@ class Scripts(HTMLParser):
             self.scripts.append(''.join(self.current))
             self.current = None
 
-def policy(text):
+def policy(text, is_shell=False):
     hashes = ["'sha256-" + base64.b64encode(hashlib.sha256(s.encode()).digest()).decode() + "'" for s in Scripts(text).scripts]
     return '; '.join([
         "default-src 'none'",
@@ -40,7 +40,7 @@ def policy(text):
         "connect-src 'none'",
         "object-src 'none'",
         "base-uri 'none'",
-        "frame-src 'none'",
+        "frame-src 'self'" if is_shell else "frame-src 'none'",
         "form-action 'none'",
     ])
 
@@ -49,7 +49,7 @@ def main():
     failed = []
     for page in sorted(ROOT.glob('*.html')):
         text = page.read_text(encoding='utf-8-sig')
-        expected = policy(text)
+        expected = policy(text, is_shell=page.name == 'index.html')
         matches = re.findall(r'<meta http-equiv="Content-Security-Policy" content="([^"]*)"\s*/?>', text)
         if check:
             if matches != [expected]:
